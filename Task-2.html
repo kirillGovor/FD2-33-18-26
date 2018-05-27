@@ -4,9 +4,9 @@
 
 function russianLetters(){
     var text = prompt("Введите предложение");
-	var len = text.match(/[аоэиуыеёюя]/igm).length ;
+	var letters = text.match(/[аоэиуыеёюя]/igm).length ;
 
-    alert(len);
+    alert(letters);
 }
 
 russianLetters();

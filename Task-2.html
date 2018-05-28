@@ -1,19 +1,13 @@
 <html>
 <head>
 <script>
-russianLetters();
-russianLetters_2();
-function russianLetters(){
-    var text = prompt("Введите предложение");
-	var letters = text.match(/[аоэиуыеёюя]/igm).length ;
+      var text = prompt("Введите предложение");
+alert (russianLetters(text))
+function russianLetters(text){
+	var letters = text.match(/[аоэиуыеёюя]/igm).length ; 
+    return letters;
+}
 
-    alert(letters);
-}
-function russianLetters_2(){
-    var text = {message:"Доброго времени суток"};
-text.message = text.message.match(/[аоэиуыеёюя]/igm).length;
-alert("Второй способ. В предложении : Доброго времени суток; кол-во гласных:"+text.message);
-}
 
 
 </script>

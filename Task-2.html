@@ -5,6 +5,7 @@
       var letters ={text:text, length:text.length, }
 alert (russianLetters(text))
 alert (russianLetters_1(letters));
+alert (russianLetters_3(letters));
 function russianLetters(text){
 	var letters = text.match(/[аоэиуыеёюя]/igm).length ; 
     return letters;
@@ -24,6 +25,19 @@ var letters ="аоэиуыеёюя";
 return c;
 }
 
+
+function russianLetters_3(text){
+var letters ="аоэиуыеёюя";
+var a = 0;
+var i=0;
+    while (i<text.text.length){
+if (letters.indexOf(text.text[i]) > 0) {
+a=a+1;
+}
+i=i+1;
+}
+return a;
+}
 
 </script>
 

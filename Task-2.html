@@ -2,12 +2,27 @@
 <head>
 <script>
       var text = prompt("Введите предложение");
+      var letters ={text:text, length:text.length, }
 alert (russianLetters(text))
+alert (russianLetters_1(letters));
 function russianLetters(text){
 	var letters = text.match(/[аоэиуыеёюя]/igm).length ; 
     return letters;
 }
 
+function russianLetters_1(text){
+var c = 0;
+var letters ="аоэиуыеёюя";
+    for (var i=0;text.text.length>i;i++){
+        for(var j=0; j<=letters.length;j++){
+            if (text.text[i]==letters[j]){
+            var c = c+1;
+            } 
+        }
+
+    }
+return c;
+}
 
 
 </script>

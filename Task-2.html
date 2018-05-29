@@ -31,7 +31,8 @@ var letters ="аоэиуыеёюя";
 var a = 0;
 var i=0;
     while (i<text.text.length){
-if (letters.indexOf(text.text[i]) > 0) {
+        console.log(text.text[i]);
+if (letters.indexOf(text.text[i]) >= 0) {
 a=a+1;
 }
 i=i+1;

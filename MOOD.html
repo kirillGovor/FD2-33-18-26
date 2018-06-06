@@ -1,4 +1,3 @@
-
 <script>
 
     "use strict";
@@ -9,20 +8,32 @@
 
     function mood(colorsCount) {
         var colors=[ '', 'красный', 'оранжевый', 'жёлтый', 'зелёный', 'голубой', 'синий', 'фиолетовый' ];
-        var colors_x={color:''};
+        var colors_double={ };
+        var c ={}
+        var k=1;
         console.log( 'цветов: ' + colorsCount );
         for ( var i=1; i<=colorsCount; i++ ) {
             var n=randomDiap(1,7);
             var colorName=colors[n];
             
-            while(colors_x.color == colorName ){
+         
+           
+            for (var k=1;k<colors.length;k++){
+               
+                if  (colorName == c[k]){
+                   
+                  while (colorName == c[k]){
                 var n=randomDiap(1,7);
-                var colorName=colors[n];
-              
+                colorName=colors[n];
+                 }       
+                  k=0;
+                }
+                
             }
-            colors_x.color= colors[n];
+            c[i]=colorName;
             
             console.log( colorName );
+           
         }
     }
 

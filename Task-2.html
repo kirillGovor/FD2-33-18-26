@@ -46,12 +46,11 @@ var a = 0;
 var text = prompt("Введите предложение(ForEach)").split("");
 var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
     
-    text.forEach(function(item){
+    text.forEach(function(item,index){
         
-        if (letters.indexOf(text[i]) >= 0) {
-        a=a+1;
+        if (letters.indexOf(item) >= 0) {
+        a++;
         }
-    i++;
     });
 alert(a);
 }

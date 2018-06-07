@@ -6,6 +6,7 @@
 alert (russianLetters(text))
 alert (russianLetters_1(letters));
 alert (russianLetters_3(letters));
+russianLettersForEach();
 function russianLetters(text){
 	var letters = text.match(/[аоэиуыеёюя]/igm).length ; 
     return letters;
@@ -39,14 +40,24 @@ var i=0;
 return a;
 }
 
+function russianLettersForEach(){
+var i=0;
+var a = 0;
+var text = prompt("Введите предложение(ForEach)").split("");
+var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
+    
+    text.forEach(function(item){
+        
+        if (letters.indexOf(text[i]) >= 0) {
+        a=a+1;
+        }
+    i++;
+    });
+alert(a);
+}
 
 
 
-
-var obc
-text.forEach(function(russianLetters) {
-    obc=
-});
 
 
 </script>

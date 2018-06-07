@@ -15,25 +15,19 @@
         for ( var i=1; i<=colorsCount; i++ ) {
             var n=randomDiap(1,7);
             var colorName=colors[n];
-            
+           
          
-           
-            for (var k=1;k<colors.length;k++){
-               
-                if  (colorName == c[k]){
-                   
-                  while (colorName == c[k]){
-                var n=randomDiap(1,7);
+         
+            if ([n] in colors_double)
+            {
+                while ([n] in colors_double)
+                {
+                    var n=randomDiap(1,7);
                 colorName=colors[n];
-                 }       
-                  k=0;
                 }
-                
             }
-            c[i]=colorName;
-            
             console.log( colorName );
-           
+            colors_double[n]=true;
         }
     }
 

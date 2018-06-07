@@ -13,7 +13,7 @@ function russianLetters(text){
 
 function russianLetters_1(text){
 var c = 0;
-var letters ="аоэиуыеёюя";
+var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
     for (var i=0;text.text.length>i;i++){
         for(var j=0; j<=letters.length;j++){
             if (text.text[i]==letters[j]){
@@ -27,18 +27,27 @@ return c;
 
 
 function russianLetters_3(text){
-var letters ="аоэиуыеёюя";
+var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
 var a = 0;
 var i=0;
     while (i<text.text.length){
-        console.log(text.text[i]);
-if (letters.indexOf(text.text[i]) >= 0) {
-a=a+1;
-}
-i=i+1;
-}
+        if (letters.indexOf(text.text[i]) >= 0) {
+        a=a+1;
+        }
+    i=i+1;
+    }
 return a;
 }
+
+
+
+
+
+var obc
+text.forEach(function(russianLetters) {
+    obc=
+});
+
 
 </script>
 

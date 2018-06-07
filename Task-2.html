@@ -1,12 +1,14 @@
 <html>
 <head>
 <script>
-      var text = prompt("Введите предложение");
-      var letters ={text:text, length:text.length, }
-alert (russianLetters(text))
-alert (russianLetters_1(letters));
-alert (russianLetters_3(letters));
+     // var text = prompt("Введите предложение");
+     // var letters ={text:text, length:text.length, }
+//alert (russianLetters(text))
+//alert (russianLetters_1(letters));
+//alert (russianLetters_3(letters));
 russianLettersForEach();
+alert (russianLettersFilter());
+russianLettersReduce();
 function russianLetters(text){
 	var letters = text.match(/[аоэиуыеёюя]/igm).length ; 
     return letters;
@@ -56,8 +58,25 @@ alert(a);
 }
 
 
+function russianLettersFilter(){
+    var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
+    var text = prompt("Введите предложение(Filter)").split("");
+let c =text.filter(function(item){
+return letters.indexOf(item) >= 0;
+});
+return(c.length);
+}
 
 
+function russianLettersReduce(item){
+    var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
+    var text = prompt("Введите предложение(Reduce)").split("");
+c = text.reduce(function(item){
+console.log( item);
+
+});
+return(c.length);
+}
 
 </script>
 

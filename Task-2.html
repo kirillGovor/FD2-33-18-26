@@ -70,11 +70,14 @@ return(c.length);
 
 function russianLettersReduce(item){
     var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
-y = text.reduce(function(item){
-    return letters.indexOf(item) >= 0;
-return(c.length);
-});
+    var c=0;
+    var a=0;
+y = text.reduce(function(index,c){
+    if (letters.indexOf(c) >= 0)
+    a++;
 
+});
+return (a);
 }
 
 </script>

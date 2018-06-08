@@ -3,12 +3,13 @@
 <script>
      // var text = prompt("Введите предложение");
      // var letters ={text:text, length:text.length, }
+     var text = prompt("Введите предложение").split("");
 //alert (russianLetters(text))
 //alert (russianLetters_1(letters));
 //alert (russianLetters_3(letters));
-russianLettersForEach();
+alert(russianLettersForEach());
 alert (russianLettersFilter());
-russianLettersReduce();
+alert (russianLettersReduce());
 function russianLetters(text){
 	var letters = text.match(/[аоэиуыеёюя]/igm).length ; 
     return letters;
@@ -45,7 +46,6 @@ return a;
 function russianLettersForEach(){
 var i=0;
 var a = 0;
-var text = prompt("Введите предложение(ForEach)").split("");
 var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
     
     text.forEach(function(item,index){
@@ -54,13 +54,13 @@ var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
         a++;
         }
     });
-alert(a);
+return(a);
 }
 
 
 function russianLettersFilter(){
     var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
-    var text = prompt("Введите предложение(Filter)").split("");
+   
 let c =text.filter(function(item){
 return letters.indexOf(item) >= 0;
 });
@@ -70,12 +70,11 @@ return(c.length);
 
 function russianLettersReduce(item){
     var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
-    var text = prompt("Введите предложение(Reduce)").split("");
-c = text.reduce(function(item){
-
-
-});
+y = text.reduce(function(item){
+    return letters.indexOf(item) >= 0;
 return(c.length);
+});
+
 }
 
 </script>

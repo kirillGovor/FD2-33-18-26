@@ -47,9 +47,7 @@ function russianLettersForEach(text){
 var i=0;
 var a = 0;
 var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
-    
     text.forEach(function(item,index){
-        
         if (letters.indexOf(item) >= 0) {
         a++;
         }
@@ -59,24 +57,22 @@ return(a);
 
 
 function russianLettersFilter(text){
-    var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
-   
-let c =text.filter(function(item){
-return letters.indexOf(item) >= 0;
-});
+var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";   
+    let c =text.filter(function(item){
+    return letters.indexOf(item) >= 0;
+    });
 return(c.length);
 }
 
 
 function russianLettersReduce(text){
-    var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
-    var c=0;
-    var sum=0;
+var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
+var c=0;
+var sum=0;
     y = text.reduce(function(item,c){
         if (letters.indexOf(c) >= 0)
         sum++;
-        
-},0);
+    },0);
 return (sum);        
 }
 

@@ -7,9 +7,9 @@
 //alert (russianLetters(text))
 //alert (russianLetters_1(letters));
 //alert (russianLetters_3(letters));
-alert(russianLettersForEach());
-alert (russianLettersFilter());
-alert (russianLettersReduce());
+alert(russianLettersForEach(text));
+alert (russianLettersFilter(text));
+alert (russianLettersReduce(text));
 function russianLetters(text){
 	var letters = text.match(/[аоэиуыеёюя]/igm).length ; 
     return letters;
@@ -43,7 +43,7 @@ var i=0;
 return a;
 }
 
-function russianLettersForEach(){
+function russianLettersForEach(text){
 var i=0;
 var a = 0;
 var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
@@ -58,7 +58,7 @@ return(a);
 }
 
 
-function russianLettersFilter(){
+function russianLettersFilter(text){
     var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
    
 let c =text.filter(function(item){
@@ -68,13 +68,13 @@ return(c.length);
 }
 
 
-function russianLettersReduce(item){
+function russianLettersReduce(text){
     var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
     var c=0;
     var a=0;
-y = text.reduce(function(index,c){
-    if (letters.indexOf(c) >= 0)
-    a++;
+    y = text.reduce(function(item,c){
+        if (letters.indexOf(c) >= 0)
+        a++;
 
 });
 return (a);

@@ -71,13 +71,13 @@ return(c.length);
 function russianLettersReduce(text){
     var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
     var c=0;
-    var a=0;
+    var sum=0;
     y = text.reduce(function(item,c){
         if (letters.indexOf(c) >= 0)
-        a++;
-
-});
-return (a);
+        sum++;
+        
+},0);
+return (sum);        
 }
 
 </script>

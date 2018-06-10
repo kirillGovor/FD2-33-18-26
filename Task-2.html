@@ -69,11 +69,12 @@ function russianLettersReduce(text){
 var letters ="аоэиуыеёюяАОЭИУЫЕЁЮЯ";
 var c=0;
 var sum=0;
-    y = text.reduce(function(item,c){
+    y = text.reduce(function sj (sum,c){
         if (letters.indexOf(c) >= 0)
         sum++;
+        return (sum);
     },0);
-return (sum);        
+return(y);
 }
 
 </script>

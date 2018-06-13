@@ -1,41 +1,51 @@
+<html>
+<head>
+
+</head>
+<body>
+    
+    <input type="submit"value="Ввод информации о напитке"OnClick="add();">
+</body>
+
 <script>
  var hash = {};
 "use strict";
 function HashStorage(hash)
 {
-   this.name="имя";
-   this.alcohol="нет";
-   this.recipe={};
+   this.storage={};
 }
-HashStorage.prototype.addValue = function(key,value)
+HashStorage.prototype.addValue = function add(key,value)
 {
-   console.log(value);
-console.log("Добавить напиток"+this.value);
+     
+this.storage={[value]:key};
+console.log(this.storage);
 }
-
+(1,4);
 HashStorage.prototype.getValue = function(key)
 {
-
+alert(this.storage.value);
 }
 HashStorage.prototype.deleteValue = function(key)
 {
-
+delete this.storage[key];
 }
 HashStorage.prototype.getkeys = function()
 {
-
+for (var k in this.storage)
+{
+    console.log(storage[k]);
 }
-function Napitok (){
+}
+drinkStorage.prototype=Object.create(HashStorage.prototype); 
+Napitok.prototype.constructor=Napitok;
 HashStorage.call(this);
 this.name="Напиток";
 this.alcohol="нет";
 this.recipe={морковка,вода, блэндер};
 console.log(this);
 
-}
-{
 
-}
 
 drinkStorage= new HashStorage;
 </script> 
+</html>

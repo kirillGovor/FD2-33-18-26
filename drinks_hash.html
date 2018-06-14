@@ -15,7 +15,7 @@ function HashStorage()
     this.value="";
     this.key=0;
 }
-drinkStorage= new HashStorage;
+var drinkStorage= new HashStorage;
 HashStorage.prototype.addValue = function add(key,value)
 {
    // this.storage={};
@@ -28,11 +28,11 @@ drinkStorage.addValue(0,"кола");
 HashStorage.prototype.getValue = function  (key)
 {
     console.log(this.storage[key]);
-    return  this.storage[value];
+    return  this.storage[key];
  
   
 }
-drinkStorage.getValue(key);
+drinkStorage.getValue(0);
 HashStorage.prototype.deleteValue = function(key)
 {
     delete this.storage[key];
@@ -41,14 +41,14 @@ HashStorage.prototype.deleteValue = function(key)
 HashStorage.prototype.getkeys = function()
 {
     var k=0;
-//for (var k in self.storage[key])
+//for (var k in this.storage[key])
 //{
-   // return (self.storage[k]);
+   // return (this.storage[k]);
    console.log(this.storage[key]);
 //}
 }
 (12);
-var drinkStorage=new HashStorage;
+
 
 HashStorage.call(this);
 

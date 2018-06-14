@@ -8,50 +8,57 @@
 
 
 <script>
- var hash = {};
 "use strict";
-function HashStorage(hash)
-{   var self=this;
-    self.storage={};
+function HashStorage()
+{   
+    this.storage={};
+    this.value="";
+    this.key=0;
 }
-HashStorage();
+drinkStorage= new HashStorage;
 HashStorage.prototype.addValue = function add(key,value)
 {
    // self.storage={};
-    value=prompt("Введите напиток");
-    key++;
-    self.storage[key]=value;
-    console.log(self.storage);
+    this.storage[key]=value;
+    console.log(this.storage);
+    
+    return (this.storage,this.key);
+    
+  
 }
-(0,);
-HashStorage.prototype.getValue = function(key)
+(0,"кола");
+
+HashStorage.prototype.getValue = function  (key)
 {
-    var get
-   get = self.storage[value];
-   return get;
+    console.log(this.storage[key]);
+    return  this.storage[value];
+ 
+  
 }
-(12);
+(key);
 HashStorage.prototype.deleteValue = function(key)
 {
-    delete self.storage[key];
+    delete this.storage[key];
 }
-(12);
+
 HashStorage.prototype.getkeys = function()
 {
-for (var k in self.storage)
-{
-    return (self.storage[k]);
-}
+    var k=0;
+//for (var k in self.storage[key])
+//{
+   // return (self.storage[k]);
+   console.log(this.storage[key]);
+//}
 }
 (12);
 var drinkStorage=new HashStorage;
 
-HashStorage.call(self);
+HashStorage.call(this);
 
 
 
 
-drinkStorage= new HashStorage;
+
 
 
 </script> 

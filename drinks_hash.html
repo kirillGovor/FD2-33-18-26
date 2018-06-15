@@ -12,7 +12,7 @@
 function HashStorage()
 {   
     this.storage={};
-    var recept={alcohol:"да",recept:"вода, скахар, секрет"};
+    var recept={alcohol:"да",recept:"вода, сахар, секрет"};
 }
 
 HashStorage.prototype.addValue = function add(key,value)
@@ -20,7 +20,6 @@ HashStorage.prototype.addValue = function add(key,value)
    // this.storage={};
    this.storage[key]=value;
     console.log(this.storage);
-    return (this.storage);
 }
 
 
@@ -54,7 +53,7 @@ HashStorage.call(this);
 
 
 var drinkStorage= new HashStorage;
-drinkStorage.addValue("кола",this.recept);
+drinkStorage.addValue("кола",);
 drinkStorage.getValue("кола");
 drinkStorage.getkeys();
 drinkStorage.deleteValue(0);

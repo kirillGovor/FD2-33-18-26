@@ -12,59 +12,84 @@
 function HashStorage()
 {   
     this.storage={};
-    var recept={alcohol:"да",recept:"вода, сахар, секрет"};
+  
 }
 
-HashStorage.prototype.addValue = function add(key,value)
+HashStorage.prototype.addValue = function (key,value)
 {
    // this.storage={};
    this.storage[key]=value;
     console.log(this.storage);
+    
 }
 
 
 HashStorage.prototype.getValue = function  (key)
 {
-    console.log(this.storage[key]);
-    return  this.storage[key];
- 
+   console.log  (this.storage[key]);
+   //alert(`
+    //напиток:${key}
+    //алкогольный:${this.storage[key]}`
+    //рецепт:${this.storage.key.recept}
+       //`
+     //  )
   
 }
 
 HashStorage.prototype.deleteValue = function(key)
 {
-    return delete this.storage[key];
+    if (this.storage[key]==undefined)
+    {alert("undefined");
+    }
+    else{
+     delete this.storage[key];
+     alert( true);
+    }
 }
 
 HashStorage.prototype.getkeys = function()
 {
-    var k=0;
-//for (var k in this.storage[key])
-//{
-   // return (this.storage[k]);
-   console.log(this.storage[key]);
-//}
+    var text="НАПИТКИ:  ";
+ for (var k in this.storage)
+ {
+   text=text+","+k;
+} 
+alert(text);
 }
 
+var value={alcho:"",recept:""};
+var key;
+function addNap (){
+key=prompt("Введите напиток");
+value.alcho=prompt("Напиток алкогольный?");
+value.recept=prompt("Подскажите рецептик");
+drinkStorage.addValue(key,value);
+return (key,value)
+}
 
-
-HashStorage.call(this);
-
-
+function getNap (){
+    drinkStorage.getValue(key);    
+}
+function delNap (){
+    drinkStorage.deleteValue(key);
+}
+function getKey (){
+    drinkStorage.getkeys();
+}
 
 var drinkStorage= new HashStorage;
-drinkStorage.addValue("кола",);
-drinkStorage.getValue("кола");
-drinkStorage.getkeys();
-drinkStorage.deleteValue(0);
+
+
+
+
 </script> 
 
 <body>
 
 
-<input type="submit"value="Ввод информации о напитке"OnClick="drinkStorage.addValue"><br><br>
-<input type="submit"value="Получение информации о строке"OnClick="HashStorage.prototype.getValue"><br><br>
-<input type="submit"value="Удаление информации о напитке"OnClick="HashStorage.prototype.deleteValue"><br><br>
-<input type="submit"value="Перечнгь всех напитков"OnClick="HashStorage.prototype.getKeys">
+<input type="submit"value="Ввод информации о напитке"OnClick="addNap()"><br><br>
+<input type="submit"value="Получение информации о напитке"OnClick="getNap()"><br><br>
+<input type="submit"value="Удаление информации о напитке"OnClick="(delNap())"><br><br>
+<input type="submit"value="Перечнгь всех напитков"OnClick="getKey()">
 </body>
 </html>

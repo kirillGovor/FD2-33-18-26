@@ -25,15 +25,9 @@ HashStorage.prototype.addValue = function (key,value)
 
 
 HashStorage.prototype.getValue = function  (key)
-{
-   console.log  (this.storage[key]);
-   //alert(`
-    //напиток:${key}
-    //алкогольный:${this.storage[key]}`
-    //рецепт:${this.storage.key.recept}
-       //`
-     //  )
-  
+{   console.log(this.storage[key]);
+    return this.storage[key];
+    
 }
 
 HashStorage.prototype.deleteValue = function(key)
@@ -48,13 +42,9 @@ HashStorage.prototype.deleteValue = function(key)
 }
 
 HashStorage.prototype.getkeys = function()
-{
-    var text="НАПИТКИ:  ";
- for (var k in this.storage)
- {
-   text=text+","+k;
-} 
-alert(text);
+{ console.log(this.storage);
+   return this.storage;
+  
 }
 
 var value={alcho:"",recept:""};
@@ -64,17 +54,22 @@ key=prompt("Введите напиток");
 value.alcho=prompt("Напиток алкогольный?");
 value.recept=prompt("Подскажите рецептик");
 drinkStorage.addValue(key,value);
-return (key,value)
 }
 
 function getNap (){
-    drinkStorage.getValue(key);    
+  var  key=prompt("Введите название напитка");
+  var text=drinkStorage.getValue(key);
+  alert(text);   
+    
 }
 function delNap (){
-    drinkStorage.deleteValue(key);
+    var key =prompt("Ведите название напитка, который хотите удалить");
+  drinkStorage.deleteValue(key);
+  
 }
 function getKey (){
-    drinkStorage.getkeys();
+    var text=drinkStorage.getkeys();
+    alert(text);
 }
 
 var drinkStorage= new HashStorage;
@@ -90,6 +85,6 @@ var drinkStorage= new HashStorage;
 <input type="submit"value="Ввод информации о напитке"OnClick="addNap()"><br><br>
 <input type="submit"value="Получение информации о напитке"OnClick="getNap()"><br><br>
 <input type="submit"value="Удаление информации о напитке"OnClick="(delNap())"><br><br>
-<input type="submit"value="Перечнгь всех напитков"OnClick="getKey()">
+<input type="submit"value="Перечень всех напитков"OnClick="getKey()">
 </body>
 </html>

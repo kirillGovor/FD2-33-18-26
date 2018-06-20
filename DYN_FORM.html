@@ -71,6 +71,11 @@
                   
                     var text=text+"<input"+" type=submit"+" value="+form[k].label+">";
                 }
+                else if (form[k].kind=="memo")
+                {
+                    var text=text+"<textarea"+" rows="+"5"+" cols="+"40"+">"+"</textarea>"+"<br>";
+                  
+                }
 
                 else{
                var text= text+"<label for="+form[k].name +">"+form[k].label+"</label>"+"<input"+" type=text" +" name="+form[k].name +" kind="+form[k].kind+" label="+form[k].label +">"+"<br>";

@@ -9,49 +9,51 @@
 
 <script>
 "use strict";
+var value={alcho:"",recept:""};
+var key;
+
 function HashStorage()
 {   
     this.storage={};
-  
 }
 
-HashStorage.prototype.addValue = function (key,value)
-{
-   this.storage[key]=value;   
+HashStorage.prototype.addValue = function (key,value){
+this.storage[key]=value;   
 }
 
 
-HashStorage.prototype.getValue = function  (key)
-{
-    if (key in this.storage){
+HashStorage.prototype.getValue = function  (key){
+if (key in this.storage){
     return this.storage[key];  
-    }
-    else {return ("Нет такого напитка");}
+}
+else{
+    return ("Нет такого напитка");
+}
 }
 
-HashStorage.prototype.deleteValue = function(key)
-{
-    if (this.storage[key]==undefined)
-    {alert("undefined");
-    }
-    else{
+HashStorage.prototype.deleteValue = function(key){
+if (this.storage[key]==undefined){
+    alert("undefined");
+}
+else{
      delete this.storage[key];
      alert( true);
-    }
+}
 }
 
-HashStorage.prototype.getkeys = function()
-{ var mass=[];
+HashStorage.prototype.getkeys = function(){ 
+var mass=[];
 var number=0;
-for (var key in this.storage){
-    mass[number]=key;
-    number++;
-}
-  return mass;
+    for (var key in this.storage){
+         mass[number]=key;
+         number++;
+    }
+    return mass;
 }
 
-var value={alcho:"",recept:""};
-var key;
+
+
+
 function addNap (){
 key=prompt("Введите напиток");
 value.alcho=prompt("Напиток алкогольный?");
@@ -60,27 +62,28 @@ drinkStorage.addValue(key,value);
 }
 
 function getNap (){
-    elseIF=""
-  var  key=prompt("Введите название напитка");
-  var elseIF = drinkStorage.getValue(key);
+elseIF=""
+var  key=prompt("Введите название напитка");
+var elseIF = drinkStorage.getValue(key);
   if (elseIF!="Нет такого напитка"){
-  alert(`
-  Напиток:${key}
-  Алкогольный:${value.alcho}
-  Рецепт:${value.recept}`);
+    alert(`
+     Напиток:${key}
+     Алкогольный:${value.alcho}
+     Рецепт:${value.recept}`);
   }
   else{
       alert (elseIF);
   }
 }
+
 function delNap (){
-    var key =prompt("Ведите название напитка, который хотите удалить");
-  drinkStorage.deleteValue(key);
-  
+var key =prompt("Ведите название напитка, который хотите удалить");
+drinkStorage.deleteValue(key); 
 }
+
 function getKey (){
- var mass=   drinkStorage.getkeys();
-    alert("Перечень всех напитков:"+"\n"+ mass);
+var mass=   drinkStorage.getkeys();
+alert("Перечень всех напитков:"+"\n"+ mass);
 }
 
 var drinkStorage= new HashStorage;

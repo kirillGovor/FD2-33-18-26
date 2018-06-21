@@ -17,16 +17,16 @@ function HashStorage()
 
 HashStorage.prototype.addValue = function (key,value)
 {
-   // this.storage={};
-   this.storage[key]=value;
-    console.log(this.storage);
-    
+   this.storage[key]=value;   
 }
 
 
 HashStorage.prototype.getValue = function  (key)
 {
+    if (key in this.storage){
     return this.storage[key];  
+    }
+    else {return ("Нет такого напитка");}
 }
 
 HashStorage.prototype.deleteValue = function(key)
@@ -41,11 +41,13 @@ HashStorage.prototype.deleteValue = function(key)
 }
 
 HashStorage.prototype.getkeys = function()
-{ var text="";
-for (var k in this.storage){
-  var text=text+" "+k;
+{ var mass=[];
+var number=0;
+for (var key in this.storage){
+    mass[number]=key;
+    number++;
 }
-  return text;
+  return mass;
 }
 
 var value={alcho:"",recept:""};
@@ -58,13 +60,18 @@ drinkStorage.addValue(key,value);
 }
 
 function getNap (){
+    elseIF=""
   var  key=prompt("Введите название напитка");
-  drinkStorage.getValue(key);
+  var elseIF = drinkStorage.getValue(key);
+  if (elseIF!="Нет такого напитка"){
   alert(`
   Напиток:${key}
   Алкогольный:${value.alcho}
   Рецепт:${value.recept}`);
-    
+  }
+  else{
+      alert (elseIF);
+  }
 }
 function delNap (){
     var key =prompt("Ведите название напитка, который хотите удалить");
@@ -72,8 +79,8 @@ function delNap (){
   
 }
 function getKey (){
- var text=   drinkStorage.getkeys();
-    alert("Перечень всех напитков:"+"\n"+ text);
+ var mass=   drinkStorage.getkeys();
+    alert("Перечень всех напитков:"+"\n"+ mass);
 }
 
 var drinkStorage= new HashStorage;

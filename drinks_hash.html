@@ -25,9 +25,8 @@ HashStorage.prototype.addValue = function (key,value)
 
 
 HashStorage.prototype.getValue = function  (key)
-{   console.log(this.storage[key]);
-    return this.storage[key];
-    
+{
+    return this.storage[key];  
 }
 
 HashStorage.prototype.deleteValue = function(key)
@@ -42,9 +41,11 @@ HashStorage.prototype.deleteValue = function(key)
 }
 
 HashStorage.prototype.getkeys = function()
-{ console.log(this.storage);
-   return this.storage;
-  
+{ var text="";
+for (var k in this.storage){
+  var text=text+" "+k;
+}
+  return text;
 }
 
 var value={alcho:"",recept:""};
@@ -58,8 +59,11 @@ drinkStorage.addValue(key,value);
 
 function getNap (){
   var  key=prompt("Введите название напитка");
-  var text=drinkStorage.getValue(key);
-  alert(text);   
+  drinkStorage.getValue(key);
+  alert(`
+  Напиток:${key}
+  Алкогольный:${value.alcho}
+  Рецепт:${value.recept}`);
     
 }
 function delNap (){
@@ -68,8 +72,8 @@ function delNap (){
   
 }
 function getKey (){
-    var text=drinkStorage.getkeys();
-    alert(text);
+ var text=   drinkStorage.getkeys();
+    alert("Перечень всех напитков:"+"\n"+ text);
 }
 
 var drinkStorage= new HashStorage;

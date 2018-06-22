@@ -9,8 +9,8 @@
 
 <script>
 "use strict";
-var value={alcho:"",recept:""};
-var key;
+//var value={alcho:"",recept:""};
+//var key;
 
 function HashStorage()
 {   
@@ -55,6 +55,8 @@ var number=0;
 
 
 function addNap (){
+    var value={alcho:"",recept:""};
+    var key;
 key=prompt("Введите напиток");
 value.alcho=prompt("Напиток алкогольный?");
 value.recept=prompt("Подскажите рецептик");
@@ -68,8 +70,8 @@ var elseIF = drinkStorage.getValue(key);
   if (elseIF!="Нет такого напитка"){
     alert(`
      Напиток:${key}
-     Алкогольный:${value.alcho}
-     Рецепт:${value.recept}`);
+     Алкогольный:${elseIF.alcho}
+     Рецепт:${elseIF.recept}`);
   }
   else{
       alert (elseIF);

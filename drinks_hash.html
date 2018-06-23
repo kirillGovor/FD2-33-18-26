@@ -25,17 +25,17 @@ if (key in this.storage){
     return this.storage[key];  
 }
 else{
-    return ("Нет такого напитка");
+    return (false);
 }
 }
 
 HashStorage.prototype.deleteValue = function(key){
 if (this.storage[key]==undefined){
-    alert("undefined");
+    return("undefined");
 }
 else{
      delete this.storage[key];
-     alert( true);
+     return( true);
 }
 }
 
@@ -65,7 +65,7 @@ function getNap (){
 elseIF=""
 var  key=prompt("Введите название напитка");
 var elseIF = drinkStorage.getValue(key);
-  if (elseIF!="Нет такого напитка"){
+  if (elseIF!=false){
     alert(`
      Напиток:${key}
      Алкогольный:${elseIF.alcho}
@@ -77,8 +77,10 @@ var elseIF = drinkStorage.getValue(key);
 }
 
 function delNap (){
+var elseIF;
 var key =prompt("Ведите название напитка, который хотите удалить");
-drinkStorage.deleteValue(key); 
+elseIF=drinkStorage.deleteValue(key); 
+alert(elseIF);
 }
 
 function getKey (){

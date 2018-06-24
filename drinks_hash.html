@@ -21,17 +21,12 @@ this.storage[key]=value;
 
 
 HashStorage.prototype.getValue = function  (key){
-if (key in this.storage){
-    return this.storage[key];  
-}
-else{
-    return (this.storage[key]);
-}
+    return (this.storage);  
 }
 
 HashStorage.prototype.deleteValue = function(key){
 if (this.storage[key]==undefined){
-    return(this.storage[key]);
+    return(undefined);
 }
 else{
      delete this.storage[key];
@@ -59,14 +54,14 @@ function getNap (){
 elseIF=""
 var  key=prompt("Введите название напитка");
 var elseIF = drinkStorage.getValue(key);
-  if (elseIF!=undefined){
+  if (key in elseIF){
     alert(`
      Напиток:${key}
-     Алкогольный:${elseIF.alcho}
-     Рецепт:${elseIF.recept}`);
+     Алкогольный:${elseIF[key].alcho}
+     Рецепт:${elseIF[key].recept}`);
   }
   else{
-      alert (elseIF);
+      alert (undefined);
   }
 }
 

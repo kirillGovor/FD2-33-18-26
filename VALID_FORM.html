@@ -38,37 +38,109 @@
 <script>
     "use strict"
     var formTag=document.forms.formInfo; // а можно было найти через getElementById
-  //  formTag.addEventListener('submit',validateInfoForm,false); // назначаем обработчик события submit
+   formTag.addEventListener('submit',validateInfoForm,false); // назначаем обработчик события submit
 
-  // function validateInfoForm(EO) {
-     //   EO=EO||window.event;
-        try{
+  function validateInfoForm(EO) {
+      var a =0;
+       EO=EO||window.event;
+
+
+try{
 var formTag=document.forms.formInfo;
 
+var Author=formTag.elements.author; //автор
+var AuthorValue=Author.value;
+  if (AuthorValue.length==0||AuthorValue.length>30) { 
+      console.log(AuthorValue)
+    this.className = "color";
+    error.innerHTML = "Введите корректно автора";
+    a++;
+  }
+
+var SiteName=formTag.elements.siteName;
+var SiteNameValue=SiteName.value;
+if (SiteNameValue.length==0||SiteNameValue.length>30) { 
+    this.className = "color";
+    error1.innerHTML = "Введите корректно название сайта";
+    a++;
+  }
+
+
+var siteUrl=formTag.elements.url //url сайта
+var siteUrlValue=siteUrl.value;
+if (siteUrlValue.length==0) { 
+    this.className = "color";
+    error2.innerHTML = "Введите url";
+    a++;
+}
 
 
 
+var siteStartdate=formTag.elements.startdate //дата запуска сайта
+var siteStartdateValue=siteStartdate.value;
+if (siteStartdateValue=="") { 
+    this.className = "color";
+    error3.innerHTML = "Введите дату";
+    a++;
+  }
 
 
+var sitePersons=formTag.elements.persons //посетители в день
+var sitePersonsValue=sitePersons.value;
+if (sitePersonsValue.length==0) { 
+    this.className = "color";
+    error4.innerHTML = "этого не может быть";
+    a++;
+}
+if (sitePersonsValue.length==100){
+error4.innerHTML("Многовато что-то для такой странички");
+a++;
+ 
+}
 
 
-
+var emailPersons=formTag.elements.email; //e-mail
+var emailPersonsValue=emailPersons.value;
+if (emailPersonsValue=="") { 
+    this.className = "color";
+    error5.innerHTML = "Введите email";
+    a++;
+}
 
 
 var CatalogRubric=formTag.elements.rubric; //рубрика каталога
 var CatalogRubricValue=CatalogRubric.value;
+if (CatalogRubric.value=="3") { 
+    this.className = "color";
+    error6.innerHTML = "данного каталога в наличии нет";
+    a++;
+  }
 
-var CatalogPublic=formTag.elements.public; //размещение
-var CatalogPublicValue=CatalogPublic.value;
-
-var CheckComments=formTag.elements.comments; //размещение
-var  CheckCommentsValue= CheckComments.value;
 
 var articleMemo=formTag.elements.article; //описание сайта
 var  articleMemoValue= articleMemo.value;
+if (articleMemoValue.length<10) { 
+    this.className = "color";
+    error9.innerHTML = "минимум 10 символов";
+    a++;
+  }
 
-
-
+var CatalogPublic=formTag.elements.public; //размещение
+var CatalogPublicValue=CatalogPublic.value;
+if (CatalogPublicValue==""){
+    this.className = "color";
+    error7.innerHTML = "Введите корректно автора";
+    a++;
+}
+var CheckComments=formTag.elements.comments; //отзыв
+var  CheckCommentsValue= CheckComments.checked;
+if (CheckCommentsValue==false){
+    this.className = "color";
+    error8.innerHTML = "Поставьте галочку";
+    a++;
+}
+if (a>0)
+return(ex);
 }
 
  catch ( ex ) {
@@ -79,7 +151,7 @@ var  articleMemoValue= articleMemo.value;
        
         
      
-//}
+}
 
 
 //разработчики
@@ -109,7 +181,7 @@ author.onfocus = function() {
 //Название сайта
 siteName.onblur = function() {
 var SiteName=formTag.elements.siteName;
-var SiteNameValue=SiteName.value
+var SiteNameValue=SiteName.value;
   if (SiteNameValue.length==0||SiteNameValue.length>30) { 
     this.className = "color";
     error1.innerHTML = "Введите корректно название сайта";
@@ -154,7 +226,7 @@ var siteStartdateValue=siteStartdate.value;
     error3.innerHTML = "Введите дату";
     
   }
-};
+}
 startdate.onfocus = function() {
   if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
     this.className = "";
@@ -173,7 +245,7 @@ var sitePersonsValue=sitePersons.value;
 if (sitePersonsValue.length==100)
 error4.innerHTML("Многовато что-то для такой странички");
   }
-};
+}
 persons.onfocus = function() {
   if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
     this.className = "";
@@ -202,7 +274,7 @@ email.onfocus = function() {
 
 
 
-//дата запуска сайта
+//рубрика каталога
 rubric.onblur = function() {
 var CatalogRubric=formTag.elements.rubric; //рубрика каталога
 var CatalogRubricValue=CatalogRubric.value;
@@ -211,11 +283,32 @@ var CatalogRubricValue=CatalogRubric.value;
     error6.innerHTML = "данного каталога в наличии нет";
     
   }
-};
+}
 rubric.onfocus = function() {
   if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
     this.className = "";
     error6.innerHTML = "";
+  }
+}
+
+
+
+
+
+//описание сайта
+article.onblur = function() {
+    var articleMemo=formTag.elements.article; //описание сайта
+var  articleMemoValue= articleMemo.value;
+  if (articleMemoValue.length<10) { 
+    this.className = "color";
+    error9.innerHTML = "минимум 10 символов";
+    
+  }
+};
+article.onfocus = function() {
+  if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
+    this.className = "";
+    error9.innerHTML = "";
   }
 }
 

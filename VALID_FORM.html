@@ -1,31 +1,34 @@
 <html>
 <head>
+      <style>
+      .color{color:red;border-color:red;}
       
+      </style>
 </head>
 <body>
         <form name=formInfo action='http://fe.it-academy.by/TestForm.php' target='_blank'novalidate>
                 <table class='SNoBorders'>
-                <tr><td>Разработчики:</td><td><input type='text' name='author' style='width: 453px'></td></tr>
-                <tr><td>Название сайта:</td><td><input type='text' name='siteName' style='width: 453px'></td></tr>
-                <tr><td>URL сайта:</td><td><input type='text' name='url' style='width: 300px'></td></tr>
-                <tr><td>Дата запуска сайта:</td><td><input type='text' name='startdate' style='width: 80px'></td></tr>
-                <tr><td>Посетителей в сутки:</td><td><input type='text' name='persons' style='width: 80px'></td></tr>
-                <tr><td>E-mail для связи:</td><td><input type='text' name='email' style='width: 200px'></td></tr>
+                <tr><td>Разработчики:</td><td><input type='text'id="author" name='author' style='width: 453px' onblur=" validateInfoForm()"></td><td id=error></td></tr>
+                <tr><td>Название сайта:</td><td><input type='text' name='siteName' style='width: 453px'id="siteName"></td><td id=error1></td></tr>
+                <tr><td>URL сайта:</td><td><input type='text' name='url' style='width: 300px'id="url"></td><td id=error2></td></tr>
+                <tr><td>Дата запуска сайта:</td><td><input type='text' name='startdate' style='width: 80px'id="startdate"></td><td id=error3></td></tr>
+                <tr><td>Посетителей в сутки:</td><td><input type='text' name='persons' style='width: 80px'id="persons"></td><td id=error4></td></tr>
+                <tr><td>E-mail для связи:</td><td><input type='text' name='email' style='width: 200px'id="email"></td><td id=error5></td></tr>
                 <tr><td>Рубрика каталога:</td><td style='padding-left: 1px'>
-                  <select name='rubric' style='width: 204px; margin-left: 2px'>
+                  <select name='rubric' style='width: 204px; margin-left: 2px'id="rubric">
                   <option value=1>здоровье</option>
                   <option value=2>домашний уют</option>
                   <option value=3 selected>бытовая техника</option>
-                  </select>
+                  </select><td id=error6></td>
                 </td></tr>
-                <tr><td>Размещение:</td><td style='padding: 2px 0 2px 0'>
+                <tr><td>Размещение:</td><td style='padding: 2px 0 2px 0'id="public">
                   <input type='radio' name='public' value=1><span class='SRadio8a'>бесплатное</span>
                   <input type='radio' name='public' value=2><span class='SRadio8a'>платное</span>
                   <input type='radio' name='public' value=3><span class='SRadio8a'>VIP</span>
-                </td></tr>
-                <tr><td style='padding: 2px 0 3px 3px'>Разрешить&nbsp;отзывы:</td><td><input type='checkbox' name='comments'></td></tr>
+                </td><td id=error7></td></tr>
+                <tr><td style='padding: 2px 0 3px 3px'>Разрешить&nbsp;отзывы:</td><td><input type='checkbox' name='comments'id="comments"></td><td id=error8></td></tr>
                 <tr><td colspan=2>Описание сайта:<br />
-                <textarea name='article' style='width: 608px; height: 50px'></textarea></td></tr>
+                <textarea name='article' style='width: 608px; height: 50px'id="article"></textarea></td><td id=error9></td></tr>
                 <tr><td><input type='submit' value='Опубликовать'></td><td></td></tr>
                 </table>
                 </form>
@@ -35,32 +38,22 @@
 <script>
     "use strict"
     var formTag=document.forms.formInfo; // а можно было найти через getElementById
-    formTag.addEventListener('submit',validateInfoForm,false); // назначаем обработчик события submit
+  //  formTag.addEventListener('submit',validateInfoForm,false); // назначаем обработчик события submit
 
-    function validateInfoForm(EO) {
-        EO=EO||window.event;
+  // function validateInfoForm(EO) {
+     //   EO=EO||window.event;
         try{
 var formTag=document.forms.formInfo;
 
-var Author=formTag.elements.author; // разработчики
-var AuthorValue=Author.value;
 
 
-var SiteName=formTag.elements.siteName; // название сайта
-var SiteNameValue=SiteName.value
 
 
-var siteUrl=formTag.elements.url //url сайта
-var siteUrlValue=siteUrl.value;
 
-var siteStartdate=formTag.elements.startdate //дата запуска сайта
-var siteStartdateValue=siteStartdate.value;
 
-var sitePersons=formTag.elements.persons //посетители в день
-var sitePersonsValue=sitePersons.value;
 
-var emailPersons=formTag.elements.email; //e-mail
-var emailPersons=emailPersons.value;
+
+
 
 var CatalogRubric=formTag.elements.rubric; //рубрика каталога
 var CatalogRubricValue=CatalogRubric.value;
@@ -75,23 +68,156 @@ var articleMemo=formTag.elements.article; //описание сайта
 var  articleMemoValue= articleMemo.value;
 
 
-if ( AuthorValue.length<30 ) {
-                alert('Введите пожалуйста ФИО не длиннее 30 символов!');
-                fioField.focus(); // фокусируем элемент и прокручиваем к нему
-                EO.preventDefault(); // форма не будет отправлена на сервер
-                return;
-            }
+
 }
 
  catch ( ex ) {
-            EO.preventDefault(); // что-то пошло не так - считаем что валидация не прошла
+           EO.preventDefault(); // что-то пошло не так - считаем что валидация не прошла
         }
      
+       
+       
+        
+     
+//}
+
+
+//разработчики
+author.onblur = function() {
+var Author=formTag.elements.author; 
+var AuthorValue=Author.value;
+  if (AuthorValue.length==0||AuthorValue.length>30) { 
+      console.log(AuthorValue)
+    this.className = "color";
+    error.innerHTML = "Введите корректно автора";
+    
+  }
+};
+author.onfocus = function() {
+  if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
+    this.className = "";
+    error.innerHTML = "";
+  }
 }
 
 
 
 
+
+
+
+//Название сайта
+siteName.onblur = function() {
+var SiteName=formTag.elements.siteName;
+var SiteNameValue=SiteName.value
+  if (SiteNameValue.length==0||SiteNameValue.length>30) { 
+    this.className = "color";
+    error1.innerHTML = "Введите корректно название сайта";
+    
+  }
+}
+siteName.onfocus = function() {
+  if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
+    this.className = "";
+    error1.innerHTML = "";
+  }
+}
+
+
+
+
+//url сайта
+url.onblur = function() {
+var siteUrl=formTag.elements.url //url сайта
+var siteUrlValue=siteUrl.value;
+  if (siteUrlValue.length==0) { 
+    this.className = "color";
+    error2.innerHTML = "Введите url";
+    
+  }
+};
+url.onfocus = function() {
+  if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
+    this.className = "";
+    error2.innerHTML = "";
+  }
+}
+
+
+
+//дата запуска сайта
+startdate.onblur = function() {
+var siteStartdate=formTag.elements.startdate //дата запуска сайта
+var siteStartdateValue=siteStartdate.value;
+  if (siteStartdateValue=="") { 
+    this.className = "color";
+    error3.innerHTML = "Введите дату";
+    
+  }
+};
+startdate.onfocus = function() {
+  if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
+    this.className = "";
+    error3.innerHTML = "";
+  }
+}
+
+
+//посетители в день
+persons.onblur = function() {
+    var sitePersons=formTag.elements.persons //посетители в день
+var sitePersonsValue=sitePersons.value;
+  if (sitePersonsValue.length==0) { 
+    this.className = "color";
+    error4.innerHTML = "этого не может быть";
+if (sitePersonsValue.length==100)
+error4.innerHTML("Многовато что-то для такой странички");
+  }
+};
+persons.onfocus = function() {
+  if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
+    this.className = "";
+    error4.innerHTML = "";
+  }
+}
+
+
+//e-mail
+email.onblur = function() {
+    var emailPersons=formTag.elements.email; //e-mail
+var emailPersonsValue=emailPersons.value;
+  if (emailPersonsValue=="") { 
+    this.className = "color";
+    error5.innerHTML = "Введите email";
+}
+
+
+}
+email.onfocus = function() {
+  if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
+    this.className = "";
+    error5.innerHTML = "";
+  }
+}
+
+
+
+//дата запуска сайта
+rubric.onblur = function() {
+var CatalogRubric=formTag.elements.rubric; //рубрика каталога
+var CatalogRubricValue=CatalogRubric.value;
+  if (CatalogRubric.value=="3") { 
+    this.className = "color";
+    error6.innerHTML = "данного каталога в наличии нет";
+    
+  }
+};
+rubric.onfocus = function() {
+  if (this.className == 'color') { // сбросить состояние "ошибка", если оно есть
+    this.className = "";
+    error6.innerHTML = "";
+  }
+}
 
 </script>
 

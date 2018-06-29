@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <style>
+       
+        
+        </style>
+        </head>
+        <body>
+            <div name="imageJs">
+            <img class="position" id="image" src="js.png" width="200px">
+        </div>
+        </body>
+    
+    <script>
+
+
+
+var imagesHash = document.getElementById('image');
+var z_index=1;
+
+
+imagesHash.onmousedown = function(e) {
+
+  var coords = getCoords(imagesHash);
+  var shiftX = e.pageX - coords.left;
+  var shiftY = e.pageY - coords.top;
+
+imagesHash.style.position = 'absolute';
+  document.body.appendChild(imagesHash);
+  moveAt(e);
+
+ imagesHash.style.zIndex = z_index +1; // над другими элементами
+
+  function moveAt(e) {
+    imagesHash.style.left = e.pageX - shiftX + 'px';
+    imagesHash.style.top = e.pageY - shiftY + 'px';
+  }
+
+  document.onmousemove = function(e) {
+    moveAt(e);
+  };
+
+  imagesHash.onmouseup = function() {
+    document.onmousemove = null;
+    imagesHash.onmouseup = null;
+  };
+
+}
+
+imagesHash  .ondragstart = function() {
+  return false;
+};
+
+function getCoords(elem) {   // кроме IE8-
+  var box = elem.getBoundingClientRect();
+  return {
+    top: box.top + pageYOffset,
+    left: box.left + pageXOffset
+  };
+}
+
+    </script>
+</html>

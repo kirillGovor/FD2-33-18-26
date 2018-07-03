@@ -248,11 +248,23 @@ persons.onblur = function() {
     var sitePersons=formTag.elements.persons //посетители в день
 var sitePersonsValue=sitePersons.value;
 error4.innerHTML ="";
-  if (sitePersonsValue.length==0) { 
+  if (sitePersonsValue.length==0 || sitePersonsValue=="0") { 
     error4.className = "color";
     error4.innerHTML = "этого не может быть";
-if (sitePersonsValue.length>1000000)
-error4.innerHTML("Многовато что-то для такой странички");
+  }
+  
+ 
+ 
+if (sitePersonsValue.length>=6){
+error4.className = "color";
+error4.innerHTML="Многовато что-то для такой странички";
+}
+sitePersonsValue=Number(sitePersonsValue);
+ if (sitePersonsValue!=sitePersonsValue)
+  {
+    error4.className = "color";
+error4.innerHTML="Введите число";
+return;
   }
 }
 persons.onfocus = function() {

@@ -165,7 +165,6 @@ var Author=formTag.elements.author;
 var AuthorValue=Author.value;
 error.innerHTML ="";
   if (AuthorValue.length==0||AuthorValue.length>30) { 
-      console.log(AuthorValue)
     error.className = "color";
     error.innerHTML = "Введите корректно автора";
     
@@ -252,7 +251,7 @@ error4.innerHTML ="";
   if (sitePersonsValue.length==0) { 
     error4.className = "color";
     error4.innerHTML = "этого не может быть";
-if (sitePersonsValue.length==100)
+if (sitePersonsValue.length>1000000)
 error4.innerHTML("Многовато что-то для такой странички");
   }
 }

@@ -176,16 +176,21 @@ return {
 }
 
 */
-
-
 var HashKey={};
 var imagesHashs =document.getElementsByTagName('img');
 var z_index_image =1;
+
+function positionImage(){
 console.log(imagesHashs);
 var k = imagesHashs.length;
 for (var i in imagesHashs){
 k=k-1;
 k=String(k);
+
+
+var iamge = imagesHashs[k];
+HashKey[k]=imagesHashs[k];
+
 
  imagesHashs[k].style.left=imagesHashs[k].offsetLeft+"px";
  imagesHashs[k].style.top=imagesHashs[k].offsetTop+"px";
@@ -197,6 +202,11 @@ k=String(k);
 }
 }
 
+}
+positionImage();
+
+
+console.log(HashKey);
 
 
 
@@ -207,45 +217,42 @@ k=String(k);
 
 
 
+/////////////////////////
 
 
 
+if (HashKey==imagesHashs[0]){
+  console.log("dfd")
+}
 
 
-
-
-
-var imagesHash = document.getElementById('image');
-console.log(imagesHash);
-
-
-imagesHash.onmousedown = function(e) {
-  var coords = getCoords(imagesHash);
+HashKey.onmousedown = function(e) {
+  var coords = getCoords(HashKey);
   var shiftX = e.pageX - coords.left;
   var shiftY = e.pageY - coords.top;
 
-  document.body.appendChild(imagesHash);
+  document.body.appendChild(HashKey);
   moveAt(e);
   z_index_image=z_index_image+1;
- imagesHash.style.zIndex = z_index_image; // над другими элементами
+  HashKey.style.zIndex = z_index_image; // над другими элементами
 
   function moveAt(e) {
-    imagesHash.style.left = e.pageX - shiftX + 'px';
-    imagesHash.style.top = e.pageY - shiftY + 'px';
+    HashKey.style.left = e.pageX - shiftX + 'px';
+    HashKey.style.top = e.pageY - shiftY + 'px';
   }
 
   document.onmousemove = function(e) {
     moveAt(e);
   };
 
-  imagesHash.onmouseup = function() {
+  HashKey.onmouseup = function() {
     document.onmousemove = null;
-    imagesHash.onmouseup = null;
+    HashKey.onmouseup = null;
   };
 
 }
 
-imagesHash  .ondragstart = function() {
+HashKey.ondragstart = function() {
   return false;
 };
 
@@ -256,6 +263,8 @@ function getCoords(elem) {   // кроме IE8-
     left: box.left + pageXOffset
   };
 }
+
+
 
     </script>
 </html>

@@ -8,6 +8,7 @@
         <body>
             <div name="imageJs">
             <img class="draggable" id="image" src="js.png" width="200px">
+            
             <img class="draggable" id="image" src="explorer.png" width="200px">
             <img class="draggable" id="image" src="chrome.png" width="200px">
             <img class="draggable" id="image" src="firefox.jpg" width="200px">
@@ -15,7 +16,7 @@
         </body>
     
     <script>
-var DragManager = new function() {
+//var DragManager = new function() {
 
 /**
  * составной объект для хранения информации о переносе:
@@ -26,6 +27,7 @@ var DragManager = new function() {
  *   shiftX/shiftY - относительный сдвиг курсора от угла элемента
  * }
  */
+ /*
 var dragObject = {};
 
 var self = this;
@@ -173,8 +175,87 @@ return {
 
 }
 
+*/
 
 
+var HashKey={};
+var imagesHashs =document.getElementsByTagName('img');
+var z_index_image =1;
+console.log(imagesHashs);
+var k = imagesHashs.length;
+for (var i in imagesHashs){
+k=k-1;
+k=String(k);
+
+ imagesHashs[k].style.left=imagesHashs[k].offsetLeft+"px";
+ imagesHashs[k].style.top=imagesHashs[k].offsetTop+"px";
+ imagesHashs[k].style.position="absolute";
+
+
+  k=Number(k);
+  if (k==0) {k=4;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var imagesHash = document.getElementById('image');
+console.log(imagesHash);
+
+
+imagesHash.onmousedown = function(e) {
+  var coords = getCoords(imagesHash);
+  var shiftX = e.pageX - coords.left;
+  var shiftY = e.pageY - coords.top;
+
+  document.body.appendChild(imagesHash);
+  moveAt(e);
+  z_index_image=z_index_image+1;
+ imagesHash.style.zIndex = z_index_image; // над другими элементами
+
+  function moveAt(e) {
+    imagesHash.style.left = e.pageX - shiftX + 'px';
+    imagesHash.style.top = e.pageY - shiftY + 'px';
+  }
+
+  document.onmousemove = function(e) {
+    moveAt(e);
+  };
+
+  imagesHash.onmouseup = function() {
+    document.onmousemove = null;
+    imagesHash.onmouseup = null;
+  };
+
+}
+
+imagesHash  .ondragstart = function() {
+  return false;
+};
+
+function getCoords(elem) {   // кроме IE8-
+  var box = elem.getBoundingClientRect();
+  return {
+    top: box.top + pageYOffset,
+    left: box.left + pageXOffset
+  };
+}
 
     </script>
 </html>

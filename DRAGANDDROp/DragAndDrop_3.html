@@ -39,6 +39,8 @@
             var z_index_image=0;  
             var imageHash={};
             var draggedImage=null;
+
+
                 function positionAbsoluteImage(){
                     imageHash=document.getElementsByTagName("img");
                     console.log(imageHash);
@@ -80,8 +82,9 @@
                     draggedImage.onmouseup=function(EO){
                     document.onmousemove = null;
                     draggedImage.onmouseup = null;
-                    
+                    draggedImage=null;
                     };   
+                    EO.preventDefault();  
                 }
 
 

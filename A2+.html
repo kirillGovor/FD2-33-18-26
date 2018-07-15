@@ -1,19 +1,37 @@
 <script>
-function a2(){
-    var stroka="  fdf fdf fddfd   ";
+function a2(stroka){
+    var stroka="  привет  мир  ";
     var newStroka="";
-    var space="f";
-    for (var i in stroka){
-
-        while(stroka[i]!=" "){
-            newStroka=newStroka+stroka[i];
-           
+    var newStroka_all="";
+    var i=0;
+    var not =0;
+    while ( i<stroka.length){
+        
+       if (stroka[i]!=" "){
+        newStroka=newStroka+stroka[i];
+            not=not+1;
         }
-        //else{
-            stroka[i]="";
-      //  }
-      }
-      console.log(newStroka)
+        else{
+            if (not>0){
+                newStroka=newStroka+stroka[i];
+            } 
+        }
+       i++;
+    }
+    not =0;
+
+    for (i=newStroka.length-1;i>=0;i--){
+        if (newStroka[i]!=" "){
+            newStroka_all=newStroka[i]+newStroka_all;
+            not=not+1;
+        }
+        else{
+            if (not>0){
+                newStroka_all=newStroka[i]+newStroka_all;
+            }   
+        }
+    }
+      console.log(newStroka_all);
 }
 a2();
 </script>

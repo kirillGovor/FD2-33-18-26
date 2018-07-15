@@ -43,7 +43,7 @@
 
                 function positionAbsoluteImage(){
                     imageHash=document.getElementsByTagName("img");
-                    console.log(imageHash);
+                    
                         for (var i=imageHash.length-1;i>=0;i-- )
                         {
                             imageHash[i].style.left=imageHash[i].offsetLeft+"px";
@@ -76,32 +76,31 @@
 
 
                     document.onmousemove = function(e) {
-                    moveAt(e);
+                        moveAt(e);
                     };
                     
                     draggedImage.onmouseup=function(EO){
-                    document.onmousemove = null;
-                    draggedImage.onmouseup = null;
-                    draggedImage=null;
+                        document.onmousemove = null;
+                        draggedImage.onmouseup = null;
+                        draggedImage=null;
                     };   
-                    EO.preventDefault();  
+                EO.preventDefault();  
                 }
 
 
                 function ImageDragStart (EO){
-                    
                     return false;
                 };
 
                 
                 
-                function getCoords(EO) {   // кроме IE8-
-                var box = EO.getBoundingClientRect();
-                 return {
-                  top: box.top + pageYOffset,
-                  left: box.left + pageXOffset
-                  };
-                    }
+                function getCoords(EO) { 
+                    var box = EO.getBoundingClientRect();
+                    return {
+                    top: box.top + pageYOffset,
+                    left: box.left + pageXOffset
+                    };
+                }
 
             </script>
 </html>  

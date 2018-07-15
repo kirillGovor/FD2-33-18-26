@@ -1,0 +1,104 @@
+<html>
+
+    <head>
+        <style>
+       
+        
+        </style>
+    </head>
+        <body>
+            <div name="imageJs">
+            <img class="draggable" id="image" src="js.png" width="200px"
+            ondragstart="ImageDragStart(event)"
+           
+           
+           
+            onmousedown="ImageMouseDown(event)"
+            >
+            <img class="draggable" id="image" src="explorer.png" width="200px"
+            ondragstart="ImageDragStart(event)"
+            
+            
+           
+            onmousedown="ImageMouseDown(event)">
+            <img class="draggable" id="image" src="chrome.png" width="200px"
+            ondragstart="ImageDragStart(event)"
+            
+            
+            
+            onmousedown="ImageMouseDown(event)">
+            <img class="draggable" id="image" src="firefox.jpg" width="200px"
+            ondragstart="ImageDragStart(event)"
+            
+            
+            
+            onmousedown="ImageMouseDown(event)">
+            </div>
+        </body>
+            <script>
+            var z_index_image=0;  
+            var imageHash={};
+            var draggedImage=null;
+                function positionAbsoluteImage(){
+                    imageHash=document.getElementsByTagName("img");
+                    console.log(imageHash);
+                        for (var i=imageHash.length-1;i>=0;i-- )
+                        {
+                            imageHash[i].style.left=imageHash[i].offsetLeft+"px";
+                            imageHash[i].style.top=imageHash[i].offsetTop+"px";
+                            imageHash[i].style.position="absolute";
+                        }
+              }
+                positionAbsoluteImage();
+            
+                
+
+
+
+                function ImageMouseDown(EO){
+                    EO=EO||window.event;
+                    draggedImage=EO.target;
+                    var coords = getCoords(draggedImage);
+                    var shiftX = EO.pageX - coords.left;
+                    var shiftY = EO.pageY - coords.top;
+                    document.body.appendChild(draggedImage);
+
+                    z_index_image=z_index_image+1;
+                    draggedImage.style.zIndex=z_index_image;
+                    moveAt(EO);
+
+                    function moveAt(e) {
+                        draggedImage.style.left = e.pageX - shiftX + 'px';
+                        draggedImage.style.top = e.pageY - shiftY + 'px';
+                    }
+
+
+                    document.onmousemove = function(e) {
+                    moveAt(e);
+                    };
+                    
+                    draggedImage.onmouseup=function(EO){
+                    document.onmousemove = null;
+                    draggedImage.onmouseup = null;
+                    
+                    };   
+                }
+
+
+                function ImageDragStart (EO){
+                    
+                    return false;
+                };
+
+                
+                
+                function getCoords(EO) {   // кроме IE8-
+                var box = EO.getBoundingClientRect();
+                 return {
+                  top: box.top + pageYOffset,
+                  left: box.left + pageXOffset
+                  };
+                    }
+
+            </script>
+</html>  

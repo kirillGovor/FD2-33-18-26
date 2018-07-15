@@ -1,84 +1,63 @@
 <html>
+
     <head>
         <style>
        
         
-        </style>
-        </head>
-        <body>
-            <div name="imageJs">
-            <img class="draggable" id="image" src="js.png" width="200px">
-            
-            <img class="draggable" id="image" src="explorer.png" width="200px">
-            <img class="draggable" id="image" src="chrome.png" width="200px">
-            <img class="draggable" id="image" src="firefox.jpg" width="200px">
-        </div>
-        </body>
-    
-    <script>
+       
+ 
+ 
+</style>
+</head>
+<body>
+<div name="imageJs">
+<img class="draggable" id="image" src="js.png" width="200px">
+ 
+<img class="draggable" id="image" src="explorer.png" width="200px">
+<img class="draggable" id="image" src="chrome.png" width="200px">
+<img class="draggable" id="image" src="firefox.jpg" width="200px">
+</div>
+</body>
+ 
+<script>
 
-var HashKey={};
-var imagesHashs =document.getElementsByTagName('img');
-var z_index_image =1;
-
-function positionImage(){
+// одну картинку
+var imagesHashs = document.getElementsByTagName("img");
 console.log(imagesHashs);
-var k = imagesHashs.length;
-for (var i in imagesHashs){
-k=k-1;
-k=String(k);
+var imagesHash = document.getElementById('image');
+console.log(imagesHash);
+var z_index=1;
 
 
-var iamge = imagesHashs[k];
-HashKey[k]=imagesHashs[k];
+imagesHash.onmousedown = function(e) {
 
-
- imagesHashs[k].style.left=imagesHashs[k].offsetLeft+"px";
- imagesHashs[k].style.top=imagesHashs[k].offsetTop+"px";
- imagesHashs[k].style.position="absolute";
-
-
-  k=Number(k);
-  if (k==0) {k=4;
-}
-}
-
-}
-positionImage();
-
-
-console.log(HashKey);
-
-
-
-
-HashKey.onmousedown = function(e) {
-  var coords = getCoords(HashKey);
+  var coords = getCoords(imagesHash);
   var shiftX = e.pageX - coords.left;
   var shiftY = e.pageY - coords.top;
 
-  document.body.appendChild(HashKey);
+imagesHash.style.position = 'absolute';
+  document.body.appendChild(imagesHash);
   moveAt(e);
-  z_index_image=z_index_image+1;
-  HashKey.style.zIndex = z_index_image; // над другими элементами
+
+ imagesHash.style.zIndex = z_index+1; // над другими элементами
 
   function moveAt(e) {
-    HashKey.style.left = e.pageX - shiftX + 'px';
-    HashKey.style.top = e.pageY - shiftY + 'px';
+    imagesHash.style.left = e.pageX - shiftX + 'px';
+    imagesHash.style.top = e.pageY - shiftY + 'px';
   }
 
   document.onmousemove = function(e) {
     moveAt(e);
   };
 
-  HashKey.onmouseup = function() {
+  imagesHash.onmouseup = function() {
     document.onmousemove = null;
-    HashKey.onmouseup = null;
+    imagesHash.onmouseup = null;
   };
 
 }
 
-HashKey.ondragstart = function() {
+imagesHash  .ondragstart = function() {
   return false;
 };
 
@@ -90,7 +69,6 @@ function getCoords(elem) {   // кроме IE8-
   };
 }
 
+</script>
 
-
-    </script>
 </html>

@@ -10,19 +10,15 @@
             <div name="imageJs">
 
             <img class="draggable" id="image" src="js.png" width="200px"
-            ondragstart="ImageDragStart(event)"
             onmousedown="ImageMouseDown(event)">
 
             <img class="draggable" id="image" src="explorer.png" width="200px"
-            ondragstart="ImageDragStart(event)"
             onmousedown="ImageMouseDown(event)">
 
             <img class="draggable" id="image" src="chrome.png" width="200px"
-            ondragstart="ImageDragStart(event)"
             onmousedown="ImageMouseDown(event)">
 
             <img class="draggable" id="image" src="firefox.jpg" width="200px"
-            ondragstart="ImageDragStart(event)"
             onmousedown="ImageMouseDown(event)">
             </div>
         </body>
@@ -78,13 +74,6 @@
                 EO.preventDefault();  
                 }
 
-
-                function ImageDragStart (EO){
-                    return false;
-                };
-
-                
-                
                 function getCoords(EO) { 
                     var box = EO.getBoundingClientRect();
                     return {

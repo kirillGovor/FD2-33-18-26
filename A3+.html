@@ -1,6 +1,6 @@
 <script>
-    function a3(){
-        var stroka="Нам сила — талисман.";
+    var stroka="Нам сила — талисман.";
+    function a3(stroka){
         var strokaProtected = stroka.replace(/[.,\/#!$%\^&\*;:{}=\-—_`~()" "]/g,"");
         strokaProtected=strokaProtected.toUpperCase();
         for (var i=0;i<=strokaProtected.length;i++){
@@ -17,12 +17,12 @@
             strokaConversely=strokaConversely+strokaProtected[i];
         }
         if (strokaConversely==strokaProtected){
-            console.log("строка  "+stroka+"  является палиндромом")
+            console.log(true)
         }
         else{
-            console.log("строка:  "+stroka+"  не является палиндромом")
+            console.log(false)
         }
     }
 
-    a3();
+    a3(stroka);
 </script>

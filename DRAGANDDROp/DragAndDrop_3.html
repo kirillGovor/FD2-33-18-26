@@ -60,14 +60,14 @@
                     draggedImage.style.zIndex=z_index_image;
                     moveAt(EO);
 
-                    function moveAt(e) {
-                        draggedImage.style.left = e.pageX - shiftX + 'px';
-                        draggedImage.style.top = e.pageY - shiftY + 'px';
+                    function moveAt(EO) {
+                        draggedImage.style.left = EO.pageX - shiftX + 'px';
+                        draggedImage.style.top = EO.pageY - shiftY + 'px';
                     }
 
 
-                    document.onmousemove = function(e) {
-                        moveAt(e);
+                    document.onmousemove = function(EO) {
+                        moveAt(EO);
                     };
                     
                     draggedImage.onmouseup=function(EO){

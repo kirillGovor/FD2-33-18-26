@@ -1,37 +1,41 @@
 <script>
-function a2(){
-    var stroka="  привет  мир  ";
+    var stroka="  Hello, world !  !!    ";
+function a2(stroka){
+    var after=0;
     var newStroka="";
-    var newStroka_all="";
     var i=0;
-    var not =0;
+    var SpaceBefore =0;
+    var SpaceAfter =0;
+
+
+
     while ( i<stroka.length){
-        
        if (stroka[i]!=" "){
-        newStroka=newStroka+stroka[i];
-            not=not+1;
+        break;
         }
         else{
-            if (not>0){
-                newStroka=newStroka+stroka[i];
+            SpaceBefore=SpaceBefore+1;
             } 
-        }
        i++;
     }
-    not =0;
+    
 
-    for (i=newStroka.length-1;i>=0;i--){
-        if (newStroka[i]!=" "){
-            newStroka_all=newStroka[i]+newStroka_all;
-            not=not+1;
+    for (i=stroka.length-1;i>=0;i--){
+        if (stroka[i]!=" "){
+            break;   
         }
         else{
-            if (not>0){
-                newStroka_all=newStroka[i]+newStroka_all;
-            }   
+            after=after+1;
         }
+    SpaceAfter=stroka.length-after;
     }
-      console.log(newStroka_all);
+
+
+    for (i=SpaceBefore;i<SpaceAfter;i++){
+        newStroka=newStroka+stroka[i];
+    }
+
+      return(newStroka);
 }
-a2();
+console.log(a2(stroka));
 </script>

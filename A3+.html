@@ -1,18 +1,11 @@
 <script>
-    var stroka="Нам сила — талисман.";
+    var stroka="мелём";
+    var strokaConversely="";
     function a3(stroka){
         var strokaProtected = stroka.replace(/[.,\/#!$%\^&\*;:{}=\-—_`~()" "]/g,"");
         strokaProtected=strokaProtected.toUpperCase();
-        for (var i=0;i<=strokaProtected.length;i++){
-            if (strokaProtected[i]=="ё"||"е"){
-                strokaProtected[i]="е";
-            }
-            if (strokaProtected[i]=="ь"||"ъ"){
-                strokaProtected[i]="ь";
-            }
-        }
-
-        var strokaConversely="";
+        strokaProtected=strokaProtected.replace(/Ё/g,"Е");
+        strokaProtected=strokaProtected.replace(/Ъ/g,"Ь");
         for (var i=strokaProtected.length-1;i>=0;i--){
             strokaConversely=strokaConversely+strokaProtected[i];
         }

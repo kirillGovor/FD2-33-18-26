@@ -1,7 +1,7 @@
 <script>
     var stroka="мелём";
-    var strokaConversely="";
     function a3(stroka){
+        var strokaConversely="";
         var strokaProtected = stroka.replace(/[.,\/#!$%\^&\*;:{}=\-—_`~()" "]/g,"");
         strokaProtected=strokaProtected.toUpperCase();
         strokaProtected=strokaProtected.replace(/Ё/g,"Е");

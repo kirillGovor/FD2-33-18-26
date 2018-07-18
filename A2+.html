@@ -1,5 +1,5 @@
 <script>
-    var stroka="  Hello, world !  !!    ";
+    var stroka="  Hello, world !  !!   dfsfsdf fsdf       ";
 function a2(stroka){
     var after=0;
     var newStroka="";
@@ -14,11 +14,11 @@ function a2(stroka){
         break;
         }
         else{
-            SpaceBefore=SpaceBefore+1;
+            
             } 
        i++;
     }
-    
+    SpaceBefore=i;
 
     for (i=stroka.length-1;i>=0;i--){
         if (stroka[i]!=" "){
@@ -29,11 +29,7 @@ function a2(stroka){
         }
     SpaceAfter=stroka.length-after;
     }
-
-
-    for (i=SpaceBefore;i<SpaceAfter;i++){
-        newStroka=newStroka+stroka[i];
-    }
+    newStroka=  stroka.substr(SpaceBefore,SpaceAfter-2);
 
       return(newStroka);
 }

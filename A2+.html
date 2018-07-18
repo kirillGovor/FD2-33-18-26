@@ -6,7 +6,7 @@ function a2(stroka){
     var i=0;
     var SpaceBefore =0;
     var SpaceAfter =0;
-
+    allSpace=0;
 
 
     while ( i<stroka.length){
@@ -14,7 +14,10 @@ function a2(stroka){
         break;
         }
         else{
-            
+            allSpace=allSpace+1;
+            if (allSpace==stroka.length){
+                return(false);
+            }
             } 
        i++;
     }
@@ -29,7 +32,7 @@ function a2(stroka){
         }
     SpaceAfter=stroka.length-after;
     }
-    newStroka=  stroka.substr(SpaceBefore,SpaceAfter-2);
+    newStroka= stroka.substr(SpaceBefore,SpaceAfter-2);
 
       return(newStroka);
 }

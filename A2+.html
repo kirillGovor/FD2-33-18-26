@@ -1,26 +1,24 @@
 
 <script>
     "use strict";
-    var stroka="  Hello, world !  !!   dfsfsdf fsdf       ";
+    var stroka=" dfd f  ";
 function a2(stroka){
     var after=0;
     var newStroka="";
     var i=0;
-    var SpaceBefore =0;
+    var SpaceBefore =1;
     var SpaceAfter =0;
-    var allSpace=0;
 
 
-    while ( i<stroka.length){
+    while ( i<=stroka.length){
        if (stroka[i]!=" "){
         break;
         }
         else{
-            allSpace=allSpace+1;
-            if (allSpace==stroka.length){
+            if (i==stroka.length){
                 return("");
             }
-            } 
+        } 
        i++;
     }
     SpaceBefore=i;
@@ -32,10 +30,13 @@ function a2(stroka){
         else{
             after=after+1;
         }
-    SpaceAfter=stroka.length-after;
+  
     }
-    newStroka= stroka.substr(SpaceBefore,SpaceAfter-2);
-
+    SpaceAfter=stroka.length-after-SpaceBefore;
+    
+   
+    newStroka= stroka.substr(SpaceBefore,SpaceAfter);
+    
       return(newStroka);
 }
 console.log(a2(stroka));

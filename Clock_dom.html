@@ -45,8 +45,8 @@
             background: green;
             border-radius: 50%;
             position: absolute;
-            width: 55px;
-            height: 95px;
+            width: 25px;
+            height: 65px;
             font-size: 45;
             transform-origin:center;
             margin-top:10px;
@@ -61,7 +61,7 @@
         
         }
         .big_ball{
-            background: yellow;
+            background: #ffcf43;
             width: 500px;
             height:500px;
             border-radius: 50%;
@@ -105,12 +105,14 @@
 
             <script>
                 function positionClock()
-                {       var left=10;
+                {       var left=297.5;
+                        var top =5;
                         var hours = document.getElementsByTagName("ul");
                         console.log(hours);
 
                         for (var  i=hours.length-1;i>=0;i--){
                         hours[i].style.left=left+"px";
+                        hours[i].style.top=top+"%";
                         left=left+100;
                         }
 

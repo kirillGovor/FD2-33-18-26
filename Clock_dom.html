@@ -1,14 +1,35 @@
 <html>
     <head>
         <style>
-        .clock
+
+        .clocks
         {
             width: 10px;
-            height: 100px;;
-            position: relative;
-            vertical-align: middle;
+            height: 100px;
+            
+            background:black;
+            border-radius: 0;
+            transform-origin: top right;
+           top: 50%;
+           left: 50%;
+           transform: rotate(50deg);
+           border-radius: 25px;
+            
+        }
+        
+        .minuts
+        {
+            width: 5px;
+            height: 150px;
+            transform: rotate(140deg);
         }
 
+         .second
+        {
+            width: 1.5px;
+            height: 200px;
+            transform: rotate(150deg);
+        }
 
         span{
                 position: absolute;
@@ -17,6 +38,7 @@
                 margin-left: -24px;
                 margin-top: -24px;
                 display: inline;
+             
         }
 
         ul{
@@ -25,10 +47,10 @@
             position: absolute;
             width: 55px;
             height: 95px;
-            vertical-align: middle;
             font-size: 45;
-            display: inline-block;
-            vertical-align: middle;
+            transform-origin:center;
+            margin-top:10px;
+            margin-bottom:10px;
         }
 
          div {background: green;
@@ -69,12 +91,42 @@
                 <ul><span>11</span></ul>
                 <ul><span>12</span></ul>
                
-                <class="clock" div>
+                <div class="clocks hour" div>
 
 
                 </div>
-               
+                <div class="clocks minuts" div>
+
+
+                    </div>
+                    <div class="clocks second" div>
+
+
+                        </div>
+
             </div>
+
+
+            <script>
+                function positionClock()
+                {       var left=10;
+                        var hours = document.getElementsByTagName("ul");
+                        console.log(hours);
+
+                        for (var  i=hours.length-1;i>=0;i--){
+                        hours[i].style.left=left+"px";
+                        left=left+100;
+                        }
+
+
+                }
+                positionClock();
+
+
+
+            </script>
+
+
         </body>
     </head>
 </html>

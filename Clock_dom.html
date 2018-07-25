@@ -16,7 +16,11 @@
            border-radius: 25px;
             
         }
-        
+
+        .hour{
+            left: 48%;
+        }
+
         .minuts
         {
             width: 5px;
@@ -142,13 +146,15 @@
                     var clocks_hour = document.getElementById("clocks_hour");//стрелка часов
                     var clocks_minuts = document.getElementById("clocks_minuts");//стрелка минут
                     var clocks_second = document.getElementById("clocks_second");//стрелка секунд
+                   
                     Data = new Date();
                     Hour = Data.getHours();//текущие часы
                     Minutes = Data.getMinutes();//текущие минуты
                     Seconds = Data.getSeconds();//текущие секунды
+
                     var t_sec = 6*Seconds+180;  //Определяем угол для секунд +180 т.к. стрелка перевернута изначально
-                    var t_min = 0.1*(Minutes + (1/60)*Minutes)+180; //Определяем угол для минут
-                    var t_hour = 0.0017*(Hour + (1/60)*Hour)+180;  //Определяем угол для часов
+                    var t_min = 6*(Minutes + (1/60)*Seconds)+180; //Определяем угол для минут
+                    var t_hour = 30*(Hour + (1/60)*Minutes)+180;  //Определяем угол для часов
 
                     console.log(Hour,Minutes,Seconds);
 

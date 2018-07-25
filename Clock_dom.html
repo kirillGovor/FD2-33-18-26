@@ -100,7 +100,7 @@
                 <ul><span>10</span></ul>
                 <ul><span>11</span></ul>
 
-               <p id="time">dfdfdfdfd</p>
+               <p id="time"></p>
 
                 <div id="clocks_hour" div>
                 </div>
@@ -125,6 +125,8 @@
                         var clocks_second = document.getElementById("clocks_second");//стрелка секунд
                         var wachElectron = document.getElementById("time");//електронные часы по типу 21:23:12
                         var span=document.getElementsByTagName("span");//текст часов(1,2,3,4...12)
+
+
                         big_circle.className = 'big_circle';
                         clocks_hour.className="clocks hour";
                         clocks_minuts.className="clocks minuts";
@@ -134,10 +136,12 @@
                         var cx=220;
                         var cy=210; // координаты центра
 
+
+
                         for ( var h=0; h<12; h++ ) { // отображаемый час
-                         var a=h/12*Math.PI*2; // отображаемый угол в радианах
-                         var x=cx+Math.sin(a)*r; // проверяем - для угла=0 sin=0
-                         var y=cy-Math.cos(a)*r; // проверяем - для угла=0 cos=1
+                            var a=h/12*Math.PI*2; // отображаемый угол в радианах
+                            var x=cx+Math.sin(a)*r; // проверяем - для угла=0 sin=0
+                            var y=cy-Math.cos(a)*r; // проверяем - для угла=0 cos=1
                             // итого цифра 12 (=0) окажется в x=cx, y=cy-r.
                             hours[h].style.left=x;
                             hours[h].style.top=y;
@@ -147,12 +151,12 @@
                         span[10].style.marginLeft="-21px"
                         span[11].style.marginLeft="-21px"
 
-
-
-
-
                 }
                 positionClock();
+
+
+
+
 
                 function watch (){
                     
@@ -171,7 +175,6 @@
                     var t_min = 6*(Minutes + (1/60)*Seconds)+180; //Определяем угол для минут
                     var t_hour = 30*(Hour + (1/60)*Minutes)+180;  //Определяем угол для часов
 
-                    console.log(Hour,Minutes,Seconds);
                     
                     clocks_hour.style.transform="rotate("+t_hour+"deg)";//задаем поворот стрелок
                     clocks_minuts.style.transform="rotate("+t_min+"deg)";

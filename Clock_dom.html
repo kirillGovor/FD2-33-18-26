@@ -77,7 +77,12 @@
             transform-origin: center;
         }
        
-
+        .time{
+            position: absolute;
+            left: 180px;
+            top: 20%;
+            font-size: 40px;
+        }
         </style>
 
         <body>
@@ -94,7 +99,9 @@
                 <ul><span>9</span></ul>
                 <ul><span>10</span></ul>
                 <ul><span>11</span></ul>
-               
+
+               <p id="time">dfdfdfdfd</p>
+
                 <div id="clocks_hour" div>
                 </div>
 
@@ -116,11 +123,13 @@
                         var clocks_hour = document.getElementById("clocks_hour");//стрелка часов
                         var clocks_minuts = document.getElementById("clocks_minuts");//стрелка минут
                         var clocks_second = document.getElementById("clocks_second");//стрелка секунд
+                        var wachElectron = document.getElementById("time");//електронные часы по типу 21:23:12
+                        var span=document.getElementsByTagName("span");//текст часов(1,2,3,4...12)
                         big_circle.className = 'big_circle';
                         clocks_hour.className="clocks hour";
                         clocks_minuts.className="clocks minuts";
-                        clocks_second.className="clocks second"; // присваиваем классы элементам
-             
+                        clocks_second.className="clocks second"; 
+                        wachElectron.className="time";// присваиваем классы элементам
                         var r=200; // радиус расположения цифр
                         var cx=220;
                         var cy=210; // координаты центра
@@ -133,6 +142,10 @@
                             hours[h].style.left=x;
                             hours[h].style.top=y;
                         }
+                        
+                        span[0].style.marginLeft="-21px"//задает ровную позицию цифрам 10 11 12
+                        span[10].style.marginLeft="-21px"
+                        span[11].style.marginLeft="-21px"
 
 
 
@@ -146,18 +159,20 @@
                     var clocks_hour = document.getElementById("clocks_hour");//стрелка часов
                     var clocks_minuts = document.getElementById("clocks_minuts");//стрелка минут
                     var clocks_second = document.getElementById("clocks_second");//стрелка секунд
-                   
+                    var wachElectron = document.getElementById("time");//електронные часы по типу 21:23:12
                     Data = new Date();
                     Hour = Data.getHours();//текущие часы
                     Minutes = Data.getMinutes();//текущие минуты
                     Seconds = Data.getSeconds();//текущие секунды
+                    
+                    wachElectron.innerHTML=Hour+":"+Minutes+":"+Seconds;//задаем электронным часам время
 
                     var t_sec = 6*Seconds+180;  //Определяем угол для секунд +180 т.к. стрелка перевернута изначально
                     var t_min = 6*(Minutes + (1/60)*Seconds)+180; //Определяем угол для минут
                     var t_hour = 30*(Hour + (1/60)*Minutes)+180;  //Определяем угол для часов
 
                     console.log(Hour,Minutes,Seconds);
-
+                    
                     clocks_hour.style.transform="rotate("+t_hour+"deg)";//задаем поворот стрелок
                     clocks_minuts.style.transform="rotate("+t_min+"deg)";
                     clocks_second.style.transform="rotate("+t_sec+"deg)";

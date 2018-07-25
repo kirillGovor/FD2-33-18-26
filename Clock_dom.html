@@ -138,6 +138,7 @@
                 positionClock();
 
                 function watch (){
+                    
                     var clocks_hour = document.getElementById("clocks_hour");//стрелка часов
                     var clocks_minuts = document.getElementById("clocks_minuts");//стрелка минут
                     var clocks_second = document.getElementById("clocks_second");//стрелка секунд
@@ -145,22 +146,17 @@
                     Hour = Data.getHours();//текущие часы
                     Minutes = Data.getMinutes();//текущие минуты
                     Seconds = Data.getSeconds();//текущие секунды
-                    console.log(Hour,Minutes,Seconds);
-                    
-
-
-
-                    var t_sec = 6*Seconds+180;  //Определяем угол для секунд
+                    var t_sec = 6*Seconds+180;  //Определяем угол для секунд +180 т.к. стрелка перевернута изначально
                     var t_min = 0.1*(Minutes + (1/60)*Minutes)+180; //Определяем угол для минут
                     var t_hour = 0.0017*(Hour + (1/60)*Hour)+180;  //Определяем угол для часов
 
 
 
-                    clocks_hour.style.transform="rotate("+t_hour+"deg)";
+                    clocks_hour.style.transform="rotate("+t_hour+"deg)";//задаем поворот стрелок
                     clocks_minuts.style.transform="rotate("+t_min+"deg)";
                     clocks_second.style.transform="rotate("+t_sec+"deg)";
                 }
-                setInterval(watch, 1000);
+                setInterval(watch, 1000);//таймер
 
                 watch();
 

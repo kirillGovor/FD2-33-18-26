@@ -150,7 +150,7 @@
                     var t_min = 0.1*(Minutes + (1/60)*Minutes)+180; //Определяем угол для минут
                     var t_hour = 0.0017*(Hour + (1/60)*Hour)+180;  //Определяем угол для часов
 
-
+                    console.log(Hour,Minutes,Seconds);
 
                     clocks_hour.style.transform="rotate("+t_hour+"deg)";//задаем поворот стрелок
                     clocks_minuts.style.transform="rotate("+t_min+"deg)";

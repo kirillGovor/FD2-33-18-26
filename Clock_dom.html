@@ -12,7 +12,7 @@
             transform-origin: top right;
            top: 50%;
            left: 50%;
-           transform: rotate(50deg);
+           
            border-radius: 25px;
             
         }
@@ -21,14 +21,14 @@
         {
             width: 5px;
             height: 150px;
-            transform: rotate(140deg);
+          
         }
 
          .second
         {
             width: 1.5px;
             height: 200px;
-            transform: rotate(150deg);
+          
         }
 
         span{
@@ -146,9 +146,21 @@
                     Minutes = Data.getMinutes();//текущие минуты
                     Seconds = Data.getSeconds();//текущие секунды
                     console.log(Hour,Minutes,Seconds);
+                    
 
 
+
+                    var t_sec = 6*Seconds+180;  //Определяем угол для секунд
+                    var t_min = 0.1*(Minutes + (1/60)*Minutes)+180; //Определяем угол для минут
+                    var t_hour = 0.0017*(Hour + (1/60)*Hour)+180;  //Определяем угол для часов
+
+
+
+                    clocks_hour.style.transform="rotate("+t_hour+"deg)";
+                    clocks_minuts.style.transform="rotate("+t_min+"deg)";
+                    clocks_second.style.transform="rotate("+t_sec+"deg)";
                 }
+                setInterval(watch, 1000);
 
                 watch();
 

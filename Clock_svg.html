@@ -48,6 +48,8 @@
                 <text x="25" y="65" font-size="50px">12</text> 
 
 
+                <text  x="25" y="65" font-size="50px">время</text> 
+
 
                 <rect class="hour" width="25px" height="100" x="500"/>
                 <rect class="minuts" width="25px" height="250"/>
@@ -66,7 +68,7 @@
                 <script>
                     function positionClock()
                 {       var ellipse = document.getElementsByTagName("ellipse"); //все элипсы (0 елемент эллипс часов )
-                        var text=document.getElementsByTagName("text");//все цифры
+                        var text=document.getElementsByTagName("text");//все цифры (12-электронные часы)
                         var minuts=document.getElementsByClassName("minuts");//стрелак минут
                         var second=document.getElementsByClassName("second");//стрелак секунд
                         var hour=document.getElementsByClassName("hour");//стрелак часов
@@ -111,13 +113,16 @@
 
                         second[0].setAttribute('transform',"rotate(45,290,290)");//задаем поворот   (пока просто поворот)
 
-                       
+                       //электронные часы
+                       text[12].setAttribute('x',210);//задаем расположение электронных часов
+                        text[12].setAttribute('y',220);
+
 
                         var r=230; // радиус расположения цифр
                         var cx=300;
                         var cy=300; // координаты центра
                         var c=0; //счетчик для текста
-
+                        
 
                         for ( var h=1; h<13; h++ ) { // отображаемый час
                             var a=h/12*Math.PI*2; // отображаемый угол в радианах
@@ -138,6 +143,7 @@
                             c++;
                         }
                         
+                        
                          
                         
 
@@ -151,16 +157,16 @@
                     var minuts=document.getElementsByClassName("minuts");//стрелак минут
                     var second=document.getElementsByClassName("second");//стрелак секунд
                     var hour=document.getElementsByClassName("hour");//стрелак часов
-
-                    //var wachElectron = document.getElementById("time");//електронные часы по типу 21:23:12
+                    var text=document.getElementsByTagName("text");//все цифры (нам нужно [12] т.к. это тескт для электронных часов)
+                    
 
                     Data = new Date();
                     Hour = Data.getHours();//текущие часы
                     Minutes = Data.getMinutes();//текущие минуты
                     Seconds = Data.getSeconds();//текущие секунды
                     
-                   // wachElectron.innerHTML=Hour+":"+Minutes+":"+Seconds;//задаем электронным часам время
 
+                    text[12].innerHTML=Hour+":"+Minutes+":"+Seconds;//задаем время электронным часам
                     var t_sec = 6*Seconds+180;  //Определяем угол для секунд +180 т.к. стрелка перевернута изначально
                     var t_min = 6*(Minutes + (1/60)*Seconds)+180; //Определяем угол для минут
                     var t_hour = 30*(Hour + (1/60)*Minutes)+180;  //Определяем угол для часов

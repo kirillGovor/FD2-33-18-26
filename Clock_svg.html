@@ -2,58 +2,12 @@
     <head>
         
     </head>
-        <body>
-            <svg width="1000px"height="1000px">
-                <ellipse cx="300" cy="300" rx="300" ry="300" fill="rgb(255,207,67)" stroke-width="1"/>
-            
-            
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">1</text> 
-            
-            
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">2</text> 
-            
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">3</text> 
-            
-            
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">4</text> 
-            
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">5</text> 
-            
-            
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">6</text> 
-            
-            
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">7</text> 
-            
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">8</text> 
-            
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">9</text> 
-            
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">10</text> 
-            
-                <ellipse  cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text class="transform" x="25" y="65" font-size="50px">11</text> 
-
-                <ellipse cx="50" cy="50" rx="50" ry="50" fill="rgb(0,128,0)" stroke-width="1"/>
-                <text x="25" y="65" font-size="50px">12</text> 
+        <body >
+            <svg width="1000px"height="1000px"id="list">
+              
 
 
-                <text  x="25" y="65" font-size="50px">время</text> 
-
-
-                <rect class="hour" width="25px" height="100" x="500"/>
-                <rect class="minuts" width="25px" height="250"/>
-                <rect class="second" width="10px" height="400"/>
+               
                 <style type="text/css">
                    
                                
@@ -72,6 +26,39 @@
                         var minuts=document.getElementsByClassName("minuts");//стрелак минут
                         var second=document.getElementsByClassName("second");//стрелак секунд
                         var hour=document.getElementsByClassName("hour");//стрелак часов
+                        var svg=document.getElementsByTagName("svg");
+                        
+
+                        
+
+
+                        var r=230; // радиус расположения цифр
+                        var cx=300;
+                        var cy=300; // координаты центра
+                        var c=0; //счетчик для текста
+
+
+                        
+
+                        var sum="<ellipse cx="+300+" cy="+300+" rx="+300+" ry="+300+" fill="+"rgb(255,207,67)"+ " stroke-width="+1+"/></ellipse>";//создаем главный круг (желтый)
+                        
+                        for (var h=1 ;h<=12;h++){   //цикл создания маленьких кружков с цифрами
+                            
+                            var watch="<ellipse cx="+50+" cy="+50+" rx="+50+" ry="+50+" fill="+"rgb(0,128,0)"+ " stroke-width="+h+"/></ellipse>";//создание элипса с зеленым background
+                            
+                            var text_watch="<text x="+25+" y="+65+" font-size="+50+"px"+">"+h+"</text>"; //создание текста часов 1,2,3..12
+                            
+                           
+                            sum=sum+watch+text_watch;//соединяем все
+                           
+
+                        }
+                        sum=sum+"<rect class=hour"+" width="+25+"px "+ "height="+200+" x="+290+" y="+100+" />";//добавляем стрелку часов (числа рандомные, мы потом норм все стиализуем :)
+                        sum=sum+"<rect class=minuts"+" width="+25+"px "+ "height="+250+" x="+290+" y="+60+" />";//добавляем стрелку минут
+                        sum=sum+"<rect class=second"+" width="+10+"px "+ "height="+300+" x="+290+" y="+60+" />";//добавляем стрелку секунд
+                        sum=sum+"<text x="+215+" y="+250+" font-size="+50+"px"+"></text>";//добавляем текст с будущими электронными часами
+                        list.innerHTML =sum;//создаем все
+                        
 
 
                         /// стиализация стрелок часов
@@ -118,13 +105,16 @@
                         text[12].setAttribute('y',190);
 
 
-                        var r=230; // радиус расположения цифр
-                        var cx=300;
-                        var cy=300; // координаты центра
-                        var c=0; //счетчик для текста
-                        
+
 
                         for ( var h=1; h<13; h++ ) { // отображаемый час
+
+
+                            
+                           
+                            
+
+
                             var a=h/12*Math.PI*2; // отображаемый угол в радианах
                             var x=cx+Math.sin(a)*r; // проверяем - для угла=0 sin=0
                             var y=cy-Math.cos(a)*r; // проверяем - для угла=0 cos=1

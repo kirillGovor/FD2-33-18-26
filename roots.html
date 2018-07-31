@@ -9,10 +9,24 @@
     // возвращает массив корней
     function squareRoots(a,b,c) {
         var x;
-        if (a==0){
+        if (a==0&&b!=0&&c!=0){
             x=-c/b;
             console.log("Это не квадратное уравнение")
-            return(x);
+            return[x];
+        }
+
+        if (a==0&&c==0&&b!=0){
+            x=0;
+            return [X];
+        }
+
+        if(a==0&&b==0&&c!=0){
+            return [];
+        }
+
+        if(a==0&&b==0&&c==0){
+            console.log("любое число")
+            return[]
         }
         var d=b*b-4*a*c; // дискриминант
 

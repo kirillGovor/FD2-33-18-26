@@ -1,29 +1,29 @@
 <script>
     var stroka="мелём";
-    function a4(stroka,xxx,strokaConversely){
-        var xxx;
+    function a4(stroka,step,strokaConversely){
+        var step;
 
         var strokaProtected = stroka.replace(/[.,\/#!$%\^&\*;:{}=\-—_`~()" "]/g,"");
         strokaProtected=strokaProtected.toUpperCase();
         strokaProtected=strokaProtected.replace(/Ё/g,"Е");
         strokaProtected=strokaProtected.replace(/Ъ/g,"Ь");
         
-        if(xxx==undefined){
-            xxx=strokaProtected.length-1;
+        if(step==undefined){
+            step=strokaProtected.length-1;
         }
         var strokaConversely;
         if(strokaConversely==undefined){
             strokaConversely="";
         }
-            strokaConversely=strokaConversely+strokaProtected[xxx];
+            strokaConversely=strokaConversely+strokaProtected[step];
         
         
         
             if (strokaConversely.length==strokaProtected.length){
                 console.log(strokaConversely.length,strokaProtected.length)
                 if (strokaConversely==strokaProtected){
-                    xxx=true;
-                 return xxx;
+                   
+                 return (true)
                  
                 }
                 else{
@@ -37,8 +37,8 @@
             
         
         
-            xxx=xxx-1;
-            a4(stroka,xxx,strokaConversely);
+            step=step-1;
+            a4(stroka,step,strokaConversely);
         
        
     }

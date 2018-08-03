@@ -1,8 +1,8 @@
 <script>
     function gertYear(year){
         var vek;
-        vek=Number(year[0]+year[1]);
-        vek=vek+1;  
+        vek=year/100;
+        vek=Math.ceil(vek);  
         return(vek);
 }
 

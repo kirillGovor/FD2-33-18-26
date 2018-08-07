@@ -63,6 +63,7 @@
                                     context.fillStyle = "black";
                                     context.strokeStyle = "black";
                                     context.font = " 40pt Arial";
+                                    
 
                                 if (h>=10){
                                     context.fillText(h, x-25,   y+20);//-25 +20 ровняем ровно цифры в кружке) (это для числе 10+ тк они сьезжают)
@@ -127,30 +128,28 @@
                    
                     
 
-                    Data = new Date();
-                    Hour = Data.getHours();//текущие часы
-                    Minutes = Data.getMinutes();//текущие минуты
-                    Seconds = Data.getSeconds();//текущие секунды
+                        Data = new Date();
+                        Hour = Data.getHours();//текущие часы
+                        Minutes = Data.getMinutes();//текущие минуты
+                        Second = Data.getSeconds();//текущие секунды
                     
 
                    
-                    var t_sec = 6*Seconds+180;  //Определяем угол для секунд +180 т.к. стрелка перевернута изначально
-                    var t_min = 6*(Minutes + (1/60)*Seconds)+180; //Определяем угол для минут
-                    var t_hour = 30*(Hour + (1/60)*Minutes)+180;  //Определяем угол для часов
+                        var t_sec = 6*Second+180;  //Определяем угол для секунд +180 т.к. стрелка перевернута изначально
+                        var t_min = 6*(Minutes + (1/60)*Second)+180; //Определяем угол для минут
+                        var t_hour = 30*(Hour + (1/60)*Minutes)+180;  //Определяем угол для часов
 
+                        var time = Hour+":"+Minutes+":"+Second;
 
-
+                        context.fillStyle = "rgb(255, 207, 67)";
+                        context.fillRect(200,150,220,80);
+                        context.fill="rgb(255, 207, 67)";
+                        context.stroke();
+                        
+                        context.fillStyle = "black";
+                        context.strokeStyle = "black";
+                        context.fillText(time, 200,200);
                     }
-
-
-
-
-
-
-
-
-
-
 
 
                 setInterval(watch, 1000);//таймер

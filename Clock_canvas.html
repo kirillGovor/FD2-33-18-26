@@ -1,0 +1,166 @@
+<html>
+    <head>
+        
+    </head>
+        <body >
+              
+                   
+                   
+                
+
+                <canvas id="Mycanvas" width="600px" height="600px">
+
+                        перезагрузите браузвер
+                </canvas>
+
+
+                <script>
+                    function positionClock()
+                    {  
+                        var r=230; // радиус расположения цифр
+                        var cx=300;
+                        var cy=300; // координаты центра
+                        var c=0;
+                        rWatch=45;// радиус кругов, отображаемый час
+                        rEllowWatch=300;// радус большого круга
+
+                        clockSecond=250;//длинна стрелок секунд
+                        clockHour=100;//длина стрелок часов
+                        clockMinutes=200;//длина стрелок минут
+
+
+                        var myCanvas = document.getElementById("Mycanvas"); // находим canvas
+                        context = myCanvas.getContext("2d");
+                        
+                        context.strokeStyle = "#F00"; //основного круга (желтый)
+                        context.beginPath();
+                        context.arc(300, 300, rEllowWatch, 0, Math.PI*2, false);
+                        context.closePath();
+                        context.strokeStyle = "rgb(255, 207, 67)";  
+                        context.fillStyle = "rgb(255, 207, 67)";
+                        context.fill();
+                        context.stroke();
+
+                        
+
+                        
+
+
+                             for ( var h=1; h<13; h++ ) { // отображаемый час
+
+                                var a=h/12*Math.PI*2; // отображаемый угол в радианах
+                                var x=cx+Math.sin(a)*r; // проверяем - для угла=0 sin=0
+                                var y=cy-Math.cos(a)*r; // проверяем - для угла=0 cos=1
+                                // итого цифра 12 (=0) окажется в x=cx, y=cy-r.
+                                    context.strokeStyle = "#F00"; //создание маленьких кружков и чисел)
+                                    context.beginPath();
+                                    context.arc(x, y, rWatch, 0, Math.PI*2, false);
+                                    context.closePath();
+                                    context.strokeStyle = "green";
+                                    context.fillStyle = "green";
+                                    context.fill();
+                                    context.stroke();
+                                    context.fillStyle = "black";
+                                    context.strokeStyle = "black";
+                                    context.font = " 40pt Arial";
+
+                                if (h>=10){
+                                    context.fillText(h, x-25,   y+20);//-25 +20 ровняем ровно цифры в кружке) (это для числе 10+ тк они сьезжают)
+                                }
+                                 else{
+                                    context.fillText(h, x-15,   y+20);//-15 +20 ровняем ровно цифры в кружке)
+                                }
+                            }
+
+                       
+
+                             context.beginPath();
+                        context.strokeStyle = "#F00"; //основного круга (желтый)
+                        context.lineWidth = 0;
+                        context.arc(300, 300, 150, 0, Math.PI*2, false);
+                        context.closePath();
+                        context.strokeStyle = "rgb(255, 207, 67)";  
+                        context.fillStyle = "rgb(255, 207, 67)";
+                        context.fill();
+                        context.stroke();
+                        
+
+
+                        context.beginPath(); // рисуем стрелки (секунды)
+                        context.rect(300, 300, 3, clockSecond);
+                        context.fill();
+                        context.strokeStyle = 'black';
+                        context.lineJoin = 'round';
+                        context.lineWidth = 5;
+                        context.stroke();
+
+
+                        context.beginPath(); // рисуем стрелки (минуты)
+                        context.rect(300, 300, 3, clockMinutes);
+                        context.fill();
+                        context.strokeStyle = 'black';
+                        context.lineJoin = 'round';
+                        context.lineWidth = 15;; 
+                        context.stroke();
+
+
+                    context.beginPath(); // рисуем стрелки (часы)
+                        context.strokeStyle = 'black';
+                        context.lineJoin = 'round';
+                        context.lineWidth = 25;
+                        context.rect(300,300, 3, clockHour);
+                        context.stroke();
+                        
+
+
+                       
+                        
+
+                    }   
+                    positionClock()
+
+
+
+                     function watch (){
+                        var myCanvas = document.getElementById("Mycanvas"); // находим canvas
+                        context = myCanvas.getContext("2d");
+                   
+                    
+
+                    Data = new Date();
+                    Hour = Data.getHours();//текущие часы
+                    Minutes = Data.getMinutes();//текущие минуты
+                    Seconds = Data.getSeconds();//текущие секунды
+                    
+
+                   
+                    var t_sec = 6*Seconds+180;  //Определяем угол для секунд +180 т.к. стрелка перевернута изначально
+                    var t_min = 6*(Minutes + (1/60)*Seconds)+180; //Определяем угол для минут
+                    var t_hour = 30*(Hour + (1/60)*Minutes)+180;  //Определяем угол для часов
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+                setInterval(watch, 1000);//таймер
+
+                watch();
+
+                   
+                </script>
+        </body>
+</html>
+
+
+

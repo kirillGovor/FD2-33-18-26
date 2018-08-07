@@ -139,16 +139,68 @@
                         var t_min = 6*(Minutes + (1/60)*Second)+180; //Определяем угол для минут
                         var t_hour = 30*(Hour + (1/60)*Minutes)+180;  //Определяем угол для часов
 
-                        var time = Hour+":"+Minutes+":"+Second;
 
+
+                        //электронные часы
+                        var time = Hour+":"+Minutes+":"+Second;
                         context.fillStyle = "rgb(255, 207, 67)";
                         context.fillRect(200,150,220,80);
                         context.fill="rgb(255, 207, 67)";
                         context.stroke();
-                        
                         context.fillStyle = "black";
                         context.strokeStyle = "black";
                         context.fillText(time, 200,200);
+
+
+                        //стрелки
+                        context.translate(myCanvas.width/2, myCanvas.height/2);
+                        
+
+
+                        context.beginPath();
+                        context.strokeStyle = "#F00"; //основного круга (желтый)
+                        context.lineWidth = 0;
+                        context.arc(300, 300, 150, 0, Math.PI*2, false);
+                        context.closePath();
+                        context.strokeStyle = "rgb(255, 207, 67)";  
+                        context.fillStyle = "rgb(255, 207, 67)";
+                        context.stroke();
+                        
+
+
+                        context.beginPath(); // рисуем стрелки (секунды)
+                        context.rotate(t_sec);
+                        context.rect(0, 0, 3, clockSecond);
+                        context.strokeStyle = 'black';
+                        context.lineJoin = 'round';
+                        context.lineWidth = 5;
+                        context.stroke();
+
+
+                        context.beginPath(); // рисуем стрелки (минуты)
+                        context.rotate(t_min);
+                        context.rect(0, 0, 3, clockMinutes);
+                        context.strokeStyle = 'black';
+                        context.lineJoin = 'round';
+                        context.lineWidth = 15;; 
+                        context.stroke();
+
+
+                        context.beginPath(); // рисуем стрелки (часы)
+                        context.rotate(t_hour);
+                        context.strokeStyle = 'black';
+                        context.lineJoin = 'round';
+                        context.lineWidth = 25;
+                        context.rect(0,0, 3, clockHour);
+                        context.stroke();
+
+                        context.translate(0,0);
+                        context.rotate(0);
+
+
+
+
+
                     }
 
 

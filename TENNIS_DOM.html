@@ -11,8 +11,10 @@
 
     <script>
         "use strict"
+        
 
         function TennisStyle(){
+        var k=0;//счетчик
         var widthBlock = "500px"; // ширина поля
         var heightBlock="300px" // высота поля
         var colorBlock="#f1eb06" // цвет поля
@@ -37,11 +39,26 @@
         var divd = document.getElementById("tennis");
         
     var button = document.createElement("input"); // создаем кнопку
-    button.type="submit"
+    button.type="button"
     button.value="старт!";
     button.style.marginBottom="20px";
-    
-    document.body.appendChild(button);
+    button.id="Starts";
+
+    document.body.appendChild(button);//задаем onclick если он клик уже нажат, то не запукскаем функцию
+
+
+
+    button.onclick=function(){
+        
+       
+        tennisTehnick()
+        
+        
+        };
+
+
+
+
 
 
     var text=document.createElement("h1");//счет
@@ -54,7 +71,7 @@
 
      var element = document.createElement('div');// создаем див поля и стиализуем его
      document.body.appendChild(element);
-     element.className="DivTennis";
+     element.id="DivTennis";
      element.style.width=widthBlock;
      element.style.height=heightBlock;
      element.style.background=colorBlock
@@ -64,7 +81,7 @@
 
 
     var oneBlock = document.createElement("div");// левый игрок (div)
-    oneBlock.className="OnePlayer";
+    oneBlock.id="OnePlayer";
     element.appendChild(oneBlock);
     oneBlock.style.width=OnePlayerWidth;
     oneBlock.style.height=OnePlayerHeight;
@@ -74,7 +91,7 @@
 
 
     var TwoBlock = document.createElement("div");// правый игрок (div)
-    oneBlock.className="TwoPlayer";
+    TwoBlock.id="TwoPlayer";
     element.appendChild(TwoBlock);
     TwoBlock.style.width=TwoPlayerWidth;
     TwoBlock.style.height=TwoPlayerHeight;
@@ -107,19 +124,16 @@
 
 
     function tennisTehnick(){
-
-        
-
-
-
-var ballH={
+    var ballH={
         posX : 250,
         posY : 130,
-        speedX : 1,
-        speedY : 1,
+        speedX : 5,
+        speedY : 5,
         width : 50,
         height: 50,
+       
 
+        
         update : function() {
             var ballElem=document.getElementById('balL');
             ballElem.style.left=this.posX+"px";
@@ -127,6 +141,30 @@ var ballH={
         }
     }
 
+    var block=document.getElementById("DivTennis");
+    var OnePlayer=document.getElementById("OnePlayer");
+
+    var TwoPlayer=document.getElementById("TwoPlayer")
+    
+    
+    
+    
+    TwoPlayer.onkeydown=function(e){
+        if (e.shiftKey||e.altKey){
+            TwoPlayer.style.top=TwoPlayer.style.top-10;
+        }
+    };
+    //ctrl 17
+    //alt18
+    //up 37
+    //down 38
+
+    
+ 
+
+
+
+    var k //счетчик
     var areaH={
         width : 502,
         height : 302
@@ -136,44 +174,51 @@ var ballH={
         // плавное движение - от 25 кадр/сек
         setInterval(tick,40);
     }
+    
+    start();
+    
+        function tick() {
 
-    function tick() {
+            ballH.posX+=ballH.speedX;
+            // вылетел ли мяч правее стены?
+            if ( ballH.posX+ballH.width>areaH.width+17 ) {
+                ballH.speedX=-ballH.speedX;
+                ballH.posX=areaH.width-ballH.width;
+            }
+            // вылетел ли мяч левее стены?
+            if ( ballH.posX<0 ) { 
+                ballH.speedX=-ballH.speedX;
+                ballH.posX=0;
+            }
 
-        ballH.posX+=ballH.speedX;
-        // вылетел ли мяч правее стены?
-        if ( ballH.posX+ballH.width>areaH.width+17 ) {
-            ballH.speedX=-ballH.speedX;
-            ballH.posX=areaH.width-ballH.width;
-        }
-        // вылетел ли мяч левее стены?
-        if ( ballH.posX<0 ) { 
-            ballH.speedX=-ballH.speedX;
-            ballH.posX=0;
-        }
-
-        ballH.posY+=ballH.speedY;
-        // вылетел ли мяч ниже пола?
-        if ( ballH.posY+ballH.height>areaH.height+17 ) {
-            ballH.speedY=-ballH.speedY;
-            ballH.posY=areaH.height-ballH.height;
-        }
-        // вылетел ли мяч выше потолка?
-        if ( ballH.posY<0 ) {
-            ballH.speedY=-ballH.speedY;
-            ballH.posY=0;
-        }
+            ballH.posY+=ballH.speedY;
+            // вылетел ли мяч ниже пола?
+            if ( ballH.posY+ballH.height>areaH.height+17 ) {
+                ballH.speedY=-ballH.speedY;
+                ballH.posY=areaH.height-ballH.height;
+            }
+            // вылетел ли мяч выше потолка?
+            if ( ballH.posY<0 ) {
+                ballH.speedY=-ballH.speedY;
+                ballH.posY=0;
+            }
 
         ballH.update();
-    }
+        }
 
     ballH.update();
 
-var button = document.getElementsByTagName("input"); // создаем кнопку
-        button.onclick=function(){
-            start(); 
-        }
+
+
+    
     }
-    tennisTehnick()
+    
+
+
+
+   
+        
+    
     
     </script>
 </html>

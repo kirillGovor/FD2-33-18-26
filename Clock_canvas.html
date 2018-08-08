@@ -161,15 +161,14 @@
 
                         context.beginPath();
                         context.strokeStyle = "#F00"; //основного круга (желтый)
-                        context.lineWidth = 0;
                         context.arc(0, 0, 170, 0, Math.PI*2, false);
-                        context.closePath();
                         context.strokeStyle = "rgb(255, 207, 67)";  
                         context.fillStyle = "rgb(255, 207, 67)";
-
                         context.lineWidth = 1;
                         context.fill();
                         context.stroke();
+                        context.closePath();
+                        
                         
 
 

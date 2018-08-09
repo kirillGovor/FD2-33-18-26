@@ -15,22 +15,23 @@
 
 
                 <script>
+                    "use strict"
                     function positionClock()
                     {  
                         var r=230; // радиус расположения цифр
                         var cx=300;
                         var cy=300; // координаты центра
                         var c=0;
-                        rWatch=45;// радиус кругов, отображаемый час
-                        rEllowWatch=300;// радус большого круга
+                        var rWatch=45;// радиус кругов, отображаемый час
+                        var rEllowWatch=300;// радус большого круга
 
-                        clockSecond=250;//длинна стрелок секунд
-                        clockHour=100;//длина стрелок часов
-                        clockMinutes=200;//длина стрелок минут
+                        var clockSecond=145;//длинна стрелок секунд
+                        var clockHour=100;//длина стрелок часов
+                        var clockMinutes=125;//длина стрелок минут
 
 
                         var myCanvas = document.getElementById("Mycanvas"); // находим canvas
-                        context = myCanvas.getContext("2d");
+                        var context = myCanvas.getContext("2d");
                         
                         context.strokeStyle = "#F00"; //основного круга (желтый)
                         context.beginPath();
@@ -75,7 +76,7 @@
 
                        
 
-                             context.beginPath();
+                        context.beginPath();
                         context.strokeStyle = "#F00"; //основного круга (желтый)
                         context.lineWidth = 0;
                         context.arc(300, 300, 150, 0, Math.PI*2, false);
@@ -105,16 +106,15 @@
                         context.stroke();
 
 
-                    context.beginPath(); // рисуем стрелки (часы)
+                        context.beginPath(); // рисуем стрелки (часы)
                         context.strokeStyle = 'black';
                         context.lineJoin = 'round';
                         context.lineWidth = 25;
                         context.rect(300,300, 3, clockHour);
                         context.stroke();
                         
+                        
 
-
-                       
                         
 
                     }   
@@ -122,35 +122,86 @@
 
 
 
-                     function watch (){
+                     function watch (hour_before,min_before,sec_before){
                         var myCanvas = document.getElementById("Mycanvas"); // находим canvas
-                        context = myCanvas.getContext("2d");
-                   
-                    
+                        var context = myCanvas.getContext("2d");
+                        var clockSecond=145;//длинна стрелок секунд
+                        var clockHour=100;//длина стрелок часов
+                        var clockMinutes=125;//длина стрелок минут
 
-                        Data = new Date();
-                        Hour = Data.getHours();//текущие часы
-                        Minutes = Data.getMinutes();//текущие минуты
-                        Second = Data.getSeconds();//текущие секунды
+
+
+                      /*  var Data = new Date();
+                        var Hour = Data.getHours();//текущие часы
+                        var Minutes = Data.getMinutes();//текущие минуты
+                        var Second = Data.getSeconds();//текущие секунды
                     
 
                    
                         var t_sec = 6*Second+180;  //Определяем угол для секунд +180 т.к. стрелка перевернута изначально
                         var t_min = 6*(Minutes + (1/60)*Second)+180; //Определяем угол для минут
                         var t_hour = 30*(Hour + (1/60)*Minutes)+180;  //Определяем угол для часов
+                        */
 
+
+
+
+                        var now = new Date();
+                        var hour = now.getHours();
+                        var minute = now.getMinutes();
+                        var second = now.getSeconds();
+                        var time = hour+":"+minute+":"+second;
+                        //hour
+                        hour=hour%12;
+                        hour=(hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60))-Math.PI;
+                        
+                        //minute
+                        minute=(minute*Math.PI/30)+(second*Math.PI/(30*60))-Math.PI;
+                       
+                        // second
+                        second=(second*Math.PI/30)-Math.PI;
+                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          //ЗАЛИВКА
+                       context.fillStyle = "rgb(255, 207, 67)";
+                        context.fillRect(150, 150, 300, 300);
 
 
                         //электронные часы
-                        var time = Hour+":"+Minutes+":"+Second;
+                       
                         context.fillStyle = "rgb(255, 207, 67)";
-                        context.fillRect(200,150,220,80);
-                        context.fill="rgb(255, 207, 67)";
-                        context.stroke();
+                        
+                        
                         context.fillStyle = "black";
                         context.strokeStyle = "black";
-                        context.fillText(time, 200,200);
+                       context.fillText(time, 200,200);
 
+
+                       
 
                         //стрелки
 
@@ -158,53 +209,45 @@
                         context.translate(myCanvas.width/2, myCanvas.height/2);
                         
 
+                      
 
-                        context.beginPath();
-                        context.strokeStyle = "#F00"; //основного круга (желтый)
-                        context.lineWidth = 0;
-                        context.arc(0, 0, 170, 0, Math.PI*2, false);
-                        context.closePath();
-                        context.strokeStyle = "rgb(255, 207, 67)";  
-                        context.fillStyle = "rgb(255, 207, 67)";
 
-                        context.lineWidth = 1;
-                        context.fill();
-                        context.stroke();
                         
-
+                      
 
                         context.beginPath(); // рисуем стрелки (секунды)
-                        context.rotate(t_sec);
+                        context.rotate(second);
                         context.rect(0, 0, 3, clockSecond);
                         context.strokeStyle = 'black';
                         context.lineJoin = 'round';
                         context.lineWidth = 5;
                         context.stroke();
-
+                        context.rotate(-second);
 
                         context.beginPath(); // рисуем стрелки (минуты)
-                        context.rotate(t_min);
+                        context.rotate(minute);
                         context.rect(0, 0, 3, clockMinutes);
                         context.strokeStyle = 'black';
                         context.lineJoin = 'round';
                         context.lineWidth = 15;; 
                         context.stroke();
-
+                        context.rotate(-minute);
 
                         context.beginPath(); // рисуем стрелки (часы)
-                        context.rotate(t_hour);
+                        context.rotate(hour);
                         context.strokeStyle = 'black';
                         context.lineJoin = 'round';
                         context.lineWidth = 25;
                         context.rect(0,0, 3, clockHour);
                         context.stroke();
+                        context.rotate(-hour);
 
+                        
                         context.restore();
 
-
-
-
-
+                        
+                       
+                        
                     }
 
 

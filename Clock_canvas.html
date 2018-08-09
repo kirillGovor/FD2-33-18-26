@@ -174,6 +174,23 @@
                         context.translate(myCanvas.width/2, myCanvas.height/2);
                         
 
+<<<<<<< HEAD
+=======
+
+                        context.beginPath();
+                        context.strokeStyle = "#F00"; //основного круга (желтый)
+                        context.arc(0, 0, 170, 0, Math.PI*2, false);
+                        context.strokeStyle = "rgb(255, 207, 67)";  
+                        context.fillStyle = "rgb(255, 207, 67)";
+                        context.lineWidth = 1;
+                        context.fill();
+                        context.stroke();
+                        context.closePath();
+                        
+                        
+
+
+>>>>>>> b4781a0e2d4fce5ebef2f92d04a907201fe2532a
                         context.beginPath(); // рисуем стрелки (секунды)
                         context.rotate(second);
                         context.rect(0, 0, 3, clockSecond);

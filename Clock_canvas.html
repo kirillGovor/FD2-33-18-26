@@ -131,17 +131,7 @@
 
 
 
-                      /*  var Data = new Date();
-                        var Hour = Data.getHours();//текущие часы
-                        var Minutes = Data.getMinutes();//текущие минуты
-                        var Second = Data.getSeconds();//текущие секунды
                     
-
-                   
-                        var t_sec = 6*Second+180;  //Определяем угол для секунд +180 т.к. стрелка перевернута изначально
-                        var t_min = 6*(Minutes + (1/60)*Second)+180; //Определяем угол для минут
-                        var t_hour = 30*(Hour + (1/60)*Minutes)+180;  //Определяем угол для часов
-                        */
 
 
 
@@ -163,42 +153,17 @@
                        
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                           //ЗАЛИВКА
-                       context.fillStyle = "rgb(255, 207, 67)";
+                        context.fillStyle = "rgb(255, 207, 67)";
                         context.fillRect(150, 150, 300, 300);
 
 
                         //электронные часы
                        
                         context.fillStyle = "rgb(255, 207, 67)";
-                        
-                        
                         context.fillStyle = "black";
                         context.strokeStyle = "black";
-                       context.fillText(time, 200,200);
+                        context.fillText(time, 200,200);
 
 
                        
@@ -208,12 +173,6 @@
                         context.save();
                         context.translate(myCanvas.width/2, myCanvas.height/2);
                         
-
-                      
-
-
-                        
-                      
 
                         context.beginPath(); // рисуем стрелки (секунды)
                         context.rotate(second);

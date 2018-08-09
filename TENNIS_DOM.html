@@ -127,7 +127,10 @@
         speedY : 5,
         width : 50,
         height: 50,
-       
+        OnePlayer:0,
+        TwoPlayer:0,
+        OneSpeed:0,
+        TwoSpeed:0,
 
         
         update : function() {
@@ -159,7 +162,7 @@
 
 
 
-    var k //счетчик
+ 
     var areaH={
         width : 502,
         height : 302
@@ -167,12 +170,54 @@
 
     function start() {
         // плавное движение - от 25 кадр/сек
-        setInterval(tick,40);
+        setInterval(tick,30);
     }
-    
+addEventListener(onkeydown,document.body);
+   
+document.window.onkeydown=function(event){
+    event = event || window.event;
+
+    if (event.KeyCode==17){
+        ballH.OneSpeed=ballH.OneSpeed-1;
+    }
+    if(event.KeyCode==18){
+        ballH.OneSpeed=ballH.OneSpeed+1;
+    }
+    if(event.KeyCode==38){
+        ballH.TwoSpeed=ballH.TwoSpeed-1;
+    }
+    if(event.KeyCode==40){
+        ballH.TwoSpeed=ballH.TwoSpeed+1;
+    }
+}
+
     start();
     
         function tick() {
+
+              var playerWidth=10;
+              var playerHeight=100;
+
+           
+
+             var oneBlock = document.getElementById("OnePlayer");
+            oneBlock.style.top=oneBlock.style.top+ballH.OneSpeed+"px";     
+            
+            var TwoBlock = document.getElementById("TwoPlayer");
+            TwoBlock.style.top=TwoBlock.style.top+ballH.OneSpeed+"px";
+
+            if (oneBlock.style.top+playerHeight>areaH.height){
+                ballH.OnePlayer=0;
+            }
+
+            if (TwoBlock.style.top+playerHeight>areaH.height){
+                ballH.TwoPlayer=0;
+            }
+
+            ballH.OneSpeed+=ballH.OnePlayer;
+            ballH.TwoSpeed+=ballH.TwoPlayer;
+
+
 
             ballH.posX+=ballH.speedX;
             // вылетел ли мяч правее стены?

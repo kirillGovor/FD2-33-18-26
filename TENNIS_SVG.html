@@ -1,25 +1,26 @@
 <html>
     <head>
     </head>
-    <body>
-        <div class="tennis">
+        <body>
+                <svg width="1000px"height="500px"id="list">
+              
 
-        </div>
-    </body>
+
+               
+                        
+                           
+                </svg>
+        </body>
     
+<script>
 
-
-    <script>
-        "use strict"
-        
-
-        function TennisStyle(){
+    function TennisStyle(){
         var widthBlock = "500px"; // ширина поля
         var heightBlock="300px" // высота поля
         var colorBlock="#f1eb06" // цвет поля
-        var borderBlock="black solid 1px"//рамка поля
-
-        //первый игрок
+        var borderBlock="black"//рамка поля
+        
+        //правый игрок
         var OnePlayerWidth="10px";
         var OnePlayerHeight="100px";
         var OnePlayerColor="green";
@@ -32,95 +33,57 @@
 
         //мячик
         var BallColor="red";
-        var BallRadius="30px";
-       
+        var BallRadius=30/2+"px";//радиус 1-е число(30)
 
-        var divd = document.getElementById("tennis");
+        var button = document.createElement("input"); // создаем кнопку
+        button.type="button"
+        button.value="старт!";
+        button.id="Starts";
+        button.style.position="absolute";
+        button.style.top="15px";
+        button.style.left="70px"
+        document.body.appendChild(button);//задаем onclick если он клик уже нажат, то не запукскаем функцию
+
+        var text=document.createElement("h1");//создаем счет
+        text.innerHTML="0:0"
+        text.id="Goal"
+        text.style.position="absolute";
+        text.style.margin="0px";
+        text.style.top="0px";
+        text.style.left="290px"
+        document.body.appendChild(text);
+        var svg=document.getElementsByTagName("svg");
+      
+      
+        //игровая зона
+        var sum="<rect class=block"+" stroke="+borderBlock+" fill="+colorBlock+" width="+widthBlock+ " height="+heightBlock+" x="+8+" y="+38+" />";
         
-    var button = document.createElement("input"); // создаем кнопку
-    button.type="button"
-    button.value="старт!";
-    button.style.marginBottom="20px";
-    button.id="Starts";
+       
+        
 
-    document.body.appendChild(button);//задаем onclick если он клик уже нажат, то не запукскаем функцию
+        //первый игрок
+        sum=sum+"<rect id=OnePlayer"+" width="+OnePlayerWidth+" fill="+OnePlayerColor+ " height="+OnePlayerHeight+" x="+8+" y="+138+" />"
+        
+        //второй игрок
+        sum=sum+"<rect id=TwoPlayer"+" width="+TwoPlayerWidth+" fill="+TwoPlayerColor+ " height="+TwoPlayerHeight+" x="+498+" y="+138+" />"
+        
+        //мячик
+        sum=sum+"<ellipse id=balL cx="+300+" cy="+200+" rx="+BallRadius+" ry="+BallRadius+" fill="+BallColor+" /></ellipse>"
 
 
 
-    button.onclick=function(){
+        list.innerHTML =sum;
+    
+        button.onclick=function(){
         tennisTehnick()
          };
-
-
-
-
-
-
-    var text=document.createElement("h1");//счет
-    text.innerHTML="0:0"
-    text.id="Goal"
-    text.style.position="absolute";
-    text.style.margin="0px";
-    text.style.top="0px";
-    text.style.left="250px"
-    document.body.appendChild(text);
-
-     var element = document.createElement('div');// создаем див поля и стиализуем его
-     document.body.appendChild(element);
-     element.id="DivTennis";
-     element.style.width=widthBlock;
-     element.style.height=heightBlock;
-     element.style.background=colorBlock
-     element.style.border=borderBlock;
-     element.style.position="relative";
-
-
-
-    var oneBlock = document.createElement("div");// левый игрок (div)
-    oneBlock.id="OnePlayer";
-    element.appendChild(oneBlock);
-    oneBlock.style.width=OnePlayerWidth;
-    oneBlock.style.height=OnePlayerHeight;
-    oneBlock.style.background=OnePlayerColor;
-    oneBlock.style.position="absolute";
-    oneBlock.style.top="100px";
-
-
-    var TwoBlock = document.createElement("div");// правый игрок (div)
-    TwoBlock.id="TwoPlayer";
-    element.appendChild(TwoBlock);
-    TwoBlock.style.width=TwoPlayerWidth;
-    TwoBlock.style.height=TwoPlayerHeight;
-    TwoBlock.style.background=TwoPlayerColor;
-    TwoBlock.style.position="absolute";
-    TwoBlock.style.left="490px";
-    TwoBlock.style.top="100px";
-
-
-
-    var ball = document.createElement("div"); // мячик
-    ball.className="balL";
-    element.appendChild(ball); 
-    ball.id="balL";
-    ball.style.width=BallRadius;
-    ball.style.height=BallRadius;
-    ball.style.background=BallColor;
-    ball.style.borderRadius="50%"
-    ball.style.position="absolute";
-    ball.style.left="250px";
-    ball.style.top="130px";
-        
+    
     }
-
-
-
-   
-
-
-
-
-
     TennisStyle()
+
+
+
+
     
 
 
@@ -149,8 +112,8 @@
         
         update : function() {
             var ballElem=document.getElementById('balL');
-            ballElem.style.left=this.posX+"px";
-            ballElem.style.top=this.posY+"px";
+            ballElem.style.cx=this.posX+"px";
+            ballElem.style.cy=this.posY+"px";
         }
     }
 
@@ -207,17 +170,9 @@ function ContinueGame(){
         
     }
 
-
-
-
     start();
     ballH.stopBall=1;
     
-
-
-
-
-
 
         function tick() {
 
@@ -225,12 +180,11 @@ function ContinueGame(){
               var playerHeight=100;
 
            
-
-             var oneBlock = document.getElementById("OnePlayer");
-            oneBlock.style.top=100+ballH.OneSpeed+"px";     //задаем высоту (+100 это высота блока игрока)
+           var oneBlock = document.getElementById("OnePlayer");
+            oneBlock.style.y=138+ballH.OneSpeed+"px";     //задаем высоту (+100 это высота блока игрока)
             
             var TwoBlock = document.getElementById("TwoPlayer");
-            TwoBlock.style.top=100+ballH.TwoSpeed+"px";
+            TwoBlock.style.y=138+ballH.TwoSpeed+"px";
 
 
 
@@ -255,31 +209,31 @@ function ContinueGame(){
 
             ballH.posX+=ballH.speedX;
             // вылетел ли мяч правее стены?
-            if ( ballH.posX+ballH.width>areaH.width+17 ) {
+            if ( ballH.posX+ballH.width>areaH.width+45 ) {
                 ballH.speedX=-ballH.speedX;
-                ballH.posX=areaH.width-ballH.width;
+                ballH.posX=areaH.width-ballH.width+45;
             }
             // вылетел ли мяч левее стены?
-            if ( ballH.posX<0 ) { 
+            if ( ballH.posX<20 ) { 
                 ballH.speedX=-ballH.speedX;
-                ballH.posX=0;
+                ballH.posX=20;
             }
 
             ballH.posY+=ballH.speedY;
             // вылетел ли мяч ниже пола?
-            if ( ballH.posY+ballH.height>areaH.height+17 ) {
+            if ( ballH.posY+ballH.height>areaH.height+70 ) {
                 ballH.speedY=-ballH.speedY;
-                ballH.posY=areaH.height-ballH.height;
+                ballH.posY=areaH.height-ballH.height+70 ;
             }
             // вылетел ли мяч выше потолка?
-            if ( ballH.posY<0 ) {
+            if ( ballH.posY<50 ) {
                 ballH.speedY=-ballH.speedY;
-                ballH.posY=0;
+                ballH.posY=50;
             }
 
-            if((ballH.posY>=100+ballH.OneSpeed+playerHeight&&ballH.posX<2)||(ballH.posY<=100+ballH.OneSpeed&&ballH.posX<2)){//если мячик вне ракетки
+            if((ballH.posY>=100+ballH.OneSpeed+playerHeight&&ballH.posX<15)||(ballH.posY<=100+ballH.OneSpeed&&ballH.posX<15)){//если мячик вне ракетки
                 if(ballH.speedX!=0&&ballH.speedY!=0){
-                    ballH.TwoPlayerGol=ballH.TwoPlayerGol+1;
+                    ballH.OnePlayerGol=ballH.OnePlayerGol+1;
                 Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
                 }
                
@@ -289,9 +243,9 @@ function ContinueGame(){
             }
 
 
-             if((ballH.posY>=100+ballH.TwoSpeed+playerHeight&&ballH.posX>464)||(ballH.posY<=100+ballH.TwoSpeed&&ballH.posX>464)){//если мячик вне ракетки
+             if((ballH.posY>=100+ballH.TwoSpeed+playerHeight&&ballH.posX>490)||(ballH.posY<=100+ballH.TwoSpeed&&ballH.posX>490)){//если мячик вне ракетки
                 if(ballH.speedX!=0&&ballH.speedY!=0){
-                    ballH.OnePlayerGol=ballH.OnePlayerGol+1;
+                    ballH.TwoPlayerGol=ballH.TwoPlayerGol+1;
                 Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
                 }
                 
@@ -311,15 +265,6 @@ function ContinueGame(){
 
     
     }
-    
 
-
-
-   
-        
-    
-    
     </script>
-</html>
-
-
+    </html>

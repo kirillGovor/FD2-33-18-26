@@ -14,7 +14,6 @@
         
 
         function TennisStyle(){
-        var k=0;//счетчик
         var widthBlock = "500px"; // ширина поля
         var heightBlock="300px" // высота поля
         var colorBlock="#f1eb06" // цвет поля
@@ -59,6 +58,7 @@
 
     var text=document.createElement("h1");//счет
     text.innerHTML="0:0"
+    text.id="Goal"
     text.style.position="absolute";
     text.style.margin="0px";
     text.style.top="0px";
@@ -115,11 +115,22 @@
 
 
    
+
+
+
+
+
     TennisStyle()
-   
+    
 
 
     function tennisTehnick(){
+
+    var Goal=document.getElementById("Goal");
+    var block=document.getElementById("DivTennis");
+    var OnePlayer=document.getElementById("OnePlayer");
+    var TwoPlayer=document.getElementById("TwoPlayer");
+    var button=document.getElementById("Starts")
     var ballH={
         posX : 250,
         posY : 130,
@@ -131,6 +142,9 @@
         TwoPlayer:0,
         OneSpeed:0,
         TwoSpeed:0,
+        stopBall:0,
+        OnePlayerGol:0,
+        TwoPlayerGol:0,
 
         
         update : function() {
@@ -140,59 +154,71 @@
         }
     }
 
-    var block=document.getElementById("DivTennis");
-    var OnePlayer=document.getElementById("OnePlayer");
-
-    var TwoPlayer=document.getElementById("TwoPlayer")
-    
-    
-    
-    
-    TwoPlayer.onkeydown=function(e){
-        if (e.shiftKey||e.altKey){
-            TwoPlayer.style.top=TwoPlayer.style.top-10;
-        }
-    };
-    //ctrl 17
-    //alt18
-    //up 40
-    //down 38
-    
- 
-
-
-
- 
     var areaH={
         width : 502,
-        height : 302
+        height : 302   
     }
+
+
+
+    document.body.onkeydown = function(e){ //событие нажатия кнопок
+        e = event || window.event;
+    
+    if (e.key=="Shift"){
+        ballH.OneSpeed=ballH.OneSpeed-5;//5-скрость
+    }
+    if(e.key=="Control"){
+        ballH.OneSpeed=ballH.OneSpeed+5;
+    }
+    if(e.key=="ArrowUp"){
+        ballH.TwoSpeed=ballH.TwoSpeed-5;
+    }
+    if(e.key=="ArrowDown"){
+        ballH.TwoSpeed=ballH.TwoSpeed+5;
+    }
+};
+
+function ContinueGame(){
+                ballH.speedX=5;
+                ballH.speedY=5;
+
+                 if ( ballH.posX<=5 ) { 
+                ballH.posX=0;}
+
+                if ( ballH.posX+ballH.width>areaH.width+17 ) {
+                ballH.speedX=-ballH.speedX;
+                ballH.posX=areaH.width-ballH.width;
+            }
+            }
+
+
 
     function start() {
         // плавное движение - от 25 кадр/сек
+        
         setInterval(tick,30);
-    }
-addEventListener(onkeydown,document.body);
-   
-document.window.onkeydown=function(event){
-    event = event || window.event;
 
-    if (event.KeyCode==17){
-        ballH.OneSpeed=ballH.OneSpeed-1;
+        button.onclick=function(){
+        ContinueGame()
+         };
+            
+                
+        
+        
     }
-    if(event.KeyCode==18){
-        ballH.OneSpeed=ballH.OneSpeed+1;
-    }
-    if(event.KeyCode==38){
-        ballH.TwoSpeed=ballH.TwoSpeed-1;
-    }
-    if(event.KeyCode==40){
-        ballH.TwoSpeed=ballH.TwoSpeed+1;
-    }
-}
+
+
+
 
     start();
+    ballH.stopBall=1;
     
+
+
+
+
+
+
         function tick() {
 
               var playerWidth=10;
@@ -201,18 +227,26 @@ document.window.onkeydown=function(event){
            
 
              var oneBlock = document.getElementById("OnePlayer");
-            oneBlock.style.top=oneBlock.style.top+ballH.OneSpeed+"px";     
+            oneBlock.style.top=100+ballH.OneSpeed+"px";     //задаем высоту (+100 это высота блока игрока)
             
             var TwoBlock = document.getElementById("TwoPlayer");
-            TwoBlock.style.top=TwoBlock.style.top+ballH.OneSpeed+"px";
+            TwoBlock.style.top=100+ballH.TwoSpeed+"px";
 
-            if (oneBlock.style.top+playerHeight>areaH.height){
-                ballH.OnePlayer=0;
+
+
+            if (100+ballH.OneSpeed+playerHeight>=areaH.height){//задаем границы перемещения блоков(игроков)
+                ballH.OneSpeed=ballH.OneSpeed-5;
+            }
+            if (100+ballH.OneSpeed<=0){
+                ballH.OneSpeed=ballH.OneSpeed+5;
+            }
+            if (100+ballH.TwoSpeed+playerHeight>=areaH.height){
+                ballH.TwoSpeed=ballH.TwoSpeed-5;
+            }
+            if (100+ballH.TwoSpeed<=0){
+                ballH.TwoSpeed=ballH.TwoSpeed+5;
             }
 
-            if (TwoBlock.style.top+playerHeight>areaH.height){
-                ballH.TwoPlayer=0;
-            }
 
             ballH.OneSpeed+=ballH.OnePlayer;
             ballH.TwoSpeed+=ballH.TwoPlayer;
@@ -242,6 +276,31 @@ document.window.onkeydown=function(event){
                 ballH.speedY=-ballH.speedY;
                 ballH.posY=0;
             }
+
+            if((ballH.posY>=100+ballH.OneSpeed+playerHeight&&ballH.posX<2)||(ballH.posY<=100+ballH.OneSpeed&&ballH.posX<2)){//если мячик вне ракетки
+                if(ballH.speedX!=0&&ballH.speedY!=0){
+                    ballH.OnePlayerGol=ballH.OnePlayerGol+1;
+                Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
+                }
+               
+                ballH.speedX=0;//убираем скорость перемещения
+                ballH.speedY=0;
+                
+            }
+
+
+             if((ballH.posY>=100+ballH.TwoSpeed+playerHeight&&ballH.posX>464)||(ballH.posY<=100+ballH.TwoSpeed&&ballH.posX>464)){//если мячик вне ракетки
+                if(ballH.speedX!=0&&ballH.speedY!=0){
+                    ballH.TwoPlayerGol=ballH.TwoPlayerGol+1;
+                Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
+                }
+                
+                ballH.speedX=0;//убираем скорость перемещения
+                ballH.speedY=0;
+                
+            }
+            
+            
 
         ballH.update();
         }

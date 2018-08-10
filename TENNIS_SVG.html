@@ -148,7 +148,7 @@ function ContinueGame(){
                  if ( ballH.posX<=5 ) { 
                 ballH.posX=0;}
 
-                if ( ballH.posX+ballH.width>areaH.width+17 ) {
+                if ( ballH.posX+ballH.width>areaH.width ) {
                 ballH.speedX=-ballH.speedX;
                 ballH.posX=areaH.width-ballH.width;
             }
@@ -231,9 +231,9 @@ function ContinueGame(){
                 ballH.posY=50;
             }
 
-            if((ballH.posY>=100+ballH.OneSpeed+playerHeight&&ballH.posX<15)||(ballH.posY<=100+ballH.OneSpeed&&ballH.posX<15)){//если мячик вне ракетки
+            if((ballH.posY>=100+ballH.OneSpeed+playerHeight&&ballH.posX<25)||(ballH.posY<=100+ballH.OneSpeed&&ballH.posX<15)){//если мячик вне ракетки
                 if(ballH.speedX!=0&&ballH.speedY!=0){
-                    ballH.OnePlayerGol=ballH.OnePlayerGol+1;
+                    ballH.TwoPlayerGol=ballH.TwoPlayerGol+1;
                 Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
                 }
                
@@ -243,9 +243,9 @@ function ContinueGame(){
             }
 
 
-             if((ballH.posY>=100+ballH.TwoSpeed+playerHeight&&ballH.posX>490)||(ballH.posY<=100+ballH.TwoSpeed&&ballH.posX>490)){//если мячик вне ракетки
+             if((ballH.posY>=130+ballH.TwoSpeed+playerHeight&&ballH.posX>490)||(ballH.posY<=120+ballH.TwoSpeed&&ballH.posX>490)){//если мячик вне ракетки
                 if(ballH.speedX!=0&&ballH.speedY!=0){
-                    ballH.TwoPlayerGol=ballH.TwoPlayerGol+1;
+                    ballH.OnePlayerGol=ballH.OnePlayerGol+1;
                 Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
                 }
                 

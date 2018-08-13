@@ -128,16 +128,35 @@
         e = event || window.event;
     
     if (e.key=="Shift"){
-        ballH.OneSpeed=ballH.OneSpeed-5;//5-скрость
+        ballH.OneSpeed=-2;//5-скрость
     }
     if(e.key=="Control"){
-        ballH.OneSpeed=ballH.OneSpeed+5;
+        ballH.OneSpeed=2;
     }
     if(e.key=="ArrowUp"){
-        ballH.TwoSpeed=ballH.TwoSpeed-5;
+        ballH.TwoSpeed=-2;
     }
     if(e.key=="ArrowDown"){
-        ballH.TwoSpeed=ballH.TwoSpeed+5;
+        ballH.TwoSpeed=2;
+    }
+};
+
+
+
+ document.body.onkeyup = function(e){ //событие нажатия кнопок
+        e = event || window.event;
+    
+    if (e.key=="Shift"){
+        ballH.OneSpeed=0;//5-скрость
+    }
+    if(e.key=="Control"){
+        ballH.OneSpeed=0;
+    }
+    if(e.key=="ArrowUp"){
+        ballH.TwoSpeed=0;
+    }
+    if(e.key=="ArrowDown"){
+        ballH.TwoSpeed=0;
     }
 };
 
@@ -178,46 +197,60 @@ function ContinueGame(){
 
               var playerWidth=10;
               var playerHeight=100;
-
+              var oneTop;
+              var twoTop;
            
            var oneBlock = document.getElementById("OnePlayer");
-            oneBlock.style.y=138+ballH.OneSpeed+"px";     //задаем высоту (+100 это высота блока игрока)
+           var twoBlock = document.getElementById("TwoPlayer");
+           oneTop=Number(oneBlock.style.y.replace(/[^-0-9]/gim,''));
+           twoTop=Number(twoBlock.style.y.replace(/[^-0-9]/gim,''));
+       
+            if(oneTop==0||twoBlock==0){
+                oneTop=138;
+                twoTop=138;
+            }
             
-            var TwoBlock = document.getElementById("TwoPlayer");
-            TwoBlock.style.y=138+ballH.TwoSpeed+"px";
+            oneBlock.style.y=oneTop+ballH.OneSpeed+"px";
+            twoBlock.style.y=twoTop+ballH.TwoSpeed+"px";
+
+            if (60+oneTop>=areaH.height){//задаем границы перемещения блоков(игроков)
+                ballH.OneSpeed=0;
+                oneBlock.style.y=oneTop+ballH.OneSpeed-2+"px";
+            }
+             if (oneTop<=40){
+                ballH.OneSpeed=0;
+                oneBlock.style.y=oneTop+ballH.OneSpeed+2+"px";
+            }
+            if (60+twoTop>=areaH.height){
+                ballH.TwoSpeed=0;
+                twoBlock.style.y=twoTop+ballH.TwoSpeed-2+"px";
+            }
+            if (twoTop<=40){
+                ballH.TwoSpeed=0;
+                twoBlock.style.y=twoTop+ballH.TwoSpeed+2+"px";
+            }
+            
+             //задаем высоту (+100 это высота блока игрока)
+
+             
+       
+
+            
+            
 
 
 
-            if (100+ballH.OneSpeed+playerHeight>=areaH.height){//задаем границы перемещения блоков(игроков)
-                ballH.OneSpeed=ballH.OneSpeed-5;
-            }
-            if (100+ballH.OneSpeed<=0){
-                ballH.OneSpeed=ballH.OneSpeed+5;
-            }
-            if (100+ballH.TwoSpeed+playerHeight>=areaH.height){
-                ballH.TwoSpeed=ballH.TwoSpeed-5;
-            }
-            if (100+ballH.TwoSpeed<=0){
-                ballH.TwoSpeed=ballH.TwoSpeed+5;
-            }
+            
 
 
             ballH.OneSpeed+=ballH.OnePlayer;
             ballH.TwoSpeed+=ballH.TwoPlayer;
 
 
-
             ballH.posX+=ballH.speedX;
-            // вылетел ли мяч правее стены?
-            if ( ballH.posX+ballH.width>areaH.width+45 ) {
-                ballH.speedX=-ballH.speedX;
-                ballH.posX=areaH.width-ballH.width+45;
-            }
-            // вылетел ли мяч левее стены?
-            if ( ballH.posX<20 ) { 
-                ballH.speedX=-ballH.speedX;
-                ballH.posX=20;
-            }
+            
+            
+           
 
             ballH.posY+=ballH.speedY;
             // вылетел ли мяч ниже пола?
@@ -231,8 +264,16 @@ function ContinueGame(){
                 ballH.posY=50;
             }
 
-            if((ballH.posY>=100+ballH.OneSpeed+playerHeight&&ballH.posX<25)||(ballH.posY<=100+ballH.OneSpeed&&ballH.posX<15)){//если мячик вне ракетки
+
+
+
+
+
+
+            if(ballH.posY<=oneTop+ballH.OneSpeed&&ballH.posX<27
+            ||ballH.posY>=oneTop+ballH.OneSpeed+100&&ballH.posX<27){//если мячик вне ракетки
                 if(ballH.speedX!=0&&ballH.speedY!=0){
+                 // debugger;
                     ballH.TwoPlayerGol=ballH.TwoPlayerGol+1;
                 Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
                 }
@@ -241,10 +282,22 @@ function ContinueGame(){
                 ballH.speedY=0;
                 
             }
+            else {
+                 // вылетел ли мяч левее стены?
+            if ( ballH.posX<28 ) { 
+               // debugger;
+                ballH.speedX=-ballH.speedX;
+                ballH.posX=30;
+            }
+            }
+            
 
 
-             if((ballH.posY>=130+ballH.TwoSpeed+playerHeight&&ballH.posX>490)||(ballH.posY<=120+ballH.TwoSpeed&&ballH.posX>490)){//если мячик вне ракетки
+
+
+             if((ballH.posY>=twoTop+ballH.TwoSpeed+playerHeight&&ballH.posX>=490)||(ballH.posY<=120+ballH.TwoSpeed&&ballH.posX>=490)){//если мячик вне ракетки
                 if(ballH.speedX!=0&&ballH.speedY!=0){
+                   debugger;
                     ballH.OnePlayerGol=ballH.OnePlayerGol+1;
                 Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
                 }
@@ -253,6 +306,37 @@ function ContinueGame(){
                 ballH.speedY=0;
                 
             }
+            else {
+                // вылетел ли мяч правее стены?
+            if ( ballH.posX+ballH.width>areaH.width+35 ) {
+                debugger;
+                    ballH.speedX=-ballH.speedX;
+                    ballH.posX=areaH.width-ballH.width+33;
+            }
+            }
+            
+
+
+
+
+
+
+
+           // if(  ballH.posX<10 && ballH.posY>=twoTop+ballH.OneSpeed&&ballH.posY<=twoTop+ballH.OneSpeed+OnePlayerHeight){
+               
+           //     ballH.speedX=-ballH.speedX;
+          //      ballH.posX=30;
+          //  }
+           
+
+       //      if(  ballH.posX+ballH.width>areaH.width+45  && ballH.posY<=130+ballH.TwoSpeed+playerHeight&&ballH.posX<490){
+        //        ballH.speedX=-ballH.speedX;
+      //          ballH.posX=30;
+        //    }
+         //  else if(ballH.posX+ballH.width>areaH.width+45  && ballH.posY>=120+ballH.TwoSpeed&&ballH.posX<490){
+          //  ballH.speedX=-ballH.speedX;
+         //       ballH.posX=areaH.width-ballH.width+35;
+//}
             
             
 

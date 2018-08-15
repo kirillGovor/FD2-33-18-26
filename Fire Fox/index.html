@@ -3,10 +3,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Fox</title>    
-  <script src="script/Position.js"></script> 
+  <script src="script/Timer.js"></script> 
   <script src="script/menu.js"></script>   
   <script>
-     // window.onload =  elementMenu;
+      window.onload =  cloudAnimation;
   </script>
   <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
 
@@ -15,10 +15,13 @@
 
    </style>
  </head>
-    <body>
+    <body>      
         <div id="ImportantMenuDiv" class="fon">
+           
         <h1 class="menu"><span>fire</span> fox</h1>
+        <p id="cloud" class="cloudPosition"><img class="cloud" src ="img/cloud1.png" ></p>
         <div class="menu_div" >
+                
         <ul id="mainMenu" class="OptionsGame">
 
             <li><a class="link"onclick="startGame()"  >start game</a></li>
@@ -26,13 +29,14 @@
            <li><a class="link" onclick="closeGame()" >exit game</a></li>
 
         </ul>
-        <ul id =option_menu class="mainMenu" style="visibility: hidden;">
-            <li><a id="music_link" class="link"onclick="optionmenuMusic()"  >звук: вкл</a></li>
-            <li></li>
-            <li></li>
+        <ul id =optionMenu class="option_menu OptionsGame">
+            <li><a id="music_link" class="link"onclick="optionmenuMusic()"  >music: on</a></li>
+            <li><a id="sound_link" class="link"onclick="optionmenuSounds()"  >sounds: on</a></li>
+            <li><a id="back_link" class="link"onclick="optionmenuBack()"  >back</a></li>
         </ul>
         </div>
         
         </div>
+        
     </body>
 </html>

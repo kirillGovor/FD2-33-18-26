@@ -258,8 +258,8 @@ function start() {
 
 
 
-            if(ballH.posY<=oneTop+ballH.OneSpeed&&ballH.posX<27  //27 позиция мячика, с которого начинается проверка (Если мячик левее 27 пикселей, и вне ракетки, останавливаем мячик)
-            ||ballH.posY>=oneTop+ballH.OneSpeed+100&&ballH.posX<27){//если мячик вне ракетки
+            if(ballH.posY<=oneTop+ballH.OneSpeed&&ballH.posX<32  //27 позиция мячика, с которого начинается проверка (Если мячик левее 27 пикселей, и вне ракетки, останавливаем мячик)
+            ||ballH.posY>=oneTop+ballH.OneSpeed+100&&ballH.posX<32){//если мячик вне ракетки
                 if(ballH.speedX!=0&&ballH.speedY!=0){
                 
                     ballH.TwoPlayerGol=ballH.TwoPlayerGol+1;
@@ -272,10 +272,10 @@ function start() {
             }
             else {      //иначе отбиваем мячик
                  // вылетел ли мяч левее стены?
-            if ( ballH.posX<28 ) { 
+            if ( ballH.posX<33 ) { 
               
                 ballH.speedX=-ballH.speedX;
-                ballH.posX=30;
+                ballH.posX=35;
             }
             }
             

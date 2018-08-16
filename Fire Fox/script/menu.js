@@ -1,3 +1,7 @@
+var Menu={
+    soundClick : 0, //скорость облочков
+    musicClick :0, //счетчик облочка
+}
 function elementMenu(){ //добовляем все компоненты на страницу
    var body=document.getElementsByTagName("body")
    document.body.innerHTML="<div id=ImportantMenuDiv class=fon><h1 class=menu><span>fire</span> fox</h1><div class=menu_div ><ul id=mainMenu class=OptionsGame><li><a class=link onclick=startGame()  >start game</a></li><li><a class=link onclick=optionsGame() >options</a></li><li><a class=link onclick=closeGame() >exit game</a></li></ul><ul><li><a class=link onclick=music() >music</a></li> </ul></div></div>";
@@ -66,9 +70,11 @@ function optionmenuSounds(){
     var sounds=document.getElementById("sound_link");
     if(sounds.innerHTML=="sounds: on"){
         sounds.innerHTML="sounds: off"
+        Menu.soundClick=1;
     }
     else{
-        sounds.innerHTML="sounds: on"
+        sounds.innerHTML="sounds: on";
+        Menu.soundClick=0;
     }
     
 }
@@ -77,4 +83,12 @@ function optionmenuBack(){
     var option_menu= document.getElementById("optionMenu");
     menu_block.style.display="block";
     option_menu.style.display="none";
+}
+
+document.onmousedown = function() {
+    if (Menu.soundClick==1){}
+    else{
+        var soundClick= document.getElementById('soundClick');
+        soundClick.play();
+    }
 }

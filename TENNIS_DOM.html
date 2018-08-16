@@ -161,20 +161,39 @@
 
 
 
-    document.body.onkeydown = function(e){ //событие нажатия кнопок
+   document.body.onkeydown = function(e){ //событие нажатия кнопок
         e = event || window.event;
     
     if (e.key=="Shift"){
-        ballH.OneSpeed=ballH.OneSpeed-5;//5-скрость
+        ballH.OneSpeed=-2;//5-скрость
     }
     if(e.key=="Control"){
-        ballH.OneSpeed=ballH.OneSpeed+5;
+        ballH.OneSpeed=2;
     }
     if(e.key=="ArrowUp"){
-        ballH.TwoSpeed=ballH.TwoSpeed-5;
+        ballH.TwoSpeed=-2;
     }
     if(e.key=="ArrowDown"){
-        ballH.TwoSpeed=ballH.TwoSpeed+5;
+        ballH.TwoSpeed=2;
+    }
+};
+
+
+
+ document.body.onkeyup = function(e){ //событие отпускания кнопок
+        e = event || window.event;
+    
+    if (e.key=="Shift"){
+        ballH.OneSpeed=0;//0-скрость
+    }
+    if(e.key=="Control"){
+        ballH.OneSpeed=0;
+    }
+    if(e.key=="ArrowUp"){
+        ballH.TwoSpeed=0;
+    }
+    if(e.key=="ArrowDown"){
+        ballH.TwoSpeed=0;
     }
 };
 
@@ -185,7 +204,7 @@ function ContinueGame(){
                  if ( ballH.posX<=5 ) { 
                 ballH.posX=0;}
 
-                if ( ballH.posX+ballH.width>areaH.width+17 ) {
+                if ( ballH.posX+ballH.width>areaH.width+10 ) {
                 ballH.speedX=-ballH.speedX;
                 ballH.posX=areaH.width-ballH.width;
             }
@@ -223,28 +242,34 @@ function ContinueGame(){
 
               var playerWidth=10;
               var playerHeight=100;
-
+              var oneTop;
+              var twoTop;
            
+              var oneBlock = document.getElementById("OnePlayer");
+           var twoBlock = document.getElementById("TwoPlayer");
+           oneTop=Number(oneBlock.style.top.replace(/[^-0-9]/gim,''));// положение блоков в y , тк они с окончанием px, берем только числа
+           twoTop=Number(twoBlock.style.top.replace(/[^-0-9]/gim,''));
 
-             var oneBlock = document.getElementById("OnePlayer");
-            oneBlock.style.top=100+ballH.OneSpeed+"px";     //задаем высоту (+100 это высота блока игрока)
+             oneBlock.style.top=oneTop+ballH.OneSpeed+"px";//присваеваем изначальное положение блоков( по середине) 
             
-            var TwoBlock = document.getElementById("TwoPlayer");
-            TwoBlock.style.top=100+ballH.TwoSpeed+"px";
+             twoBlock.style.top=twoTop+ballH.TwoSpeed+"px";
 
 
-
-            if (100+ballH.OneSpeed+playerHeight>=areaH.height){//задаем границы перемещения блоков(игроков)
-                ballH.OneSpeed=ballH.OneSpeed-5;
+            if (100+oneTop>=areaH.height){//задаем границы перемещения блоков(игроков)
+                ballH.OneSpeed=0;
+                oneBlock.style.top=oneTop+ballH.OneSpeed-2+"px";
             }
-            if (100+ballH.OneSpeed<=0){
-                ballH.OneSpeed=ballH.OneSpeed+5;
+             if (oneTop<=0){
+                ballH.OneSpeed=0;
+                oneBlock.style.top=oneTop+ballH.OneSpeed+2+"px";
             }
-            if (100+ballH.TwoSpeed+playerHeight>=areaH.height){
-                ballH.TwoSpeed=ballH.TwoSpeed-5;
+            if (100+twoTop>=areaH.height){
+                ballH.TwoSpeed=0;
+                twoBlock.style.top=twoTop+ballH.TwoSpeed-2+"px";
             }
-            if (100+ballH.TwoSpeed<=0){
-                ballH.TwoSpeed=ballH.TwoSpeed+5;
+            if (twoTop<=0){
+                ballH.TwoSpeed=0;
+                twoBlock.style.top=twoTop+ballH.TwoSpeed+2+"px";
             }
 
 
@@ -254,22 +279,15 @@ function ContinueGame(){
 
 
             ballH.posX+=ballH.speedX;
-            // вылетел ли мяч правее стены?
-            if ( ballH.posX+ballH.width>areaH.width+17 ) {
-                ballH.speedX=-ballH.speedX;
-                ballH.posX=areaH.width-ballH.width;
-            }
-            // вылетел ли мяч левее стены?
-            if ( ballH.posX<0 ) { 
-                ballH.speedX=-ballH.speedX;
-                ballH.posX=0;
-            }
+            
+            
+           
 
             ballH.posY+=ballH.speedY;
             // вылетел ли мяч ниже пола?
             if ( ballH.posY+ballH.height>areaH.height+17 ) {
                 ballH.speedY=-ballH.speedY;
-                ballH.posY=areaH.height-ballH.height;
+                ballH.posY=areaH.height-ballH.height+0;
             }
             // вылетел ли мяч выше потолка?
             if ( ballH.posY<0 ) {
@@ -277,8 +295,16 @@ function ContinueGame(){
                 ballH.posY=0;
             }
 
-            if((ballH.posY>=100+ballH.OneSpeed+playerHeight&&ballH.posX<2)||(ballH.posY<=100+ballH.OneSpeed&&ballH.posX<2)){//если мячик вне ракетки
+
+
+
+
+
+
+            if(ballH.posY<=oneTop+ballH.OneSpeed&&ballH.posX<12  //27 позиция мячика, с которого начинается проверка (Если мячик левее 27 пикселей, и вне ракетки, останавливаем мячик)
+            ||ballH.posY>=oneTop+ballH.OneSpeed+100&&ballH.posX<12){//если мячик вне ракетки
                 if(ballH.speedX!=0&&ballH.speedY!=0){
+                    
                     ballH.TwoPlayerGol=ballH.TwoPlayerGol+1;
                 Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
                 }
@@ -287,25 +313,46 @@ function ContinueGame(){
                 ballH.speedY=0;
                 
             }
+            else {      //иначе отбиваем мячик
+                 // вылетел ли мяч левее стены?
+            if ( ballH.posX<10 ) { 
+              
+                ballH.speedX=-ballH.speedX;
+                ballH.posX=10;
+            }
+            }
+            
 
 
-             if((ballH.posY>=100+ballH.TwoSpeed+playerHeight&&ballH.posX>464)||(ballH.posY<=100+ballH.TwoSpeed&&ballH.posX>464)){//если мячик вне ракетки
-                if(ballH.speedX!=0&&ballH.speedY!=0){
+
+
+             if((ballH.posY>=twoTop+ballH.TwoSpeed+playerHeight&&ballH.posX>=465)
+             ||(ballH.posY<=100+ballH.TwoSpeed&&ballH.posX>=465)){ //490 позиция мячика, с которого начинается проверка (Если мячик правее 490 пикселей, и вне ракетки, останавливаем мячик)
+                 
+                if(ballH.speedX!=0&&ballH.speedY!=0){//если мячик вне ракетки
+                   
                     ballH.OnePlayerGol=ballH.OnePlayerGol+1;
-                Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
+                    Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
                 }
                 
                 ballH.speedX=0;//убираем скорость перемещения
                 ballH.speedY=0;
                 
             }
-            
-            
+            else {  //иначе отбиваем мячик
+                if ( ballH.posX+ballH.width>areaH.width+8 ) {// вылетел ли мяч правее стены?
+                       // debugger;
+                        ballH.speedX=-ballH.speedX;
+                        ballH.posX=areaH.width-ballH.width;
+                }
+            }
 
         ballH.update();
-        }
+ }
 
     ballH.update();
+
+
 
 
 

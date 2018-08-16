@@ -5,15 +5,36 @@ function elementMenu(){ //добовляем все компоненты на с
 
 
 function startGame(){ //скрыть менюху при нажатии кнопки старт
-    var menu_block =document.getElementById("ImportantMenuDiv");
-    
-        menu_block.style.visibility="hidden";
-    
+   
+    var menu_block =document.getElementById("mainMenu");
+    var menu_name = document.getElementById("NameMenu");
+    menu_block.style.display="none";
+    menu_name.style.display="block"; 
+}
+function NameBack(){
+    var menu_block =document.getElementById("mainMenu");
+    var menu_name = document.getElementById("NameMenu");
+    menu_block.style.display="block";
+    menu_name.style.display="none";
+}
+
+function TrueName(){
+    var textName=document.getElementById("text_name");
+    var Nick= document.getElementById("Nick");
+    var MainMenuBlock =document.getElementById("ImportantMenuDiv");
+    if (Nick.value==""||Nick.value==undefined){
+        Nick.style.background="#ff4949";
+        Nick.style.color="orange";
+    }
+    else{
+       var ImportantMenuDiv=document.getElementById("ImportantMenuDiv");
+       ImportantMenuDiv.style.display="none";
+    }
 }
 
 function optionsGame(){ //скрывает тескт при нажатии настроек
     var menu_block =document.getElementById("mainMenu");
-    var option_menu= document.getElementById("optionMenu")
+    var option_menu= document.getElementById("optionMenu");
   if (menu_block.style.display=="block"||menu_block.style.display==""){
     menu_block.style.display="none";
     option_menu.style.display="block"

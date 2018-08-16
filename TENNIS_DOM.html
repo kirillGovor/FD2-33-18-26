@@ -204,9 +204,12 @@ function ContinueGame(){
                  if ( ballH.posX<=5 ) { 
                 ballH.posX=0;}
 
-                if ( ballH.posX+ballH.width>areaH.width+10 ) {
+                if ( ballH.posX+ballH.width>areaH.width+17 ) {
                 ballH.speedX=-ballH.speedX;
                 ballH.posX=areaH.width-ballH.width;
+            }
+            if (ballH.posX<=10){
+                ballH.posX=25; 
             }
             }
 
@@ -303,8 +306,8 @@ function ContinueGame(){
 
             if(ballH.posY<=oneTop+ballH.OneSpeed&&ballH.posX<12  //27 позиция мячика, с которого начинается проверка (Если мячик левее 27 пикселей, и вне ракетки, останавливаем мячик)
             ||ballH.posY>=oneTop+ballH.OneSpeed+100&&ballH.posX<12){//если мячик вне ракетки
+                ballH.posX=0;
                 if(ballH.speedX!=0&&ballH.speedY!=0){
-                    
                     ballH.TwoPlayerGol=ballH.TwoPlayerGol+1;
                 Goal.innerHTML=ballH.OnePlayerGol+":"+ballH.TwoPlayerGol;
                 }
@@ -328,7 +331,7 @@ function ContinueGame(){
 
              if((ballH.posY>=twoTop+ballH.TwoSpeed+playerHeight&&ballH.posX>=465)
              ||(ballH.posY<=100+ballH.TwoSpeed&&ballH.posX>=465)){ //490 позиция мячика, с которого начинается проверка (Если мячик правее 490 пикселей, и вне ракетки, останавливаем мячик)
-                 
+                ballH.posX=470;
                 if(ballH.speedX!=0&&ballH.speedY!=0){//если мячик вне ракетки
                    
                     ballH.OnePlayerGol=ballH.OnePlayerGol+1;

@@ -321,6 +321,8 @@ function start() {
            
 
                 //задаем движение ракеток
+
+                //если ракетка выше
                 if(ballH.TwoBlock<=40){
                     ballH.TwoSpeed=0;
                     ballH.TwoBlock=ballH.TwoBlock+2;
@@ -364,6 +366,52 @@ function start() {
                         context.stroke();
                     
                 }
+
+                    ///если ракетка ниже
+              else  if(ballH.TwoBlock>=238){
+                    ballH.TwoSpeed=0;
+                    ballH.TwoBlock=ballH.TwoBlock-2;
+                        context.beginPath(); //закрашиваем правого игрока
+                        context.fillStyle = "#f1eb06";
+                        context.fillRect(498, ballH.TwoBlock+2, 10, 100);
+                        context.lineWidth = 5;
+                        context.stroke();
+
+                        ballH.TwoBlock=ballH.TwoBlock+ballH.TwoSpeed;
+
+
+                        context.beginPath(); //рисуем правого игрока
+                        context.fillStyle = "blue";
+                        context.fillRect(498, ballH.TwoBlock-2, 10, 100);
+                        context.lineWidth = 5;
+                        context.stroke();
+                        ballH.TwoBlock=ballH.TwoBlock-2;
+
+                }
+
+
+               else if(ballH.OneBlock>=238){
+                    ballH.OneSpeed=0;
+                    ballH.OneBlock=ballH.OneBlock-2;
+                        context.beginPath(); //закрашиваем левого игрока
+                        context.fillStyle = "#f1eb06";
+                        context.fillRect(9, ballH.OneBlock+2, 10, 100);
+                        context.lineWidth = 5;
+                        context.stroke();
+
+                       
+
+                        ballH.OneBlock= ballH.OneBlock+ballH.OneSpeed;
+                        
+
+                        context.beginPath(); //рисуем нового левого игрока
+                        context.fillStyle = "green";
+                        context.fillRect(9, ballH.OneBlock-2, 10, 100);
+                        context.lineWidth = 5;
+                        context.stroke();
+                    
+                }
+                
                 else{
                 context.beginPath(); //закрашиваем левого игрока
                 context.fillStyle = "#f1eb06";

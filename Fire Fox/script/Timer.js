@@ -33,7 +33,12 @@ if ( !window.requestAnimationFrame ) {
 function cloudAnimation(){
     var cloud = document.getElementById("cloud");
     var cloud_left; //счетчик, который будет сдивагить облочки
-
+    var fon = document.getElementById("fon");
+    var fonWidth=fon.style.width;
+  // if(fonWidth<=500){
+    // hash.CloudWay=20;
+   //}
+    
       cloud_left=Number(cloud.style.marginLeft.replace(/[^-0-9]/gim,''));// положение блоков в y , тк они с окончанием px, берем только числа
       
       if (cloud_left==0||cloud_left<=hash.CloudWay && hash.cloudstep ==0){ // если облочко слишком далеко,, то его не сдивгаем

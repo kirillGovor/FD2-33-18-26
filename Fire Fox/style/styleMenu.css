@@ -61,11 +61,11 @@
     .menu_div
     {   width:500px;
         margin: auto;
-        
+        /*
         background: #ed9fdd;;
         border-radius: 20px;
         box-shadow: 0 0 20px rgba(251, 242, 225,1);
-        
+        */
     }
     .inputName{
         background: #ed9fdd;

@@ -57,11 +57,14 @@ function closeGame(){
 
 function optionmenuMusic(){
     var music=document.getElementById("music_link");
+    var fonMusic=document.getElementById("fonMusic");
     if(music.innerHTML=="music: on"){
     music.innerHTML="music: off"
+    fonMusic.volume="0";
     }
     else{
     music.innerHTML="music: on"
+    fonMusic.volume="1";
     }
     
 }

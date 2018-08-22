@@ -1,0 +1,225 @@
+<html>
+
+<head>
+
+</head>
+
+
+
+
+
+<script>
+    "use strict";
+
+
+    function HashStorage() {
+        this.storage = {};
+        if (localStorage.length == 0) {
+
+        }
+        else {
+            var returnvalueJSON1 = JSON.parse(localStorage.getItem("Drinks"))
+            this.storage = returnvalueJSON1;
+        }
+
+    }
+
+    HashStorage.prototype.addValue = function (key, value) {
+        this.storage[key] = value;
+
+        var returnvalueJSON1 = JSON.parse(localStorage.getItem("Drinks")) //закидывваем в local storage
+        var valueJSON1 = JSON.stringify(this.storage);//
+        localStorage.setItem("Drinks", valueJSON1);
+
+
+        console.log(returnvalueJSON1); //проверочка
+        console.log(localStorage.length);
+        console.log(localStorage);
+
+    }
+
+    HashStorage.prototype.getValue = function (key) {
+        if (key in this.storage) {
+            return (this.storage[key]);
+        }
+        else {
+            return (undefined);
+        }
+    }
+
+    HashStorage.prototype.deleteValue = function (key) {
+        if (this.storage[key] == undefined) {
+            return (false);
+        }
+        else {
+            delete this.storage[key];
+            return (true);
+        }
+    }
+
+    HashStorage.prototype.getkeys = function () {
+        return Object.keys(this.storage);
+    }
+
+    function addNap() {
+        var value = { alcho: "", recept: "" };
+        var key;
+        key = prompt("Введите напиток");
+        value.alcho = prompt("Напиток алкогольный?");
+        value.recept = prompt("Подскажите рецептик");
+        drinkStorage.addValue(key, value);
+    }
+
+    function getNap() {
+        elseIF = ""
+        var key = prompt("Введите название напитка");
+        var elseIF = drinkStorage.getValue(key);
+        if (elseIF != undefined) {
+            alert(`
+            Напиток:${key}
+            Алкогольный:${elseIF.alcho}
+            Рецепт:${elseIF.recept}`);
+        }
+        else {
+            alert(undefined);
+        }
+    }
+
+    function delNap() {
+        var elseIF;
+        var key = prompt("Ведите название напитка, который хотите удалить");
+        elseIF = drinkStorage.deleteValue(key);
+        alert(elseIF);
+    }
+
+    function getKey() {
+        var mass = drinkStorage.getkeys();
+        alert("Перечень всех напитков:" + "\n" + mass);
+    }
+    var drinkStorage = new HashStorage;
+
+
+
+
+    ////////////////////////////////FOOD
+
+
+    function HashStorageFood() {
+        this.storage = {};
+        if (localStorage.length == 0) {
+
+        }
+        else {
+            var returnvalueJSON1 = JSON.parse(localStorage.getItem("Drinks"))
+            this.storage = returnvalueJSON1;
+        }
+
+    }
+
+    HashStorageFood.prototype.addValue = function (key, value) {
+        this.storage[key] = value;
+
+        var returnvalueJSON1 = JSON.parse(localStorage.getItem("Food")) //закидывваем в local storage
+        var valueJSON1 = JSON.stringify(this.storage);//
+        localStorage.setItem("Food", valueJSON1);
+
+
+        console.log(returnvalueJSON1); //проверочка
+        console.log(localStorage.length);
+        console.log(localStorage);
+
+    }
+
+    HashStorageFood.prototype.getValue = function (key) {
+        if (key in this.storage) {
+            return (this.storage[key]);
+        }
+        else {
+            return (undefined);
+        }
+    }
+
+    HashStorageFood.prototype.deleteValue = function (key) {
+        if (this.storage[key] == undefined) {
+            return (false);
+        }
+        else {
+            delete this.storage[key];
+            return (true);
+        }
+    }
+
+    HashStorageFood.prototype.getkeys = function () {
+        console.log(Object.keys(this.storage));
+        return Object.keys(this.storage);
+
+    }
+
+    function addFood() {
+        var value = { alcho: "", recept: "" };
+        var key;
+        key = prompt("Введите напиток");
+        value.alcho = prompt("Напиток алкогольный?");
+        value.recept = prompt("Подскажите рецептик");
+        FoodkStorage.addValue(key, value);
+    }
+
+    function getFood() {
+        elseIF = ""
+        var key = prompt("Введите название напитка");
+        var elseIF = FoodkStorage.getValue(key);
+        if (elseIF != undefined) {
+            alert(`
+            Напиток:${key}
+            Алкогольный:${elseIF.alcho}
+            Рецепт:${elseIF.recept}`);
+        }
+        else {
+            alert(undefined);
+        }
+    }
+
+    function delFood() {
+        var elseIF;
+        var key = prompt("Ведите название напитка, который хотите удалить");
+        elseIF = FoodkStorage.deleteValue(key);
+        alert(elseIF);
+    }
+
+    function getKeyFood() {
+        var mass = FoodkStorage.getkeys();
+        alert("Перечень всех напитков:" + "\n" + mass);
+    }
+    var FoodkStorage = new HashStorageFood;
+</script>
+
+<body>
+
+
+    <input type="submit" value="Ввод информации о напитке" OnClick="addNap()">
+    <br>
+    <br>
+    <input type="submit" value="Получение информации о напитке" OnClick="getNap()">
+    <br>
+    <br>
+    <input type="submit" value="Удаление информации о напитке" OnClick="(delNap())">
+    <br>
+    <br>
+    <input type="submit" value="Перечень всех напитков" OnClick="getKey()">
+    <hr>
+
+
+    <p>FOOD</p>
+    <input type="submit" value="Ввод информации о блюде" OnClick="addFood()">
+    <br>
+    <br>
+    <input type="submit" value="Получение информации о блюде" OnClick="getFood()">
+    <br>
+    <br>
+    <input type="submit" value="Удаление информации о блюде" OnClick="(delFood())">
+    <br>
+    <br>
+    <input type="submit" value="Перечень всех блюде" OnClick="getKeyFood()">
+</body>
+
+</html>

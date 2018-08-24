@@ -13,45 +13,46 @@
 
 
     function HashStorage(type) {
-        localStorage.clear();
-        this.storage = { "food": {}, "Drinks": {} };
 
+        this.storage = {};
+        //localStorage.clear();
 
         if (type == "Drinks") {
             if (localStorage.getItem('Drinks') == null) {
 
             }
             else {
-                var returnvalueJSON1 = JSON.parse(localStorage.getItem("Drinks"))
-                this.storage.Drinks = returnvalueJSON1;
+                var returnvalueJSON1 = JSON.parse(localStorage.getItem(type))
+                this.storage = returnvalueJSON1;
             }
         }
 
 
 
         if (type == "food") {
-            if (localStorage.getItem('Food') == null) {
+            if (localStorage.getItem('food') == null) {
 
             }
             else {
-                var returnvalueJSON1 = JSON.parse(localStorage.getItem("Food"))
-                this.storage.food = returnvalueJSON1;
+                var returnvalueJSON1 = JSON.parse(localStorage.getItem(type))
+                this.storage = returnvalueJSON1;
             }
         }
+
 
     }
 
     HashStorage.prototype.addValue = function (key, value, type) {
         if (type == "Drinks") {
-            this.storage.Drinks[key] = value;
-            var returnvalueJSON1 = JSON.parse(localStorage.getItem("Drinks")) //закидывваем в local storage
-            var valueJSON1 = JSON.stringify(this.storage.Drinks);//
+            this.storage[key] = value;
+            var returnvalueJSON1 = JSON.parse(localStorage.getItem(type)) //закидывваем в local storage
+            var valueJSON1 = JSON.stringify(this.storage);//
             localStorage.setItem("Drinks", valueJSON1);
         }
         if (type == "food") {
-            this.storage.food[key] = value;
-            var returnvalueJSON1 = JSON.parse(localStorage.getItem("food")) //закидывваем в local storage
-            var valueJSON1 = JSON.stringify(this.storage.food);//
+            this.storage[key] = value;
+            var returnvalueJSON1 = JSON.parse(localStorage.getItem(type)) //закидывваем в local storage
+            var valueJSON1 = JSON.stringify(this.storage);//
             localStorage.setItem("food", valueJSON1);
 
         }
@@ -60,16 +61,16 @@
 
     HashStorage.prototype.getValue = function (key, type) {
         if (type == "Drinks") {
-            if (key in this.storage.Drinks) {
-                return (this.storage.Drinks[key]);
+            if (key in this.storage) {
+                return (this.storage[key]);
             }
             else {
                 return (undefined);
             }
         }
         if (type == "food") {
-            if (key in this.storage.food) {
-                return (this.storage.food[key]);
+            if (key in this.storage) {
+                return (this.storage[key]);
             }
             else {
                 return (undefined);
@@ -80,14 +81,14 @@
 
     HashStorage.prototype.deleteValue = function (key, type) {
         if (type == "Drinks") {
-            if (this.storage.Drinks[key] == undefined) {
+            if (this.storage[key] == undefined) {
                 return (false);
             }
             else {
-                delete this.storage.Drinks[key];
+                delete this.storage[key];
 
-                localStorage.removeItem("Drinks");
-                var returnvalueJSON1 = JSON.parse(localStorage.getItem("Drinks")) //закидывваем в local storage
+                localStorage.removeItem(type);
+                var returnvalueJSON1 = JSON.parse(localStorage.getItem(type)) //закидывваем в local storage
                 var valueJSON1 = JSON.stringify(this.storage.Drinks);//
                 localStorage.setItem(type, valueJSON1);
                 return (true);
@@ -97,15 +98,15 @@
 
 
         if (type == "food") {
-            if (this.storage.food[key] == undefined) {
+            if (this.storage[key] == undefined) {
                 return (false);
             }
             else {
-                delete this.storage.food[key];
+                delete this.storage[key];
 
-                localStorage.removeItem("food");
-                var returnvalueJSON1 = JSON.parse(localStorage.getItem("food")) //закидывваем в local storage
-                var valueJSON1 = JSON.stringify(this.storage.food);//
+                localStorage.removeItem(type);
+                var returnvalueJSON1 = JSON.parse(localStorage.getItem(type)) //закидывваем в local storage
+                var valueJSON1 = JSON.stringify(this.storage);//
                 localStorage.setItem(type, valueJSON1);
 
                 return (true);
@@ -117,10 +118,10 @@
 
     HashStorage.prototype.getkeys = function (type) {
         if (type == "Drinks") {
-            return Object.keys(this.storage.Drinks);
+            return Object.keys(this.storage);
         }
-        else {
-            return Object.keys(this.storage.food);
+        if (type == "food") {
+            return Object.keys(this.storage);
         }
     }
 

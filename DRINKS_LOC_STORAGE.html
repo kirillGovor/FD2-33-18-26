@@ -37,13 +37,13 @@
     }
 
     HashStorage.prototype.getValue = function (key, type) {
-       
-            if (key in this.storage) {
-                return (this.storage[key]);
-            }
-            else {
-                return (undefined);
-            }
+
+        if (key in this.storage) {
+            return (this.storage[key]);
+        }
+        else {
+            return (undefined);
+        }
 
     }
 
@@ -62,19 +62,11 @@
             return (true);
         }
 
-
-
-
-
-
-
     }
 
     HashStorage.prototype.getkeys = function (type) {
-        
-            return Object.keys(this.storage);
-        
-       
+
+        return Object.keys(this.storage);
     }
 
     function addNap() {

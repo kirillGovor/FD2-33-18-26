@@ -10,80 +10,75 @@
 
 <script>
     "use strict";
-
-
     function HashStorage(type) {
-
         this.storage = {};
-
-
+        this.type = type;
         if (localStorage.getItem(type) == null) {
-
         }
         else {
             var returnvalueJSON1 = JSON.parse(localStorage.getItem(type))
             this.storage = returnvalueJSON1;
         }
-
     }
 
-    HashStorage.prototype.addValue = function (key, value, type) {
 
+
+    HashStorage.prototype.addValue = function (key, value) {
         this.storage[key] = value;
-        var returnvalueJSON1 = JSON.parse(localStorage.getItem(type)) //закидывваем в local storage
+        var returnvalueJSON1 = JSON.parse(localStorage.getItem(this.type)) //закидывваем в local storage
         var valueJSON1 = JSON.stringify(this.storage);//
-        localStorage.setItem(type, valueJSON1);
-
+        localStorage.setItem(this.type, valueJSON1);
     }
 
-    HashStorage.prototype.getValue = function (key, type) {
 
+
+    HashStorage.prototype.getValue = function (key) {
         if (key in this.storage) {
             return (this.storage[key]);
         }
         else {
             return (undefined);
         }
-
     }
 
-    HashStorage.prototype.deleteValue = function (key, type) {
 
+
+    HashStorage.prototype.deleteValue = function (key) {
         if (this.storage[key] == undefined) {
             return (false);
         }
         else {
             delete this.storage[key];
-
-            localStorage.removeItem(type);
-            var returnvalueJSON1 = JSON.parse(localStorage.getItem(type)) //закидывваем в local storage
+            localStorage.removeItem(this.type);
+            var returnvalueJSON1 = JSON.parse(localStorage.getItem(this.type)) //закидывваем в local storage
             var valueJSON1 = JSON.stringify(this.storage);//
-            localStorage.setItem(type, valueJSON1);
+            localStorage.setItem(this.type, valueJSON1);
             return (true);
         }
-
     }
 
-    HashStorage.prototype.getkeys = function (type) {
 
+
+    HashStorage.prototype.getkeys = function () {
         return Object.keys(this.storage);
     }
 
+
     function addNap() {
-        var type = "Drinks";
         var value = { alcho: "", recept: "" };
         var key;
         key = prompt("Введите напиток");
         value.alcho = prompt("Напиток алкогольный?");
         value.recept = prompt("Подскажите рецептик");
-        drinkStorage.addValue(key, value, type);
+        drinkStorage.addValue(key, value);
     }
 
+
     function getNap() {
-        var type = "Drinks";
+
         elseIF = ""
         var key = prompt("Введите название напитка");
-        var elseIF = drinkStorage.getValue(key, type);
+        var elseIF = drinkStorage.getValue(key);
         if (elseIF != undefined) {
             alert(`
             Напиток:${key}
@@ -95,41 +90,38 @@
         }
     }
 
+
     function delNap() {
-        var type = "Drinks";
         var elseIF;
         var key = prompt("Ведите название напитка, который хотите удалить");
-        elseIF = drinkStorage.deleteValue(key, type);
+        elseIF = drinkStorage.deleteValue(key);
         alert(elseIF);
     }
 
+
     function getKey() {
-        var type = "Drinks";
-        var mass = drinkStorage.getkeys(type);
+
+        var mass = drinkStorage.getkeys();
         alert("Перечень всех напитков:" + "\n" + mass);
     }
 
 
 
-
-
     ////////////////////////////////FOOD
-
     function addFood() {
-        var type = "food";
         var value = { alcho: "", recept: "" };
         var key;
         key = prompt("Введите Блюдо");
         value.alcho = prompt("Блюдо с алкоголем в подарок??");
         value.recept = prompt("Подскажите рецептик");
-        FoodkStorage.addValue(key, value, type);
+        FoodkStorage.addValue(key, value);
     }
 
+
     function getFood() {
-        var type = "food";
         elseIF = ""
         var key = prompt("Введите название блюда");
-        var elseIF = FoodkStorage.getValue(key, type);
+        var elseIF = FoodkStorage.getValue(key);
         if (elseIF != undefined) {
             alert(`
             Напиток:${key}
@@ -141,21 +133,24 @@
         }
     }
 
+
     function delFood() {
-        var type = "food";
         var elseIF;
         var key = prompt("Ведите название блюда, который хотите удалить");
-        elseIF = FoodkStorage.deleteValue(key, type);
+        elseIF = FoodkStorage.deleteValue(key);
         alert(elseIF);
     }
 
+
     function getKeyFood() {
-        var type = "food";
-        var mass = FoodkStorage.getkeys(type);
+        var mass = FoodkStorage.getkeys();
         alert("Перечень всех блюд:" + "\n" + mass);
     }
+
+
     var drinkStorage = new HashStorage("Drinks");
     var FoodkStorage = new HashStorage("food");
+
 </script>
 
 <body>

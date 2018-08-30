@@ -25,6 +25,7 @@ function NameBack(){
 function TrueName(){
     var textName=document.getElementById("text_name");
     var Nick= document.getElementById("Nick");
+    var canvas=document.getElementById("canvas");
     var MainMenuBlock =document.getElementById("ImportantMenuDiv");
     if (Nick.value==""||Nick.value==undefined){
         Nick.style.background="#ff4949";
@@ -33,6 +34,7 @@ function TrueName(){
     else{
        var ImportantMenuDiv=document.getElementById("ImportantMenuDiv");
        ImportantMenuDiv.style.display="none";
+       canvas.style.display="block";
     }
 }
 

@@ -4,10 +4,13 @@
       
 </head>
 <body>
+      
 <form id="form" action="http://fe.it-academy.by/TestForm.php ">
 </form>
 <form id="form2" action="http://fe.it-academy.by/TestForm.php ">
 </form>
+<script id="data" type="application/json" src="Form_data.json"></script>
+
 
 <script>
         var formDef1=
@@ -33,7 +36,27 @@
           {label:'Возраст:',kind:'number',name:'age'},
           {label:'Зарегистрироваться:',kind:'submit'},
         ];
-        
+
+
+       
+        $.ajax("Form_data.json",
+            { type:'GET', dataType:'text', success:dataLoaded, error:errorHandler }
+        );
+    
+
+    function dataLoaded(data) {
+        console.log('загруженные через AJAX данные:');
+        console.log(data);
+
+        alert(data);
+    }
+
+    function errorHandler(jqXHR,statusStr,errorStr) {
+        alert(statusStr+' '+errorStr);
+    }
+
+    
+       
         
         function build(form,id)
         {
@@ -86,10 +109,20 @@
         }
         build(formDef1,"form");
         build(formDef2,"form2");
+
+
+
+
+
+       
+        
+        
+    
+         
         </script>
 
 
-
+ <input type="button" value="Получить массив с описание формы" onclick="StartAJAX()">
 
 
 

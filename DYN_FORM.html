@@ -1,133 +1,129 @@
-
 <html>
+
 <head>
-      
+
 </head>
+
 <body>
-      
-<form id="form" action="http://fe.it-academy.by/TestForm.php ">
-</form>
-<form id="form2" action="http://fe.it-academy.by/TestForm.php ">
-</form>
-<script id="data" type="application/json" src="Form_data.json"></script>
+
+    <form id="form" action="http://fe.it-academy.by/TestForm.php ">
+    </form>
+    <form id="form2" action="http://fe.it-academy.by/TestForm.php ">
+    </form>
+    <script src='http://fe.it-academy.by/JQ/jquery.js'></script>
 
 
-<script>
-        var formDef1=
-        [
-          {label:'Название сайта:',kind:'longtext',name:'sitename'},
-          {label:'URL сайта:',kind:'longtext',name:'siteurl'},
-          {label:'Посетителей в сутки:',kind:'number',name:'visitors'},
-          {label:'E-mail для связи:',kind:'shorttext',name:'email'},
-          {label:'Рубрика каталога:',kind:'combo',name:'division',
-            variants:[{text:'здоровье',value:1},{text:'домашний уют',value:2},{text:'бытовая техника',value:3}]},
-          {label:'Размещение:',kind:'radio',name:'payment',
-            variants:[{text:'бесплатное',value:1},{text:'платное',value:2},{text:'VIP',value:3}]},
-          {label:'Разрешить отзывы:',kind:'check',name:'votes'},
-          {label:'Описание сайта:',kind:'memo',name:'description'},
-          {label:'Опубликовать:',kind:'submit'},
-        ];
-        
-        var formDef2=
-        [
-          {label:'Фамилия:',kind:'longtext',name:'lastname'},
-          {label:'Имя:',kind:'longtext',name:'firstname'},
-          {label:'Отчество:',kind:'longtext',name:'secondname'},
-          {label:'Возраст:',kind:'number',name:'age'},
-          {label:'Зарегистрироваться:',kind:'submit'},
-        ];
+    <script>
 
 
-       
+        //AJAX
+     
+
         $.ajax("Form_data.json",
-            { type:'GET', dataType:'text', success:dataLoaded, error:errorHandler }
+            { type: 'GET', dataType: 'text', success: dataLoaded, error: errorHandler }
         );
-    
 
-    function dataLoaded(data) {
-        console.log('загруженные через AJAX данные:');
-        console.log(data);
 
-        alert(data);
-    }
+        function dataLoaded(data) {
+            data = JSON.parse(data);
 
-    function errorHandler(jqXHR,statusStr,errorStr) {
-        alert(statusStr+' '+errorStr);
-    }
+            build(data, "form");
+            
 
-    
-       
-        
-        function build(form,id)
-        {
-            var formElem=document.getElementById(id);
+           
+        }
+
+        function errorHandler(jqXHR, statusStr, errorStr) {
+            alert(statusStr + ' ' + errorStr);
+        }
+
+
+        $.ajax("form_data.json_2.json",
+            { type: 'GET', dataType: 'text', success: dataLoaded2, error: errorHandler2 }
+        );
+
+
+
+        function dataLoaded2(data) {
+            data = JSON.parse(data);
+
+            build(data, "form2");
+           
+
+           
+        }
+
+        function errorHandler2(jqXHR, statusStr, errorStr) {
+            alert(statusStr + ' ' + errorStr);
+        }
+        //END AJAX
+
+
+        function build(form, id) {
+            var formElem = document.getElementById(id);
             var label;
             var name;
             var kind;
-            var text="";
-            for (var k in form){
+            var text = "";
+            for (var k in form) {
 
-                
-                if (form[k].kind=="combo")
-                {
-                    var combo=""
-                    for (var i in form[k].variants){  
-                    combo+="<option>"+form[k].variants[i].text+"</option>";
+
+                if (form[k].kind == "combo") {
+                    var combo = ""
+                    for (var i in form[k].variants) {
+                        combo += "<option>" + form[k].variants[i].text + "</option>";
                     }
 
-                    combo="<select>"+combo+"</select>";
-                    var text= text+"<label for="+form[k].name +">"+form[k].label+"</label>"+combo+"<br>";
+                    combo = "<select>" + combo + "</select>";
+                    var text = text + "<label for=" + form[k].name + ">" + form[k].label + "</label>" + combo + "<br>";
                 }
-                else if(form[k].kind=="radio")
-                {
-                    var radio=""
-                    for (var i in form[k].variants){  
-                    radio+="<input"+" type=radio" +" name="+form[k].name +" kind="+form[k].kind+" value="+form[k].variants[i].text +">"+form[k].variants[i].text;
+                else if (form[k].kind == "radio") {
+                    var radio = ""
+                    for (var i in form[k].variants) {
+                        radio += "<input" + " type=radio" + " name=" + form[k].name + " kind=" + form[k].kind + " value=" + form[k].variants[i].text + ">" + form[k].variants[i].text;
                     }
 
-                   
-                    var text=text+"<label for="+form[k].name +">"+form[k].label+"</label>"+radio+"<br>";
+
+                    var text = text + "<label for=" + form[k].name + ">" + form[k].label + "</label>" + radio + "<br>";
                 }
 
-                else if(form[k].kind=="submit")
-                {
-                  
-                    var text=text+"<input"+" type=submit"+" value="+form[k].label+">";
+                else if (form[k].kind == "submit") {
+
+                    var text = text + "<input" + " type=submit" + " value=" + form[k].label + ">";
                 }
-                else if (form[k].kind=="memo")
-                {
-                    var text=text+"<textarea"+" rows="+"5"+" cols="+"40"+">"+"</textarea>"+"<br>";
-                  
+                else if (form[k].kind == "memo") {
+                    var text = text + "<textarea" + " rows=" + "5" + " cols=" + "40" + ">" + "</textarea>" + "<br>";
+
                 }
 
-                else{
-               var text= text+"<label for="+form[k].name +">"+form[k].label+"</label>"+"<input"+" type=text" +" name="+form[k].name +" kind="+form[k].kind+" label="+form[k].label +">"+"<br>";
+                else {
+                    var text = text + "<label for=" + form[k].name + ">" + form[k].label + "</label>" + "<input" + " type=text" + " name=" + form[k].name + " kind=" + form[k].kind + " label=" + form[k].label + ">" + "<br>";
+                }
             }
-            } 
-            formElem.innerHTML=text;
-            
+            formElem.innerHTML = text;
+
         }
-        build(formDef1,"form");
-        build(formDef2,"form2");
+
+      
 
 
 
 
 
-       
-        
-        
-    
-         
-        </script>
 
 
- <input type="button" value="Получить массив с описание формы" onclick="StartAJAX()">
+
+
+
+    </script>
+
+
+   
 
 
 
 </body>
 
 </html>
-</html>
 
+</html>

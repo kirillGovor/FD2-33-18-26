@@ -1,4 +1,7 @@
 
+html{
+    margin: 0;
+}
 .menu {
     cursor:default;
     font-family: 'Luckiest Guy', cursive;
@@ -24,6 +27,7 @@
         
     }
     .cloudPosition{
+        margin: 0;
         text-align: center;
         display: block;
         max-width: 100%;

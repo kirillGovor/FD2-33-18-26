@@ -1,6 +1,7 @@
 var canvas=document.getElementById("canvas");
 canvas.width = document.documentElement.clientWidth;
 canvas.height = document.documentElement.clientHeight;
+
 canvas.style.display="none";
 
 var context = canvas.getContext("2d");
@@ -23,4 +24,8 @@ function draw(){
     context.drawImage(fox,xPosFox,yPoxFox)
 }
 pipe.onload=draw;
+window.onresize = function(event) {
+    canvas.width = document.documentElement.clientWidth;
+    canvas.height = document.documentElement.clientHeight;
+};
 //765

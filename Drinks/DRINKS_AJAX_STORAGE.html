@@ -7,7 +7,7 @@
 
 
 
-
+<script src="http://fe.it-academy.by/JQ/jquery.js"></script>
 <script>
     "use strict";
     function HashStorage(type) {
@@ -49,7 +49,6 @@
         }
         else {
             delete this.storage[key];
-            localStorage.removeItem(this.type);
             var returnvalueJSON1 = JSON.parse(localStorage.getItem(this.type)) //закидывваем в local storage
             var valueJSON1 = JSON.stringify(this.storage);//
             localStorage.setItem(this.type, valueJSON1);

@@ -95,6 +95,16 @@ html{
             height: 50px;
         }
     }
+
+    @media  (max-height: 400px) {
+        .cloud{
+            
+            height: 300px;
+        }
+        .menu{
+            margin-top: 0px;
+        }
+    }
     #canvas{
         position: absolute;
     }

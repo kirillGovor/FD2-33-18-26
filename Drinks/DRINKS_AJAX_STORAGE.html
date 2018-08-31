@@ -8,11 +8,20 @@
 
 
 <script src="http://fe.it-academy.by/JQ/jquery.js"></script>
+<script src="AJAXStorage.js"></script>
 <script>
     "use strict";
     function HashStorage(type) {
+
+        var ajaxHandlerScript = "https://fe.it-academy.by/AjaxStringStorage2.php";
+        var updatePassword;
+        var stringName = 'GOVOR_TEST_INFO';
+        updatePassword = Math.random();
+
+
         this.storage = {};
         this.type = type;
+
         if (localStorage.getItem(type) == null) {
         }
         else {
@@ -25,6 +34,24 @@
 
     HashStorage.prototype.addValue = function (key, value) {
         this.storage[key] = value;
+
+        $.ajax({
+            url: this.ajaxHandlerScript, type: 'POST', cache: false, dataType: 'json',
+            data: { f: 'LOCKGET', n: this.stringName, p: this.updatePassword },
+            error: errorHandler
+        }
+        );
+
+
+        $.ajax({
+            url: this.ajaxHandlerScript, type: 'POST', cache: false, dataType: 'json',
+            data: { f: 'UPDATE', n: this.stringName, v: JSON.stringify(this.storage), p: this.updatePassword },
+            error: errorHandler
+        }
+        );
+
+
+
         var returnvalueJSON1 = JSON.parse(localStorage.getItem(this.type)) //закидывваем в local storage
         var valueJSON1 = JSON.stringify(this.storage);//
         localStorage.setItem(this.type, valueJSON1);
@@ -52,8 +79,30 @@
             var returnvalueJSON1 = JSON.parse(localStorage.getItem(this.type)) //закидывваем в local storage
             var valueJSON1 = JSON.stringify(this.storage);//
             localStorage.setItem(this.type, valueJSON1);
+
+            $.ajax({
+                url: this.ajaxHandlerScript, type: 'POST', cache: false, dataType: 'json',
+                data: { f: 'LOCKGET', n: this.stringName, p: this.updatePassword },
+                error: errorHandler
+            }
+            );
+            $.ajax({
+                url: this.ajaxHandlerScript, type: 'POST', cache: false, dataType: 'json',
+                data: { f: 'UPDATE', n: this.stringName, v: JSON.stringify(this.storage), p: this.updatePassword },
+                error: errorHandler
+            }
+            );
+
+
+
+
             return (true);
         }
+
+
+
+
+
     }
 
 

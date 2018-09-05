@@ -35,6 +35,8 @@ function TrueName(){
        var ImportantMenuDiv=document.getElementById("ImportantMenuDiv");
        ImportantMenuDiv.style.display="none";
        canvas.style.display="block";
+       var newBg =document.getElementById("fon");
+       newBg.style.backgroundImage="url('img/fon2.jpg')";
     }
 }
 

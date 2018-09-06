@@ -5,6 +5,7 @@ var Menu={
 function elementMenu(){ //добовляем все компоненты на страницу
    var body=document.getElementsByTagName("body")
    document.body.innerHTML="<div id=ImportantMenuDiv class=fon><h1 class=menu><span>fire</span> fox</h1><div class=menu_div ><ul id=mainMenu class=OptionsGame><li><a class=link onclick=startGame()  >start game</a></li><li><a class=link onclick=optionsGame() >options</a></li><li><a class=link onclick=closeGame() >exit game</a></li></ul><ul><li><a class=link onclick=music() >music</a></li> </ul></div></div>";
+    
 }
 
 
@@ -104,6 +105,16 @@ document.onmousedown = function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
 ///Убрать выделение тексат мышкой (НА половину работает :)
 
 function preventSelection(element){
@@ -139,7 +150,6 @@ function preventSelection(element){
           event.returnValue = false;
       }
     }
-  
     // не даем выделять текст мышкой
     addHandler(element, 'mousemove', function(){
       if(preventSelection)

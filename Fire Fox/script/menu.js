@@ -38,6 +38,15 @@ function TrueName(){
        canvas.style.display="block";
        var newBg =document.getElementById("fon");
        newBg.style.backgroundImage="url('img/fon2.jpg')";
+
+
+        //если есть сенсор, показываем сенсорные кнопки
+       if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ){
+        leftTouch=document.getElementById("touchLeft");
+        RightTouch=document.getElementById("touchRight");
+        leftTouch.style.display="block";
+        RightTouch.style.display="block";
+        }
     }
 }
 

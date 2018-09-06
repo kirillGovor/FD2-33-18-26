@@ -87,7 +87,10 @@ function Animation() {
       hash.counterTimer = 0;
 
         //анимация белки и ловукек
-     
+
+    
+
+
      
         //на месте
       if (mass.foxSpeed == 0) {
@@ -113,6 +116,10 @@ function Animation() {
         hash.score = hash.score + 1;
         }
         context.fillText("Score:" + hash.score, 10, 50);
+        //если очков 0, то белку не перемешаем
+        if(hash.score==0){
+          mass.foxSpeedOnMap=400;
+        }
         //если белка зашла за границу, заканчиваем игру
         if (mass.foxSpeedOnMap < 2) {
           hash.stopGame = true;
@@ -268,13 +275,14 @@ function Animation() {
         hash.stopGame = true;
       }
     }
-    }
-
+    
+  }
 
   }
   //елси игра закончена, то выводим табло
   else {
     if (canvas.width<512){
+      navigator.vibrate(1000);
       var table = document.getElementById("EndGameTable");
       table.style.display="block";
       //table.style.background = "url('img/EndGameTable.gif')";
@@ -290,9 +298,10 @@ function Animation() {
      resultScore.innerHTML="result:"+hash.score;
     }
     else{
+    navigator.vibrate(1000);
     var table = document.getElementById("EndGameTable");
     table.style.display="block";
-    table.style.background = "url('img/EndGameTable.gif')";
+   // table.style.background = "url('img/EndGameTable.gif')";
    // table.style.width = "400px";
    // table.style.height = "450px";
     table.style.position = "absolute";

@@ -59,6 +59,54 @@ var mass = {
 }
 
 
+//тач события
+if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ){
+  leftTouch=document.getElementById("touchLeft");
+  topTouch=document.getElementById("touchTop");
+  RightTouch=document.getElementById("touchRight");
+  leftTouch.style.display="block";
+  RightTouch.style.display="block";
+  topTouch.style.display="block";
+
+
+
+  leftTouch.ontouchstart = function(e){
+    
+    e = event || window.event;
+    mass.foxSpeed = 1;
+  }
+
+  leftTouch.ontouchend = function(e){
+    
+    e = event || window.event;
+    mass.foxSpeed = 0;
+  }
+  RightTouch.ontouchstart = function(e){
+    
+    e = event || window.event;
+    mass.foxSpeed = 2;
+  }
+  RightTouch.ontouchend = function(e){
+    
+    e = event || window.event;
+    mass.foxSpeed = 0;
+  }
+
+  topTouch.ontouchstart = function(e){
+    
+    e = event || window.event;
+    mass.foxSpeed = 3;
+  }
+  topTouch.ontouchend = function(e){
+    
+    e = event || window.event;
+    mass.foxSpeed = 0;
+  }
+  }
+
+
+
+
 
 //1-бег в лево 2-бег в право 3- прыжок вверх 4-прыжок на северо-запад 5- прыжок на северо-восток
 document.body.onkeydown = function (e) { //событие нажатия кнопок

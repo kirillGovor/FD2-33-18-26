@@ -111,3 +111,34 @@ html{
     #canvas{
         position: absolute;
     }
+    #touchRight{
+        display: none;
+        position: absolute;
+        height: 50px;
+        width: 60px;
+        top:80%;
+        left: 75%;
+        background-image: url("../img/right.gif");
+        background-size: cover;
+    }
+
+    #touchLeft{
+        display: none;
+        position: absolute;
+        height: 50px;
+        width: 60px;
+        top:80%;
+        left: 18%;
+        background-image: url("../img/left.gif");
+        background-size: cover;
+    }
+    #touchTop{
+        display: none;
+        position: absolute;
+        height: 50px;
+        width: 60px;
+        top:50%;
+        left: 75%;
+        background-image: url("../img/top.gif");
+        background-size: cover;
+    }

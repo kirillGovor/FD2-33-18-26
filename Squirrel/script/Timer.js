@@ -338,17 +338,35 @@ function Animation() {
             y: Math.floor(Math.random() * (900 - 300)),
           })
         }
-        //условия попадание белки в ловушки
-        if (mass.foxSpeedOnMap >= pipeBlock[i].x - pipeBlock[i].y - 60 &&
-          mass.foxSpeedOnMap >= pipeBlock[i].x - pipeBlock[i].y + pipe.width &&
-          topSqPosition <= PipeUpY + pipeUp.height - 80 || mass.foxSpeedOnMap == pipeBlock[i].x - pipeBlock[i].y) {
+        //условия попадание белки в висящую ловушку
+        if (mass.foxSpeedOnMap+40 >= pipeBlock[i].x
+          && mass.foxSpeedOnMap <= pipeBlock[i].x + pipeUp.width //pipe.width
+          &&hash.poxYJumbSq<= 720
+          &&hash.poxYJumbSq>= 580
+           ||hash.poxYJumbSq-10 > pipeBlock[i].x + pipeUp.height-310) {
             if (hash.score <= 100) {
-              mass.foxSpeedOnMap = 400;
+              mass.foxSpeedOnMap = mass.foxSpeedOnMap;
             }
-            else{
+           else{
               hash.stopGame=true;
             }
         }
+
+
+         //условия попадание белки в обычную ловушку
+         if (mass.foxSpeedOnMap+40 >=  pipeBlock[i].x - pipeBlock[i].y + 500
+          && mass.foxSpeedOnMap <=  pipeBlock[i].x - pipeBlock[i].y + 500 + pipe.width
+          && hash.poxYJumbSq-10>=  740)
+           {
+            if (hash.score <= 100) {
+              mass.foxSpeedOnMap = mass.foxSpeedOnMap;
+            }
+           else{
+              hash.stopGame=true;
+            }
+        }
+
+
       }
 
     }
@@ -359,7 +377,17 @@ function Animation() {
     
     if (canvas.width < 512) {
       if(hash.vibroPhone==0){
-      navigator.vibrate(1000);
+       
+        try {
+
+          navigator.vibrate(500);
+        
+        } catch (err) {
+        
+          // обработка ошибки
+        
+        }
+
       hash.vibroPhone=1;
       records();
     }
@@ -380,7 +408,18 @@ function Animation() {
     }
     else {
       if(hash.vibroPhone==0){
-      navigator.vibrate(500);
+
+        try {
+
+          navigator.vibrate(500);
+        
+        } catch (err) {
+        
+          // обработка ошибки
+        
+        }
+
+      
       hash.vibroPhone=1;
       records();
       }

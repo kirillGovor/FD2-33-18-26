@@ -28,7 +28,7 @@ var hash = {
   CloudWay: 400, // длинна пути облочка
   CloudWayMobile: 58,// длинна пути облочка в адаптиве
   cloudSpeedMobile: 0.5,//скорость облочков в адаптиве
-  cloudHeightAdaptive:100,
+  cloudHeightAdaptive: 100,
   counterTimer: 0,
   speedBg: 1,
   PosXSq: 0,
@@ -37,7 +37,7 @@ var hash = {
   posPipe: 200,
   poxYJumbSq: 0,
   poxYJumbSqEnd: 3,
-  vibroPhone:0,
+  vibroPhone: 0,
 }
 //анимация облочек
 
@@ -45,11 +45,11 @@ var hash = {
 function Animation() {
   var cloud = document.getElementById("cloud");
   var cloud_left; //счетчик, который будет сдивагить облочки
- 
+
   cloud_left = Number(cloud.style.marginLeft.replace(/[^-0-9]/gim, ''));// положение блоков в y , тк они с окончанием px, берем только числа
 
   if (window.matchMedia("(min-width: 650px)").matches) {
-    
+
     if (cloud_left == 0 || cloud_left <= hash.CloudWay && hash.cloudstep == 0) { // если облочко слишком далеко,, то его не сдивгаем
       cloud.style.marginLeft = cloud_left + hash.cloudSpeed + "px";// сдиваем облочко на 2 px
     }
@@ -63,7 +63,7 @@ function Animation() {
 
 
   } else {
-    
+
     if (cloud_left == 0 || cloud_left <= hash.CloudWayMobile && hash.cloudstep == 0) { // если облочко слишком далеко,, то его не сдивгаем
       cloud.style.marginLeft = cloud_left + 1 + "px";// сдиваем облочко на 2 px
     }
@@ -92,7 +92,7 @@ function Animation() {
       //анимация белки и ловукек
 
 
-      
+
 
 
       //на месте
@@ -205,7 +205,7 @@ function Animation() {
       //вверх
       if (mass.foxSpeed == 3) {
         //включаем звук джетпака
-       jetpack= document.getElementById("jetpack");
+        jetpack = document.getElementById("jetpack");
         jetpack.play();
         context.clearRect(0, 0, canvas.width, canvas.height);
         hash.PosXSq = hash.PosXSq - hash.speedBg;
@@ -225,7 +225,7 @@ function Animation() {
         }
         context.fillText("Score:" + hash.score, 10, 50);
         //обновляем белку
-        context.drawImage(fox, 265, 130, 40, 80, mass.foxSpeedOnMap, hash.poxYJumbSq, 60, 100);
+        context.drawImage(fox, 265, 130, 46, 80, mass.foxSpeedOnMap, hash.poxYJumbSq, 70, 100);
         if (hash.poxYJumbSq == 0) {
           hash.poxYJumbSq = canvas.height - bg.height + bg.height / 2.6;
         }
@@ -243,7 +243,7 @@ function Animation() {
 
       //после прыжка возвращаемся вниз
       if (mass.foxSpeed == 4) {
-        jetpack= document.getElementById("jetpack");
+        jetpack = document.getElementById("jetpack");
         jetpack.pause();
         context.clearRect(0, 0, canvas.width, canvas.height);
         hash.PosXSq = hash.PosXSq - hash.speedBg;
@@ -263,7 +263,7 @@ function Animation() {
         }
         context.fillText("Score:" + hash.score, 10, 50);
         //обновляем белку
-        context.drawImage(fox, 265, 130, 40, 80, mass.foxSpeedOnMap, hash.poxYJumbSq, 60, 100);
+        context.drawImage(fox, 265, 130, 46, 80, mass.foxSpeedOnMap, hash.poxYJumbSq, 70, 100);
         if (hash.poxYJumbSq == 0) {
           hash.poxYJumbSq = canvas.height - bg.height + bg.height / 2.6;
         }
@@ -288,8 +288,8 @@ function Animation() {
           context.fillText("Score:" + hash.score, 10, 50);
 
           context.drawImage(fox, 0, 0, 40, 55, mass.foxSpeedOnMap, topSqPosition, 60, 80);
-          mass.foxSpeed=0;
-          var soundJump= document.getElementById("JumpSound");
+          mass.foxSpeed = 0;
+          var soundJump = document.getElementById("JumpSound");
           soundJump.play();
         }
         else {
@@ -316,17 +316,24 @@ function Animation() {
         context.drawImage(pipe, pipeBlock[i].x - pipeBlock[i].y + 500, canvas.height - bg.height + bg.height / 2.2);
         // соотношаем с экранов
         //если тач поддерживается, меняем соотношение
-        if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ){
-        hash.posPipe = hash.posPipe - hash.speedBg;
-        if (canvas.width < 500) {
-          PipeUpY = -430;
+        if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+          hash.posPipe = hash.posPipe - hash.speedBg;
+          if (canvas.width < 500) {
+            PipeUpY = -430;
+            context.drawImage(pipeUp, pipeBlock[i].x, PipeUpY);
+          }
+          else if (canvas.width <= 812 || canvas.height <= 375) {
+            PipeUpY = -830;
+            context.drawImage(pipeUp, pipeBlock[i].x, PipeUpY);
+          }
+
+        }
+
+        else if (canvas.height < 850) {
+          PipeUpY = -450;
           context.drawImage(pipeUp, pipeBlock[i].x, PipeUpY);
         }
-        else if (canvas.width <= 812 || canvas.height <= 375) {
-          PipeUpY = -830;
-          context.drawImage(pipeUp, pipeBlock[i].x, PipeUpY);
-        }
-      }
+
         else { //соотношение на десктопе
           PipeUpY = -250;
           context.drawImage(pipeUp, pipeBlock[i].x, PipeUpY);
@@ -339,31 +346,30 @@ function Animation() {
           })
         }
         //условия попадание белки в висящую ловушку
-        if (mass.foxSpeedOnMap+40 >= pipeBlock[i].x
+        if (mass.foxSpeedOnMap >= pipeBlock[i].x
           && mass.foxSpeedOnMap <= pipeBlock[i].x + pipeUp.width //pipe.width
-          &&hash.poxYJumbSq<= 720
-          &&hash.poxYJumbSq>= 580
-           ||hash.poxYJumbSq-10 > pipeBlock[i].x + pipeUp.height-310) {
-            if (hash.score <= 100) {
-              mass.foxSpeedOnMap = mass.foxSpeedOnMap;
-            }
-           else{
-              hash.stopGame=true;
-            }
+          && hash.poxYJumbSq <= pipeUp.height / 1.5
+          && hash.poxYJumbSq >= pipeUp.height / 1.7) {
+          if (hash.score <= 100) {
+            mass.foxSpeedOnMap = mass.foxSpeedOnMap;
+          }
+          else {
+            hash.stopGame = true;
+          }
         }
+        //720
+        //580
 
-
-         //условия попадание белки в обычную ловушку
-         if (mass.foxSpeedOnMap+40 >=  pipeBlock[i].x - pipeBlock[i].y + 500
-          && mass.foxSpeedOnMap <=  pipeBlock[i].x - pipeBlock[i].y + 500 + pipe.width
-          && hash.poxYJumbSq-10>=  740)
-           {
-            if (hash.score <= 100) {
-              mass.foxSpeedOnMap = mass.foxSpeedOnMap;
-            }
-           else{
-              hash.stopGame=true;
-            }
+        //условия попадание белки в обычную ловушку
+        if (mass.foxSpeedOnMap + 40 >= pipeBlock[i].x - pipeBlock[i].y + 500
+          && mass.foxSpeedOnMap <= pipeBlock[i].x - pipeBlock[i].y + 500 + pipe.width
+          && hash.poxYJumbSq >= 740) {
+          if (hash.score <= 100) {
+            mass.foxSpeedOnMap = mass.foxSpeedOnMap;
+          }
+          else {
+            hash.stopGame = true;
+          }
         }
 
 
@@ -374,60 +380,25 @@ function Animation() {
   }
   //елси игра закончена, то выводим табло
   else {
-    
+
     if (canvas.width < 512) {
-      if(hash.vibroPhone==0){
-       
-        try {
-
-          navigator.vibrate(500);
-        
-        } catch (err) {
-        
-          // обработка ошибки
-        
-        }
-
-      hash.vibroPhone=1;
-      records();
-    }
-      var table = document.getElementById("EndGameTable");
-      table.style.display = "block";
-      //table.style.background = "url('img/EndGameTable.gif')";
-      // table.style.width = "300px";
-      // table.style.height = "350px";
-      table.style.position = "absolute";
-      table.style.backgroundSize = "cover";
-      table.style.margin = "auto";
-      table.style.marginTop = "50px";
-      table.style.left = 0 + "px";
-      table.style.right = 0 + "px";
-      var resultScore = document.getElementById("resultScore");
-      resultScore.innerHTML = "result:" + hash.score;
-      
-    }
-    else {
-      if(hash.vibroPhone==0){
+      if (hash.vibroPhone == 0) {
 
         try {
 
           navigator.vibrate(500);
-        
+
         } catch (err) {
-        
+
           // обработка ошибки
-        
+
         }
 
-      
-      hash.vibroPhone=1;
-      records();
+        hash.vibroPhone = 1;
+        records();
       }
       var table = document.getElementById("EndGameTable");
       table.style.display = "block";
-      // table.style.background = "url('img/EndGameTable.gif')";
-      // table.style.width = "400px";
-      // table.style.height = "450px";
       table.style.position = "absolute";
       table.style.backgroundSize = "cover";
       table.style.margin = "auto";
@@ -436,21 +407,50 @@ function Animation() {
       table.style.right = 0 + "px";
       var resultScore = document.getElementById("resultScore");
       resultScore.innerHTML = "result:" + hash.score;
-      
+
     }
-      //защита от выхода 
-    if (hash.score!=0){
-      window.onbeforeunload = function() {
+    else {
+      if (hash.vibroPhone == 0) {
+
+        try {
+
+          navigator.vibrate(500);
+
+        } catch (err) {
+
+          // обработка ошибки
+
+        }
+
+
+        hash.vibroPhone = 1;
+        records();
+      }
+      var table = document.getElementById("EndGameTable");
+      table.style.display = "block";
+      table.style.position = "absolute";
+      table.style.backgroundSize = "cover";
+      table.style.margin = "auto";
+      table.style.marginTop = "50px";
+      table.style.left = 0 + "px";
+      table.style.right = 0 + "px";
+      var resultScore = document.getElementById("resultScore");
+      resultScore.innerHTML = "result:" + hash.score;
+
+    }
+    //защита от выхода 
+    if (hash.score != 0) {
+      window.onbeforeunload = function () {
         return "Данные не сохранены. Точно перейти?";
       };
-            
+
     }
   }
   requestAnimationFrame(Animation);
 }
 // начать игру при нажатии клавиши играть снова
 function ContinueGame() {
-  hash.vibroPhone=0;
+  hash.vibroPhone = 0;
   var table = document.getElementById("EndGameTable");
   table.style.display = "none";
   mass.foxSpeedOnMap = 400;

@@ -38,20 +38,18 @@ function TrueName(){
        canvas.style.display="block";
        var newBg =document.getElementById("fon");
        newBg.style.backgroundImage="url('img/fon2.jpg')";
+       
+
+
+        //если есть сенсор, показываем сенсорные кнопки
+       if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ){
+        
        leftTouch=document.getElementById("touchLeft");
        topTouch=document.getElementById("touchTop");
        RightTouch=document.getElementById("touchRight");
        leftTouch.style.display="block";
        RightTouch.style.display="block";
        topTouch.style.display="block";
-
-
-        //если есть сенсор, показываем сенсорные кнопки
-       if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ){
-        leftTouch=document.getElementById("touchLeft");
-        RightTouch=document.getElementById("touchRight");
-        leftTouch.style.display="block";
-        RightTouch.style.display="block";
         }
     }
 }
@@ -109,10 +107,19 @@ function optionmenuBack(){
 }
 
 document.onmousedown = function() {
-    if (Menu.soundClick==1){}
+    if (Menu.soundClick==1){
+        var jetpack= document.getElementById("jetpack");
+        jetpack.volume="0";
+        var soundJump= document.getElementById("JumpSound");
+        soundJump.volume="0";
+    }
     else{
         var soundClick= document.getElementById('soundClick');
         soundClick.play();
+        jetpack= document.getElementById("jetpack");
+        jetpack.volume="1";
+        var soundJump= document.getElementById("JumpSound");
+        soundJump.volume="1";
     }
 }
 

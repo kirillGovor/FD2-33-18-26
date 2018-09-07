@@ -24,7 +24,7 @@ var foxZerkal = new Image(); // белка отраженная в другую 
 fox.src = "img/squirrel.png";
 bg.src = "img/fon_bg.gif";
 pipe.src = "img/PipeSpears.gif";
-pipeIron.src="img/PipeSpearsIron.gif"
+pipeIron.src = "img/PipeSpearsIron.gif"
 pipeUp.src = "img/pipeUp.gif";
 foxZerkal.src = "img/squirrelZerkal.png";
 
@@ -38,12 +38,10 @@ pipe.onload = draw;
 window.onresize = function (event) {
   canvas.width = document.documentElement.clientWidth;
   canvas.height = document.documentElement.clientHeight;
+  context.drawImage(bg, 0, canvas.height - bg.height);
 
 };
 
-
-//765 var fox = new Image();
-////////////////////////////////////////////////////////////////////////
 
 
 
@@ -55,52 +53,52 @@ var mass = {
   foxSpeedOnMap: 320,
   JumpFox: canvas.height - bg.height,
   counterJumpFox: 0,
- 
+
 }
 
 
 //тач события
-if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ){
-  leftTouch=document.getElementById("touchLeft");
-  topTouch=document.getElementById("touchTop");
-  RightTouch=document.getElementById("touchRight");
+if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+  leftTouch = document.getElementById("touchLeft");
+  topTouch = document.getElementById("touchTop");
+  RightTouch = document.getElementById("touchRight");
 
 
 
 
-  leftTouch.ontouchstart = function(e){
-    
+  leftTouch.ontouchstart = function (e) {
+
     e = event || window.event;
     mass.foxSpeed = 1;
   }
 
-  leftTouch.ontouchend = function(e){
-    
+  leftTouch.ontouchend = function (e) {
+
     e = event || window.event;
     mass.foxSpeed = 0;
   }
-  RightTouch.ontouchstart = function(e){
-    
+  RightTouch.ontouchstart = function (e) {
+
     e = event || window.event;
     mass.foxSpeed = 2;
   }
-  RightTouch.ontouchend = function(e){
-    
+  RightTouch.ontouchend = function (e) {
+
     e = event || window.event;
     mass.foxSpeed = 0;
   }
 
-  topTouch.ontouchstart = function(e){
-    
+  topTouch.ontouchstart = function (e) {
+
     e = event || window.event;
     mass.foxSpeed = 3;
   }
-  topTouch.ontouchend = function(e){
-    
+  topTouch.ontouchend = function (e) {
+
     e = event || window.event;
     mass.foxSpeed = 4;
   }
-  }
+}
 
 
 
@@ -110,17 +108,28 @@ if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof D
 document.body.onkeydown = function (e) { //событие нажатия кнопок
   e = event || window.event;
 
-  if (e.keyCode == 37||e.keyCode ==65) {
-    mass.foxSpeed = 1;
+  if (e.keyCode == 37 || e.keyCode == 65) {
+    if (mass.foxSpeed == 3) { }
+    else if (mass.foxSpeed == 4) { }
+    else {
+      mass.foxSpeed = 1;
+    }
   }
-  if (e.keyCode == 39||e.keyCode ==68) {
-    mass.foxSpeed = 2;
+  if (e.keyCode == 39 || e.keyCode == 68) {
+    //проверка летил ли сечас белка
+    if (mass.foxSpeed == 3) { }
+    else if (mass.foxSpeed == 4) { }
+    else {
+      mass.foxSpeed = 2;
+    }
   }
-  if (e.keyCode == 38|| e.keyCode == 87) {
-    mass.foxSpeed = 3;
+  if (e.keyCode == 38 || e.keyCode == 87) {
+    
+      mass.foxSpeed = 3;
+    
   }
-  if (e.keyCode ==83||e.keyCode ==40) {
-   // mass.foxSpeed = 1111;
+  if (e.keyCode == 83 || e.keyCode == 40) {
+    // mass.foxSpeed = 1111;
   }
 
 };
@@ -129,25 +138,29 @@ document.body.onkeydown = function (e) { //событие нажатия кно�
 document.body.onkeyup = function (e) { //событие отпускания кнопок
   e = event || window.event;
 
-  if (e.keyCode == 37||e.keyCode ==65){
-    mass.foxSpeed = 0;//0-скрость
+  if (e.keyCode == 37 || e.keyCode == 65) {
+    if (mass.foxSpeed == 3) { }
+    else if (mass.foxSpeed == 4) { }
+    else {
+      mass.foxSpeed = 0;
+    }
   }
-  if(e.keyCode == 39||e.keyCode ==68) {
-    mass.foxSpeed = 0;
+  if (e.keyCode == 39 || e.keyCode == 68) {
+    if (mass.foxSpeed == 3) { }
+    else if (mass.foxSpeed == 4) { }
+    else {
+      mass.foxSpeed = 0;
+    }
   }
-  if  (e.keyCode == 38|| e.keyCode == 87) {
+  if (e.keyCode == 38 || e.keyCode == 87) {
     mass.foxSpeed = 4;
   }
-  if (e.keyCode ==83||e.keyCode ==40) {
+  if (e.keyCode == 83 || e.keyCode == 40) {
     mass.foxSpeed = 0;
   }
 
 };
-
-
-
-
-
-
-
+window.onbeforeunload = function() {
+  return "Данные не сохранены. Точно перейти?";
+};
 

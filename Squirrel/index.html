@@ -6,6 +6,7 @@
   <link rel="shortcut icon" href="img/favicon.ico" />
   <script src="script/Timer.js"></script> 
   <script src="script/menu.js"></script>  
+  <script src="script/record.js"></script> 
   <script>
       
       window.onload =  Animation;
@@ -33,7 +34,7 @@
             </div>
           
 
-            <p id="cloud" class="cloudPosition"><img class="cloud" src ="img/cloud1.png" ></p>
+            <p id="cloud" class="cloudPosition"><img class="cloud" height="350px" src ="img/cloud1.png" ></p>
             <div id="ImportantMenuDiv">
         <h1 class="menu"><span>squirrel</span></h1>
         
@@ -56,6 +57,8 @@
             <li><input id="Nick" class="inputName" type="text" size="40"></li>
             <li><a id="" class="link OptionsGame"onclick="TrueName()">ok</a></li>
             <li><a id=back_name class="link OptionsGame" onclick="NameBack()">back</a></li>
+            </ul>
+
             
             
             <audio id=soundClick>
@@ -64,12 +67,20 @@
             <audio id="fonMusic" autoplay loop>
                 <source src="sounds/fon_music.wav">
             </audio>
+            <audio id="JumpSound">
+                <source src="sounds/jump.wav">
+            </audio>
+            <audio id="jetpack">
+                <source src ="sounds/jetpack.mp3">
+            </audio>
 
         
         </ul>
         </div>
         </div>
         </div>
+        
+        <!--кнопки тача-->
         <div id="touchRight"></div>
         <div id="touchLeft"></div>
         <div id="touchTop"></div>

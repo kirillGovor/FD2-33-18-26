@@ -36,7 +36,7 @@ var hash = {
   posPipe: 200,
   poxYJumbSq: 0,
   poxYJumbSqEnd: 3,
-
+  vibroPhone:0,
 }
 //анимация облочек
 function Animation() {
@@ -86,13 +86,13 @@ function Animation() {
     if (hash.counterTimer > 3) {
       hash.counterTimer = 0;
 
-        //анимация белки и ловукек
-
-    
+      //анимация белки и ловукек
 
 
-     
-        //на месте
+
+
+
+      //на месте
       if (mass.foxSpeed == 0) {
         //чистим canvas
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -111,14 +111,14 @@ function Animation() {
         //обновляем подсчет очков
         context.font = "30px Luckiest Guy";
         context.fillStyle = "black";
-        if(canvas.style.display!="block"){} //если cavas выключен, подсчет не вести
-        else{
-        hash.score = hash.score + 1;
+        if (canvas.style.display != "block") { } //если cavas выключен, подсчет не вести
+        else {
+          hash.score = hash.score + 1;
         }
         context.fillText("Score:" + hash.score, 10, 50);
         //если очков 0, то белку не перемешаем
-        if(hash.score==0){
-          mass.foxSpeedOnMap=400;
+        if (hash.score == 0) {
+          mass.foxSpeedOnMap = 400;
         }
         //если белка зашла за границу, заканчиваем игру
         if (mass.foxSpeedOnMap < 2) {
@@ -149,9 +149,9 @@ function Animation() {
         //обновляем подсчет очков
         context.font = "30px Luckiest Guy";
         context.fillStyle = "black"
-        if(canvas.style.display!="block"){} //если cavas выключен, подсчет не вести
-        else{
-        hash.score = hash.score + 1;
+        if (canvas.style.display != "block") { } //если cavas выключен, подсчет не вести
+        else {
+          hash.score = hash.score + 1;
         }
         context.fillText("Score:" + hash.score, 10, 50);
         //если белка зашла за границу, заканчиваем игру
@@ -182,13 +182,13 @@ function Animation() {
         //обновляем подсчет очков
         context.font = "30px Luckiest Guy";
         context.fillStyle = "black"
-        if(canvas.style.display!="block"){} //если cavas выключен, подсчет не вести
-        else{
-        hash.score = hash.score + 1;
+        if (canvas.style.display != "block") { } //если cavas выключен, подсчет не вести
+        else {
+          hash.score = hash.score + 1;
         }
         context.fillText("Score:" + hash.score, 10, 50);
 
-       
+
         //если белка зашла за границу, заканчиваем игру
         if (mass.foxSpeedOnMap < 2) {
           hash.stopGame = true;
@@ -196,135 +196,198 @@ function Animation() {
       }
 
 
-          //вверх
-    if (mass.foxSpeed == 3) {
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      hash.PosXSq = hash.PosXSq - hash.speedBg;
-      // движение земли 
-      context.drawImage(bg, hash.PosXSq, canvas.height - bg.height);
-      context.drawImage(bg, hash.PosXSq + bg.width, canvas.height - bg.height);
-      context.drawImage(bg, hash.PosXSq + bg.width + bg.width, canvas.height - bg.height);
-      if (hash.PosXSq < (-bg.width)) {
-        hash.PosXSq = 0;
-      }
-      
-
-      //обновляем подсчет очков
-      context.font = "30px Luckiest Guy";
-      context.fillStyle = "black"
-      if(canvas.style.display!="block"){}
-      else{
-      hash.score = hash.score + 1;
-    }
-      context.fillText("Score:" + hash.score, 10, 50);
-
-      //обновляем белку
-      context.drawImage(fox, 265, 130, 40, 80, mass.foxSpeedOnMap, hash.poxYJumbSq, 60, 100);
-      if (hash.poxYJumbSq == 0) {
-        hash.poxYJumbSq = canvas.height - bg.height + bg.height / 2.6;
-
-      }
-      else {
-        hash.poxYJumbSq = hash.poxYJumbSq - 5;
-        mass.foxSpeedOnMap = mass.foxSpeedOnMap + 1;
-      }
-     
+      //вверх
+      if (mass.foxSpeed == 3) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        hash.PosXSq = hash.PosXSq - hash.speedBg;
+        // движение земли 
+        context.drawImage(bg, hash.PosXSq, canvas.height - bg.height);
+        context.drawImage(bg, hash.PosXSq + bg.width, canvas.height - bg.height);
+        context.drawImage(bg, hash.PosXSq + bg.width + bg.width, canvas.height - bg.height);
+        if (hash.PosXSq < (-bg.width)) {
+          hash.PosXSq = 0;
+        }
+        //обновляем подсчет очков
+        context.font = "30px Luckiest Guy";
+        context.fillStyle = "black"
+        if (canvas.style.display != "block") { }
+        else {
+          hash.score = hash.score + 1;
+        }
+        context.fillText("Score:" + hash.score, 10, 50);
+        //обновляем белку
+        context.drawImage(fox, 265, 130, 40, 80, mass.foxSpeedOnMap, hash.poxYJumbSq, 60, 100);
+        if (hash.poxYJumbSq == 0) {
+          hash.poxYJumbSq = canvas.height - bg.height + bg.height / 2.6;
+        }
+        else {
+          hash.poxYJumbSq = hash.poxYJumbSq - 5;
+          mass.foxSpeedOnMap = mass.foxSpeedOnMap + 1;
+        }
         //если белка зашла за границу, заканчиваем игру
         if (mass.foxSpeedOnMap < 2) {
           hash.stopGame = true;
         }
-      
-    }
+      }
+
+
+
+      //после прыжка возвращаемся вниз
+      if (mass.foxSpeed == 4) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        hash.PosXSq = hash.PosXSq - hash.speedBg;
+        // движение земли 
+        context.drawImage(bg, hash.PosXSq, canvas.height - bg.height);
+        context.drawImage(bg, hash.PosXSq + bg.width, canvas.height - bg.height);
+        context.drawImage(bg, hash.PosXSq + bg.width + bg.width, canvas.height - bg.height);
+        if (hash.PosXSq < (-bg.width)) {
+          hash.PosXSq = 0;
+        }
+        //обновляем подсчет очков
+        context.font = "30px Luckiest Guy";
+        context.fillStyle = "black"
+        if (canvas.style.display != "block") { }
+        else {
+          hash.score = hash.score + 1;
+        }
+        context.fillText("Score:" + hash.score, 10, 50);
+        //обновляем белку
+        context.drawImage(fox, 265, 130, 40, 80, mass.foxSpeedOnMap, hash.poxYJumbSq, 60, 100);
+        if (hash.poxYJumbSq == 0) {
+          hash.poxYJumbSq = canvas.height - bg.height + bg.height / 2.6;
+        }
+        //если белка достигла земли
+        else if (hash.poxYJumbSq >= canvas.height - bg.height + bg.height / 2.6) {
+          context.clearRect(0, 0, canvas.width, canvas.height);
+
+          // движение земли 
+          context.drawImage(bg, hash.PosXSq, canvas.height - bg.height);
+          context.drawImage(bg, hash.PosXSq + bg.width, canvas.height - bg.height);
+          context.drawImage(bg, hash.PosXSq + bg.width + bg.width, canvas.height - bg.height);
+          if (hash.PosXSq < (-bg.width)) {
+            hash.PosXSq = 0;
+          }
+          //обновляем подсчет очков
+          context.font = "30px Luckiest Guy";
+          context.fillStyle = "black"
+          if (canvas.style.display != "block") { }
+          else {
+            hash.score = hash.score + 1;
+          }
+          context.fillText("Score:" + hash.score, 10, 50);
+
+          context.drawImage(fox, 0, 0, 40, 55, mass.foxSpeedOnMap, topSqPosition, 60, 80);
+        }
+        else {
+          hash.poxYJumbSq = hash.poxYJumbSq + 5;
+          mass.foxSpeedOnMap = mass.foxSpeedOnMap + 1;
+        }
+        //если белка зашла за границу, заканчиваем игру
+        if (mass.foxSpeedOnMap < 2) {
+          hash.stopGame = true;
+        }
+
+      }
 
 
 
       //анимация ловушек
 
 
-    var PipeUpY=0; //Высота верхнего блока
+      var PipeUpY = 0; //Высота верхнего блока
 
-    for (var i = 0; i < pipeBlock.length; i++) {
-      
-      //обновляем препятсвия 
-      context.drawImage(pipe, pipeBlock[i].x - pipeBlock[i].y + 500, canvas.height - bg.height + bg.height / 2.2);
-      // соотношаем с экраномв
-      hash.posPipe = hash.posPipe - hash.speedBg;
-      if (canvas.width < 500) {
-        PipeUpY= -430;
-        context.drawImage(pipeUp, pipeBlock[i].x,PipeUpY);
+      for (var i = 0; i < pipeBlock.length; i++) {
+
+        //обновляем препятсвия 
+        context.drawImage(pipe, pipeBlock[i].x - pipeBlock[i].y + 500, canvas.height - bg.height + bg.height / 2.2);
+        // соотношаем с экранов
+        //если тач поддерживается, меняем соотношение
+        if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ){
+        hash.posPipe = hash.posPipe - hash.speedBg;
+        if (canvas.width < 500) {
+          PipeUpY = -430;
+          context.drawImage(pipeUp, pipeBlock[i].x, PipeUpY);
+        }
+        else if (canvas.width <= 812 || canvas.height <= 375) {
+          PipeUpY = -830;
+          context.drawImage(pipeUp, pipeBlock[i].x, PipeUpY);
+        }
       }
-      else if (canvas.width <= 812 || canvas.height <= 375) {
-        PipeUpY= -830;
-        context.drawImage(pipeUp, pipeBlock[i].x, PipeUpY);
+        else {
+          PipeUpY = -250;
+          context.drawImage(pipeUp, pipeBlock[i].x, PipeUpY);
+        }
+        pipeBlock[i].x = pipeBlock[i].x - 1;
+        if (pipeBlock[i].x == 125) {
+          pipeBlock.push({
+            x: 1000,
+            y: Math.floor(Math.random() * (900 - 300)),
+          })
+        }
+        //условия попадание белки в ловушки
+        if (mass.foxSpeedOnMap >= pipeBlock[i].x - pipeBlock[i].y - 60 &&
+          mass.foxSpeedOnMap >= pipeBlock[i].x - pipeBlock[i].y + pipe.width &&
+          topSqPosition <= PipeUpY + pipeUp.height - 80 || mass.foxSpeedOnMap == pipeBlock[i].x - pipeBlock[i].y) {
+          hash.stopGame = true;
+        }
       }
-      else {
-        PipeUpY= -250;
-        context.drawImage(pipeUp, pipeBlock[i].x, PipeUpY);
-      }
-      pipeBlock[i].x = pipeBlock[i].x - 1;
-      if (pipeBlock[i].x == 125) {
-        pipeBlock.push({
-          x: 1000,
-          y: Math.floor(Math.random() * (900 - 300)),
-        })
-      }
-      //условия попадание белки в ловушки
-      if (mass.foxSpeedOnMap >= pipeBlock[i].x - pipeBlock[i].y - 60 &&
-        mass.foxSpeedOnMap >= pipeBlock[i].x - pipeBlock[i].y + pipe.width &&
-        topSqPosition <= PipeUpY+pipeUp.height-80 || mass.foxSpeedOnMap == pipeBlock[i].x - pipeBlock[i].y) {
-        hash.stopGame = true;
-      }
+
     }
-    
-  }
 
   }
   //елси игра закончена, то выводим табло
   else {
-    if (canvas.width<512){
+    if (canvas.width < 512) {
       navigator.vibrate(1000);
       var table = document.getElementById("EndGameTable");
-      table.style.display="block";
+      table.style.display = "block";
       //table.style.background = "url('img/EndGameTable.gif')";
-     // table.style.width = "300px";
-     // table.style.height = "350px";
+      // table.style.width = "300px";
+      // table.style.height = "350px";
       table.style.position = "absolute";
       table.style.backgroundSize = "cover";
       table.style.margin = "auto";
       table.style.marginTop = "50px";
       table.style.left = 0 + "px";
       table.style.right = 0 + "px";
-     var resultScore= document.getElementById("resultScore");
-     resultScore.innerHTML="result:"+hash.score;
+      var resultScore = document.getElementById("resultScore");
+      resultScore.innerHTML = "result:" + hash.score;
     }
-    else{
-    navigator.vibrate(1000);
-    var table = document.getElementById("EndGameTable");
-    table.style.display="block";
-   // table.style.background = "url('img/EndGameTable.gif')";
-   // table.style.width = "400px";
-   // table.style.height = "450px";
-    table.style.position = "absolute";
-    table.style.backgroundSize = "cover";
-    table.style.margin = "auto";
-    table.style.marginTop = "50px";
-    table.style.left = 0 + "px";
-    table.style.right = 0 + "px";
-   var resultScore= document.getElementById("resultScore");
-   resultScore.innerHTML="result:"+hash.score;
-  }
-   
+    else {
+      if(hash.vibroPhone==0){
+       //добовляем пользователя в ajaxStringStorage
+
+      navigator.vibrate(500);
+      hash.vibroPhone=1;
+      }
+      var table = document.getElementById("EndGameTable");
+      table.style.display = "block";
+      // table.style.background = "url('img/EndGameTable.gif')";
+      // table.style.width = "400px";
+      // table.style.height = "450px";
+      table.style.position = "absolute";
+      table.style.backgroundSize = "cover";
+      table.style.margin = "auto";
+      table.style.marginTop = "50px";
+      table.style.left = 0 + "px";
+      table.style.right = 0 + "px";
+      var resultScore = document.getElementById("resultScore");
+      resultScore.innerHTML = "result:" + hash.score;
+      records();
+    }
+
 
   }
   requestAnimationFrame(Animation);
 }
 // начать игру при нажатии клавиши играть снова
-function ContinueGame(){
+function ContinueGame() {
+  hash.vibroPhone=0;
   var table = document.getElementById("EndGameTable");
-  table.style.display="none";
-  mass.foxSpeedOnMap=400;
-  hash.stopGame=false;
-  hash.score=0;
+  table.style.display = "none";
+  mass.foxSpeedOnMap = 400;
+  hash.stopGame = false;
+  hash.score = 0;
 }
 
 

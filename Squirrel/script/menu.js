@@ -38,6 +38,12 @@ function TrueName(){
        canvas.style.display="block";
        var newBg =document.getElementById("fon");
        newBg.style.backgroundImage="url('img/fon2.jpg')";
+       leftTouch=document.getElementById("touchLeft");
+       topTouch=document.getElementById("touchTop");
+       RightTouch=document.getElementById("touchRight");
+       leftTouch.style.display="block";
+       RightTouch.style.display="block";
+       topTouch.style.display="block";
 
 
         //если есть сенсор, показываем сенсорные кнопки

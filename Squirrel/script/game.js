@@ -25,7 +25,7 @@ fox.src = "img/squirrel.png";
 bg.src = "img/fon_bg.gif";
 pipe.src = "img/PipeSpears.gif";
 pipeIron.src="img/PipeSpearsIron.gif"
-pipeUp.src = "img/PipeUp.gif";
+pipeUp.src = "img/pipeUp.gif";
 foxZerkal.src = "img/squirrelZerkal.png";
 
 var xPosFox = 10;
@@ -64,9 +64,7 @@ if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof D
   leftTouch=document.getElementById("touchLeft");
   topTouch=document.getElementById("touchTop");
   RightTouch=document.getElementById("touchRight");
-  leftTouch.style.display="block";
-  RightTouch.style.display="block";
-  topTouch.style.display="block";
+
 
 
 
@@ -100,7 +98,7 @@ if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof D
   topTouch.ontouchend = function(e){
     
     e = event || window.event;
-    mass.foxSpeed = 0;
+    mass.foxSpeed = 4;
   }
   }
 
@@ -108,7 +106,7 @@ if ( ('ontouchstart' in window) || window.DocumentTouch && document instanceof D
 
 
 
-//1-бег в лево 2-бег в право 3- прыжок вверх 4-прыжок на северо-запад 5- прыжок на северо-восток
+//1-бег в лево 2-бег в право 3- прыжок вверх
 document.body.onkeydown = function (e) { //событие нажатия кнопок
   e = event || window.event;
 
@@ -124,9 +122,7 @@ document.body.onkeydown = function (e) { //событие нажатия кно�
   if (e.keyCode ==83||e.keyCode ==40) {
    // mass.foxSpeed = 1111;
   }
-  if (e.key == "ArrowLeft" && e.key == "ArrowUp") {
-    mass.foxSpeed = 4;
-  }
+
 };
 
 
@@ -140,14 +136,12 @@ document.body.onkeyup = function (e) { //событие отпускания к�
     mass.foxSpeed = 0;
   }
   if  (e.keyCode == 38|| e.keyCode == 87) {
-    mass.foxSpeed = 0;
+    mass.foxSpeed = 4;
   }
   if (e.keyCode ==83||e.keyCode ==40) {
     mass.foxSpeed = 0;
   }
-  if (e.key == "ArrowLeft" && e.key == "ArrowUp") {
-    mass.foxSpeed = 0;
-  }
+
 };
 
 
